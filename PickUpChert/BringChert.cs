@@ -14,6 +14,7 @@ namespace PickUpChert {
 
         public GameObject _chert;
         public Transform ChertSocket { get; private set; }
+        public SectorCullGroup Sector_Lakebed { get; private set; }
 
         public BringChert() {
             Instance = this;
@@ -31,6 +32,7 @@ namespace PickUpChert {
                     break;
                 }
             }
+            Sector_Lakebed = _chert.transform.parent.GetComponent<SectorCullGroup>();
 
             var conversationZone = _chert.transform.Find("ConversationZone_Chert");
             conversationZone.transform.localPosition = new Vector3(0.009f, 0.363f, 0.355f);
