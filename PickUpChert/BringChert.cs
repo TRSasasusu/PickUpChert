@@ -12,9 +12,13 @@ namespace PickUpChert {
 
         public static BringChert Instance;
 
+        static AssetBundle _assetBundle;
+
         public GameObject _chert;
         public Transform ChertSocket { get; private set; }
         public SectorCullGroup Sector_Lakebed { get; private set; }
+        public Mesh Drum { get; private set; }
+        public Mesh DrumStick { get; private set; }
 
         public BringChert() {
             Instance = this;
@@ -25,6 +29,11 @@ namespace PickUpChert {
         }
 
         IEnumerator InitializeBody() {
+            //if(_assetBundle != null) {
+            //    _assetBundle.Unload(true);
+            //    _assetBundle = null;
+            //}
+
             while(true) {
                 yield return null;
                 _chert = GameObject.Find(PATH_CHERT);
@@ -60,6 +69,19 @@ namespace PickUpChert {
             ChertSocket.parent = defaultItemSocket.transform.parent;
             ChertSocket.localPosition = new Vector3(0.185f, -0.32f, 0.37f);
             ChertSocket.localEulerAngles = new Vector3(0, 350, 15);
+
+            //var streamingAssetBundle = new StreamingAssetBundle("hourglasstwins/meshes/characters");
+            //streamingAssetBundle.Load();
+            //while(true) {
+            //    yield return null;
+            //    if(streamingAssetBundle._loadBundleOperation.isDone) {
+            //        PickUpChert.Log("loading chert assetbundle is done");
+            //        break;
+            //    }
+            //}
+            //_assetBundle = streamingAssetBundle._loadBundleOperation.assetBundle;
+            //Drum = _assetBundle.LoadAsset<Mesh>("Assets/Scenes/HourglassTwins/Streamingmeshes_characters/NewDrum_polySurface2.asset");
+            //DrumStick = _assetBundle.LoadAsset<Mesh>("Assets/Scenes/HourglassTwins/Streamingmeshes_characters/Chert_DrumStick_Geo1.asset");
         }
     }
 }

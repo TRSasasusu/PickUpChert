@@ -22,18 +22,24 @@ namespace PickUpChert {
                 for(var i = BringChert.Instance.Sector_Lakebed._staticRenderers.Count - 1; i >= 0; i--) {
                     var name = BringChert.Instance.Sector_Lakebed._staticRenderers[i].name;
                     if(name == "NewDrum:polySurface1" || name == "NewDrum:polySurface2" || name == "Chert_Skin_02:Chert_Mesh:Traveller_HEA_Chert 1" || name == "Chert_DrumStick_Geo1") {
-                        var meshFilter = BringChert.Instance.Sector_Lakebed._staticRenderers[i].GetComponent<MeshFilter>(); // to avoid unload mesh by unloading assetbundle
-                        if(meshFilter) {
-                            //PickUpChert.Log($"mesh of {name} is updated");
-                            //meshFilter.mesh = UnityEngine.Object.Instantiate(meshFilter.mesh);
-                        }
-                        else {
-                            var skinnedMeshRenderer = BringChert.Instance.Sector_Lakebed._staticRenderers[i].GetComponent<SkinnedMeshRenderer>();
-                            if(skinnedMeshRenderer) {
-                                PickUpChert.Log($"sharedMesh of {name} is updated");
-                                skinnedMeshRenderer.sharedMesh = UnityEngine.Object.Instantiate(skinnedMeshRenderer.sharedMesh);
-                            }
-                        }
+                        //var meshFilter = BringChert.Instance.Sector_Lakebed._staticRenderers[i].GetComponent<MeshFilter>(); // to avoid unload mesh by unloading assetbundle
+                        //if(meshFilter) {
+                        //    PickUpChert.Log($"mesh of {name} is updated");
+                        //    //meshFilter.mesh = UnityEngine.Object.Instantiate(meshFilter.mesh);
+                        //    if(name == "NewDrum:polySurface2") { // these meshes are isReadable: false, so we should load it from assetbundle manually to avoid unload
+                        //        meshFilter.mesh = BringChert.Instance.Drum;
+                        //    }
+                        //    else if(name == "Chert_DrumStick_Geo1") {
+                        //        meshFilter.mesh = BringChert.Instance.DrumStick;
+                        //    }
+                        //}
+                        //else {
+                        //    var skinnedMeshRenderer = BringChert.Instance.Sector_Lakebed._staticRenderers[i].GetComponent<SkinnedMeshRenderer>();
+                        //    if(skinnedMeshRenderer) {
+                        //        PickUpChert.Log($"sharedMesh of {name} is updated");
+                        //        skinnedMeshRenderer.sharedMesh = UnityEngine.Object.Instantiate(skinnedMeshRenderer.sharedMesh);
+                        //    }
+                        //}
                         BringChert.Instance.Sector_Lakebed._staticRenderers.RemoveAt(i);
                     }
                 }
@@ -58,6 +64,16 @@ namespace PickUpChert {
                 return false;
             }
             return true;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(StreamingAssetBundle), nameof(StreamingAssetBundle.UnloadImmediate))]
+        public static void StreamingAssetBundle_UnloadImmediate_Prefix(StreamingAssetBundle __instance) {
+            if(__instance._assetBundleName == "hourglasstwins/meshes/characters") {
+                PickUpChert.Log($"unload is avoided on {__instance._assetBundleName}");
+                __instance._assetBundle.Unload(false); // to avoid unloading them even if they are used
+                __instance._assetBundle = null;
+            }
         }
 
         //[HarmonyPrefix]
