@@ -22,24 +22,6 @@ namespace PickUpChert {
                 for(var i = BringChert.Instance.Sector_Lakebed._staticRenderers.Count - 1; i >= 0; i--) {
                     var name = BringChert.Instance.Sector_Lakebed._staticRenderers[i].name;
                     if(name == "NewDrum:polySurface1" || name == "NewDrum:polySurface2" || name == "Chert_Skin_02:Chert_Mesh:Traveller_HEA_Chert 1" || name == "Chert_DrumStick_Geo1") {
-                        //var meshFilter = BringChert.Instance.Sector_Lakebed._staticRenderers[i].GetComponent<MeshFilter>(); // to avoid unload mesh by unloading assetbundle
-                        //if(meshFilter) {
-                        //    PickUpChert.Log($"mesh of {name} is updated");
-                        //    //meshFilter.mesh = UnityEngine.Object.Instantiate(meshFilter.mesh);
-                        //    if(name == "NewDrum:polySurface2") { // these meshes are isReadable: false, so we should load it from assetbundle manually to avoid unload
-                        //        meshFilter.mesh = BringChert.Instance.Drum;
-                        //    }
-                        //    else if(name == "Chert_DrumStick_Geo1") {
-                        //        meshFilter.mesh = BringChert.Instance.DrumStick;
-                        //    }
-                        //}
-                        //else {
-                        //    var skinnedMeshRenderer = BringChert.Instance.Sector_Lakebed._staticRenderers[i].GetComponent<SkinnedMeshRenderer>();
-                        //    if(skinnedMeshRenderer) {
-                        //        PickUpChert.Log($"sharedMesh of {name} is updated");
-                        //        skinnedMeshRenderer.sharedMesh = UnityEngine.Object.Instantiate(skinnedMeshRenderer.sharedMesh);
-                        //    }
-                        //}
                         BringChert.Instance.Sector_Lakebed._staticRenderers.RemoveAt(i);
                     }
                 }
@@ -94,6 +76,10 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.Update))]
         public static void PlayerTool_Update_Prefix(ItemTool __instance) {
+            if(BringChert.Instance == null || !BringChert.Instance.ChertSocket || !BringChert.Instance.ShipCockpitController) {
+                return;
+            }
+
             if(BringChert.Instance.ChertSocket.transform.childCount > 0 && BringChert.Instance.ShipCockpitController._playerAtFlightConsole) {
                 __instance._isPuttingAway = false;
                 __instance._isEquipped = false;

@@ -20,6 +20,7 @@ namespace PickUpChert {
         public Mesh Drum { get; private set; }
         public Mesh DrumStick { get; private set; }
         public ShipCockpitController ShipCockpitController { get; private set; }
+        public GameObject SignalDrums { get; private set; }
 
         public BringChert() {
             Instance = this;
@@ -81,18 +82,15 @@ namespace PickUpChert {
                 }
             }
 
-            //var streamingAssetBundle = new StreamingAssetBundle("hourglasstwins/meshes/characters");
-            //streamingAssetBundle.Load();
-            //while(true) {
-            //    yield return null;
-            //    if(streamingAssetBundle._loadBundleOperation.isDone) {
-            //        PickUpChert.Log("loading chert assetbundle is done");
-            //        break;
-            //    }
-            //}
-            //_assetBundle = streamingAssetBundle._loadBundleOperation.assetBundle;
-            //Drum = _assetBundle.LoadAsset<Mesh>("Assets/Scenes/HourglassTwins/Streamingmeshes_characters/NewDrum_polySurface2.asset");
-            //DrumStick = _assetBundle.LoadAsset<Mesh>("Assets/Scenes/HourglassTwins/Streamingmeshes_characters/Chert_DrumStick_Geo1.asset");
+            SignalDrums = null;
+            while(true) {
+                yield return null;
+                SignalDrums = GameObject.Find("CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_Lakebed/Volumes_Lakebed/Signal_Drums");
+                if(SignalDrums) {
+                    break;
+                }
+            }
+            SignalDrums.transform.parent = _chert.transform;
         }
     }
 }
