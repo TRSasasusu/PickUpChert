@@ -91,6 +91,23 @@ namespace PickUpChert {
             return true;
         }
 
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.Update))]
+        public static void PlayerTool_Update_Prefix(ItemTool __instance) {
+            if(BringChert.Instance.ChertSocket.transform.childCount > 0 && BringChert.Instance.ShipCockpitController._playerAtFlightConsole) {
+                __instance._isPuttingAway = false;
+                __instance._isEquipped = false;
+                __instance.enabled = false;
+                __instance._moveSpring.ResetVelocity();
+            }
+        }
+
+        //[HarmonyPrefix]
+        //[HarmonyPatch(typeof(ToolModeSwapper), nameof(ToolModeSwapper.UnequipTool))]
+        //public static bool ToolModeSwapper_UnequipTool_Prefix() {
+        //    return !(BringChert.Instance.ChertSocket.transform.childCount > 0 && BringChert.Instance.ShipCockpitController._playerAtFlightConsole); // it leads to not allowed to cancel cockpit...
+        //}
+
         //[HarmonyPrefix] // only to find sector cull group of chert
         //[HarmonyPatch(typeof(CullGroup), nameof(CullGroup.SetRenderersEnabled))]
         //public static void CullGroup_SetRenderersEnabled_Prefix(CullGroup __instance) {

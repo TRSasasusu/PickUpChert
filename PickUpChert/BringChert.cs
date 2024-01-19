@@ -19,6 +19,7 @@ namespace PickUpChert {
         public SectorCullGroup Sector_Lakebed { get; private set; }
         public Mesh Drum { get; private set; }
         public Mesh DrumStick { get; private set; }
+        public ShipCockpitController ShipCockpitController { get; private set; }
 
         public BringChert() {
             Instance = this;
@@ -69,6 +70,16 @@ namespace PickUpChert {
             ChertSocket.parent = defaultItemSocket.transform.parent;
             ChertSocket.localPosition = new Vector3(0.185f, -0.32f, 0.37f);
             ChertSocket.localEulerAngles = new Vector3(0, 350, 15);
+
+            GameObject shipCockpitController;
+            while(true) {
+                yield return null;
+                shipCockpitController = GameObject.Find("Ship_Body/Module_Cockpit/Systems_Cockpit/ShipCockpitController");
+                if(shipCockpitController) {
+                    ShipCockpitController = shipCockpitController.GetComponent<ShipCockpitController>();
+                    break;
+                }
+            }
 
             //var streamingAssetBundle = new StreamingAssetBundle("hourglasstwins/meshes/characters");
             //streamingAssetBundle.Load();
