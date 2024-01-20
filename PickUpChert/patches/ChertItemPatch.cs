@@ -92,6 +92,32 @@ namespace PickUpChert {
             }
         }
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(TravelerAudioManager), nameof(TravelerAudioManager.OnUnpause))]
+        public static void TravelerAudioManager_OnUnpause_Postfix() {
+            if(!ChertItem.Instance || BringChert.Instance == null || !BringChert.Instance.SignalDrums) {
+                return;
+            }
+            if(!ChertItem.Instance.Playing) {
+                BringChert.Instance.SignalDrums.GetOWAudioSource().Stop();
+            }
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(TravelerController), nameof(TravelerController.OnUnpause))]
+        public static bool TravelerController_OnUnpause_Prefix(TravelerController __instance) {
+            if(!(__instance is ChertTravelerController)) {
+                return true;
+            }
+            if(!ChertItem.Instance || BringChert.Instance == null || !BringChert.Instance.SignalDrums) {
+                return true;
+            }
+            if(!ChertItem.Instance.Playing) {
+                return false;
+            }
+            return true;
+        }
+
         //[HarmonyPrefix]
         //[HarmonyPatch(typeof(ToolModeSwapper), nameof(ToolModeSwapper.UnequipTool))]
         //public static bool ToolModeSwapper_UnequipTool_Prefix() {
