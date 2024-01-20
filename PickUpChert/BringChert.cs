@@ -14,13 +14,16 @@ namespace PickUpChert {
 
         static AssetBundle _assetBundle;
 
-        public GameObject _chert;
+        public GameObject Chert { get; private set; }
+        public ChertTravelerController ChertTraveler { get; private set; }
         public Transform ChertSocket { get; private set; }
         public SectorCullGroup Sector_Lakebed { get; private set; }
         public Mesh Drum { get; private set; }
         public Mesh DrumStick { get; private set; }
         public ShipCockpitController ShipCockpitController { get; private set; }
-        public GameObject SignalDrums { get; private set; }
+        public AudioSignal SignalDrums { get; private set; }
+        public ScreenPrompt StopDrumPrompt { get; private set; }
+        public ScreenPrompt PlayDrumPrompt { get; private set; }
 
         public BringChert() {
             Instance = this;
@@ -38,25 +41,25 @@ namespace PickUpChert {
 
             while(true) {
                 yield return null;
-                _chert = GameObject.Find(PATH_CHERT);
-                if(_chert) {
+                Chert = GameObject.Find(PATH_CHERT);
+                if(Chert) {
                     break;
                 }
             }
-            Sector_Lakebed = _chert.transform.parent.GetComponent<SectorCullGroup>();
+            Sector_Lakebed = Chert.transform.parent.GetComponent<SectorCullGroup>();
 
-            var conversationZone = _chert.transform.Find("ConversationZone_Chert");
+            var conversationZone = Chert.transform.Find("ConversationZone_Chert");
             conversationZone.transform.localPosition = new Vector3(0.009f, 0.363f, 0.355f);
 
-            _chert.AddComponent<ChertItem>();
+            Chert.AddComponent<ChertItem>();
 
-            var sphereCollider = _chert.AddComponent<SphereCollider>();
+            var sphereCollider = Chert.AddComponent<SphereCollider>();
             sphereCollider.isTrigger = true;
             //sphereCollider.enabled = false;
             sphereCollider.radius = 0.75f;
             sphereCollider.center = new Vector3(0, 0.5f, -1f);
 
-            var owCollider = _chert.AddComponent<OWCollider>();
+            var owCollider = Chert.AddComponent<OWCollider>();
 
             GameObject defaultItemSocket;
             while(true) {
@@ -82,15 +85,25 @@ namespace PickUpChert {
                 }
             }
 
-            SignalDrums = null;
+            GameObject signalDrums;
             while(true) {
                 yield return null;
-                SignalDrums = GameObject.Find("CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_Lakebed/Volumes_Lakebed/Signal_Drums");
-                if(SignalDrums) {
+                signalDrums = GameObject.Find("CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_Lakebed/Volumes_Lakebed/Signal_Drums");
+                if(signalDrums) {
+                    SignalDrums = signalDrums.GetComponent<AudioSignal>();
                     break;
                 }
             }
-            SignalDrums.transform.parent = _chert.transform;
+            SignalDrums.transform.parent = Chert.transform;
+
+            StopDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, "Stop Drums" + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            PlayDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, "Play Drums" + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            Locator.GetPromptManager().AddScreenPrompt(StopDrumPrompt, PromptPosition.UpperRight, false);
+            Locator.GetPromptManager().AddScreenPrompt(PlayDrumPrompt, PromptPosition.UpperRight, false);
+            StopDrumPrompt.SetVisibility(false);
+            PlayDrumPrompt.SetVisibility(false);
+
+            ChertTraveler = Chert.GetComponent<ChertTravelerController>();
         }
     }
 }

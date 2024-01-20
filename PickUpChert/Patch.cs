@@ -75,7 +75,10 @@ namespace PickUpChert {
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.Update))]
-        public static void PlayerTool_Update_Prefix(ItemTool __instance) {
+        public static void PlayerTool_Update_Prefix(PlayerTool __instance) {
+            if(!(__instance is ItemTool)) {
+                return;
+            }
             if(BringChert.Instance == null || !BringChert.Instance.ChertSocket || !BringChert.Instance.ShipCockpitController) {
                 return;
             }
