@@ -27,4 +27,12 @@
   <ItemGroup>
     <Content Include="PickUpChert.csproj.user" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="assets\translations\english.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\translations\japanese.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

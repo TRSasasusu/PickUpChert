@@ -9,7 +9,7 @@ namespace PickUpChert {
         bool _playing = true;
 
         public override string GetDisplayName() {
-            return "Chert";
+            return TextTranslation.Translate("Chert");
         }
 
         void Update() {

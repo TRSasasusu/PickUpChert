@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using OWML.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace PickUpChert {
     [HarmonyPatch]
-    public static class Patch {
+    public static class ChertItemPatch {
         //[HarmonyPrefix]
         //[HarmonyPatch(typeof(ItemTool), nameof(ItemTool.MoveItemToCarrySocket))]
         //public static bool ItemTool_MoveItemToCarrySocket_Prefix(OWItem item, ItemTool __instance) {
@@ -17,11 +18,11 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(OWItem), nameof(OWItem.MoveAndChildToTransform))]
         public static void OWItem_MoveAndChildToTransform_Prefix(ref Transform socketTransform, OWItem __instance) {
-            if(__instance.name == "Traveller_HEA_Chert") {
+            if (__instance.name == "Traveller_HEA_Chert") {
                 socketTransform = BringChert.Instance.ChertSocket;
-                for(var i = BringChert.Instance.Sector_Lakebed._staticRenderers.Count - 1; i >= 0; i--) {
+                for (var i = BringChert.Instance.Sector_Lakebed._staticRenderers.Count - 1; i >= 0; i--) {
                     var name = BringChert.Instance.Sector_Lakebed._staticRenderers[i].name;
-                    if(name == "NewDrum:polySurface1" || name == "NewDrum:polySurface2" || name == "Chert_Skin_02:Chert_Mesh:Traveller_HEA_Chert 1" || name == "Chert_DrumStick_Geo1") {
+                    if (name == "NewDrum:polySurface1" || name == "NewDrum:polySurface2" || name == "Chert_Skin_02:Chert_Mesh:Traveller_HEA_Chert 1" || name == "Chert_DrumStick_Geo1") {
                         BringChert.Instance.Sector_Lakebed._staticRenderers.RemoveAt(i);
                     }
                 }
@@ -31,7 +32,7 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(StreamingRenderMeshHandle), nameof(StreamingRenderMeshHandle.UnloadMesh))]
         public static bool StreamingSkinnedMeshHandle_UnloadMesh_Prefix(StreamingRenderMeshHandle __instance) {
-            if(__instance.name == "NewDrum:polySurface1" || __instance.name == "NewDrum:polySurface2" || __instance.name == "Chert_DrumStick_Geo1") {
+            if (__instance.name == "NewDrum:polySurface1" || __instance.name == "NewDrum:polySurface2" || __instance.name == "Chert_DrumStick_Geo1") {
                 PickUpChert.Log($"unload is avoided on {__instance.name}");
                 return false;
             }
@@ -41,7 +42,7 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(StreamingSkinnedMeshHandle), nameof(StreamingSkinnedMeshHandle.UnloadMesh))]
         public static bool StreamingSkinnedMeshHandle_UnloadMesh_Prefix(StreamingSkinnedMeshHandle __instance) {
-            if(__instance.name == "Chert_Skin_02:Chert_Mesh:Traveller_HEA_Chert 1") {
+            if (__instance.name == "Chert_Skin_02:Chert_Mesh:Traveller_HEA_Chert 1") {
                 PickUpChert.Log($"unload is avoided on {__instance.name}");
                 return false;
             }
@@ -51,7 +52,7 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(StreamingAssetBundle), nameof(StreamingAssetBundle.UnloadImmediate))]
         public static void StreamingAssetBundle_UnloadImmediate_Prefix(StreamingAssetBundle __instance) {
-            if(__instance._assetBundleName == "hourglasstwins/meshes/characters") {
+            if (__instance._assetBundleName == "hourglasstwins/meshes/characters") {
                 PickUpChert.Log($"unload is avoided on {__instance._assetBundleName}");
                 __instance._assetBundle.Unload(false); // to avoid unloading them even if they are used
                 __instance._assetBundle = null;
@@ -67,7 +68,7 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TravelerController), nameof(TravelerController.OnSectorOccupantsUpdated))]
         public static bool TravelerController_OnSectorOccupantsUpdated_Prefix(TravelerController __instance) {
-            if(__instance.name == "Traveller_HEA_Chert") {
+            if (__instance.name == "Traveller_HEA_Chert") {
                 return false;
             }
             return true;
@@ -76,14 +77,14 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.Update))]
         public static void PlayerTool_Update_Prefix(PlayerTool __instance) {
-            if(!(__instance is ItemTool)) {
+            if (!(__instance is ItemTool)) {
                 return;
             }
-            if(BringChert.Instance == null || !BringChert.Instance.ChertSocket || !BringChert.Instance.ShipCockpitController) {
+            if (BringChert.Instance == null || !BringChert.Instance.ChertSocket || !BringChert.Instance.ShipCockpitController) {
                 return;
             }
 
-            if(BringChert.Instance.ChertSocket.transform.childCount > 0 && BringChert.Instance.ShipCockpitController._playerAtFlightConsole) {
+            if (BringChert.Instance.ChertSocket.transform.childCount > 0 && BringChert.Instance.ShipCockpitController._playerAtFlightConsole) {
                 __instance._isPuttingAway = false;
                 __instance._isEquipped = false;
                 __instance.enabled = false;

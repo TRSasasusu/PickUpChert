@@ -96,8 +96,8 @@ namespace PickUpChert {
             }
             SignalDrums.transform.parent = Chert.transform;
 
-            StopDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, "Stop Drums" + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
-            PlayDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, "Play Drums" + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            StopDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, TextTranslation.Translate("Stop Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            PlayDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, TextTranslation.Translate("Play Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
             Locator.GetPromptManager().AddScreenPrompt(StopDrumPrompt, PromptPosition.UpperRight, false);
             Locator.GetPromptManager().AddScreenPrompt(PlayDrumPrompt, PromptPosition.UpperRight, false);
             StopDrumPrompt.SetVisibility(false);
