@@ -24,6 +24,8 @@ namespace PickUpChert {
         public AudioSignal SignalDrums { get; private set; }
         public ScreenPrompt StopDrumPrompt { get; private set; }
         public ScreenPrompt PlayDrumPrompt { get; private set; }
+        public PlayerSectorDetector SectorDetector { get; private set; }
+        public CharacterDialogueTree ChertDialogueTree { get; private set; }
 
         public BringChert() {
             Instance = this;
@@ -104,6 +106,19 @@ namespace PickUpChert {
             PlayDrumPrompt.SetVisibility(false);
 
             ChertTraveler = Chert.GetComponent<ChertTravelerController>();
+
+            GameObject sectorDetector;
+            while(true) {
+                yield return null;
+                sectorDetector = GameObject.Find("Player_Body/PlayerDetector");
+                if(sectorDetector) {
+                    SectorDetector = sectorDetector.GetComponent<PlayerSectorDetector>();
+                    break;
+                }
+            }
+
+            ChertDialogueTree = Chert.transform.Find("ConversationZone_Chert").GetComponent<CharacterDialogueTree>();
+            Chert.AddComponent<ChertPickUpConversation>();
         }
     }
 }

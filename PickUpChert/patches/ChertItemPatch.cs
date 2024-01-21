@@ -118,6 +118,15 @@ namespace PickUpChert {
             return true;
         }
 
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(ChertDialogueSwapper), nameof(ChertDialogueSwapper.OnStartConversation))]
+        public static bool ChertDialogueSwapper_OnStartConversation_Prefix() {
+            if(ChertPickUpConversation.Instance) {
+                return ChertPickUpConversation.Instance.OnStartConversation();
+            }
+            return true;
+        }
+
         //[HarmonyPrefix]
         //[HarmonyPatch(typeof(ToolModeSwapper), nameof(ToolModeSwapper.UnequipTool))]
         //public static bool ToolModeSwapper_UnequipTool_Prefix() {

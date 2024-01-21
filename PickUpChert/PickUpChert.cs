@@ -44,6 +44,8 @@ namespace PickUpChert {
                 var bringChert = new BringChert();
                 bringChert.Initialize();
             };
+
+            ChertPickUpConversation.Initialize();
         }
     }
 }

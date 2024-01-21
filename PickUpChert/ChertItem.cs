@@ -9,6 +9,11 @@ namespace PickUpChert {
         public static ChertItem Instance;
 
         public bool Playing { get; private set; } = true;
+        public bool Brought {
+            get {
+                return BringChert.Instance.ChertSocket.transform.childCount > 0;
+            }
+        }
 
         public override void Awake() {
             base.Awake();

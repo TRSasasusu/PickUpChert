@@ -1,4 +1,11 @@
 {
   "Play Drums": "演奏を始めてもらう",
-  "Stop Drums": "演奏を止めてもらう"
+  "Stop Drums": "演奏を止めてもらう",
+
+  "PickUpChert_InitialPickUpINITIAL_PICKUP_0_0": "おい。私をどこに連れていくつもりだ？",
+  "PickUpChert_InitialPickUpINITIAL_PICKUP_0_1": "宇宙服のこの部分は別に取っ手か何かじゃないんだぞ。",
+  "ChertPickUpChert_InitialPickUpINITIAL_PICKUP_0_Q": "でも昔、Gabbroがあなたをそうやって運んでるのを見たことがある。",
+  "PickUpChert_InitialPickUp_AnswerINITIAL_PICKUP_0_A": "あのなあ、こいつはそのためにあるんじゃなくて…。<Pause/>えっ、もしかしてそのために付いてるのか？",
+
+  // Sunless City
 }
