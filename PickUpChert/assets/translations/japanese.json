@@ -2,10 +2,14 @@
   "Play Drums": "演奏を始めてもらう",
   "Stop Drums": "演奏を止めてもらう",
 
+  // Initial Pick Up
   "PickUpChert_InitialPickUpINITIAL_PICKUP_0_0": "おい。私をどこに連れていくつもりだ？",
   "PickUpChert_InitialPickUpINITIAL_PICKUP_0_1": "宇宙服のこの部分は別に取っ手か何かじゃないんだぞ。",
   "ChertPickUpChert_InitialPickUpINITIAL_PICKUP_0_Q": "でも昔、Gabbroがあなたをそうやって運んでるのを見たことがある。",
   "PickUpChert_InitialPickUp_AnswerINITIAL_PICKUP_0_A": "あのなあ、こいつはそのためにあるんじゃなくて…。<Pause/>えっ、もしかしてそのために付いてるのか？",
 
   // Sunless City
+  "PickUpChert_SunlessCitySUNLESS_CITY_0": "これは…<Pause/>驚いた。まさか砂の降り積もる洞窟の奥にここまで壮大な居住地を作っていたとは。",
+  "PickUpChert_SunlessCitySUNLESS_CITY_1": "Nomaiはどうやってこんなものを作り上げたんだ？控えめに言って砂が積もるまでに何か建築するなんて無理だろう。",
+  "PickUpChert_SunlessCitySUNLESS_CITY_2": "いや、そもそも作り上げたとしてもここに住むなんてできっこない。少しでも居眠りなんかしたら…<Pause/>考えるだけで恐ろしい。"
 }

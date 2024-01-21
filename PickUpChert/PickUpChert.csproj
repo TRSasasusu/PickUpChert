@@ -31,6 +31,9 @@
     <None Update="assets\dialogues\initial_pick_up.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="assets\dialogues\sunless_city.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\translations\english.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
