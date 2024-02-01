@@ -11,7 +11,7 @@ namespace PickUpChert {
         public bool Playing { get; private set; } = true;
         public bool Brought {
             get {
-                return BringChert.Instance.ChertSocket.transform.childCount > 0;
+                return BringChert.Instance != null && BringChert.Instance.ChertSocket && BringChert.Instance.ChertSocket.transform.childCount > 0;
             }
         }
 

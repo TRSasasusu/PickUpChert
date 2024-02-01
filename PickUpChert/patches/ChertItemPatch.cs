@@ -18,6 +18,9 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(OWItem), nameof(OWItem.MoveAndChildToTransform))]
         public static void OWItem_MoveAndChildToTransform_Prefix(ref Transform socketTransform, OWItem __instance) {
+            if(socketTransform.parent.name != "ItemCarryTool") {
+                return;
+            }
             if (__instance.name == "Traveller_HEA_Chert") {
                 socketTransform = BringChert.Instance.ChertSocket;
                 for (var i = BringChert.Instance.Sector_Lakebed._staticRenderers.Count - 1; i >= 0; i--) {
@@ -26,6 +29,17 @@ namespace PickUpChert {
                         BringChert.Instance.Sector_Lakebed._staticRenderers.RemoveAt(i);
                     }
                 }
+            }
+            else if(ChertItem.Instance && ChertItem.Instance.Brought) {
+                socketTransform = BringChert.Instance.ChertRightHand;
+            }
+        }
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(OWItem), nameof(OWItem.MoveAndChildToTransform))]
+        public static void OWItem_MoveAndChildToTransform_Postfix(ref Transform socketTransform, OWItem __instance) {
+            if(socketTransform == BringChert.Instance.ChertRightHand) {
+                __instance.transform.localPosition = new Vector3(0.2f, -0.1f, 0);
+                __instance.transform.localEulerAngles = new Vector3(330, 280, 0);
             }
         }
 
@@ -119,17 +133,6 @@ namespace PickUpChert {
             return true;
         }
 
-        //[HarmonyPrefix]
-        //[HarmonyPatch(typeof(TravelerAudioManager), nameof(TravelerAudioManager.Update))]
-        //public static void TravelerAudioManager_Update_Prefix(TravelerAudioManager __instance) {
-        //    if(!ChertItem.Instance || BringChert.Instance == null || !BringChert.Instance.SignalDrums) {
-        //        return;
-        //    }
-        //    if(__instance._playAfterDelay)
-
-        //    __instance._signals
-        //}
-
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TravelerController), nameof(TravelerController.OnUnpause))]
         public static bool TravelerController_OnUnpause_Prefix(TravelerController __instance) {
@@ -140,7 +143,6 @@ namespace PickUpChert {
                 return true;
             }
             if(!ChertItem.Instance.Playing) {
-                //PickUpChert.Log("OnUnpause is called and playing is not called");
                 return false;
             }
             return true;
@@ -175,5 +177,33 @@ namespace PickUpChert {
         //        }
         //    }
         //}
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(ItemTool), nameof(ItemTool.UpdateInteract))]
+        public static void ItemTool_UpdateInteract_Prefix(FirstPersonManipulator firstPersonManipulator, ItemTool __instance) {
+            if(!ChertItem.Instance || BringChert.Instance == null || !BringChert.Instance.SignalDrums) {
+                return;
+            }
+            if(!ChertItem.Instance.Brought) {
+                return;
+            }
+            if(__instance._heldItem != ChertItem.Instance) {
+                return;
+            }
+
+            var focusedOWItem = firstPersonManipulator.GetFocusedOWItem();
+            if(!focusedOWItem) {
+                return;
+            }
+
+            __instance._heldItem = null;
+        }
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(ItemTool), nameof(ItemTool.UpdateInteract))]
+        public static void ItemTool_UpdateInteract_Postfix(ItemTool __instance) {
+            if(!__instance._heldItem && ChertItem.Instance.Brought) {
+                __instance._heldItem = ChertItem.Instance;
+            }
+        }
     }
 }

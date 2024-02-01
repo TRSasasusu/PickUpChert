@@ -17,6 +17,7 @@ namespace PickUpChert {
         public GameObject Chert { get; private set; }
         public ChertTravelerController ChertTraveler { get; private set; }
         public Transform ChertSocket { get; private set; }
+        public Transform ChertRightHand { get; private set; }
         public SectorCullGroup Sector_Lakebed { get; private set; }
         public Mesh Drum { get; private set; }
         public Mesh DrumStick { get; private set; }
@@ -119,6 +120,8 @@ namespace PickUpChert {
 
             ChertDialogueTree = Chert.transform.Find("ConversationZone_Chert").GetComponent<CharacterDialogueTree>();
             Chert.AddComponent<ChertPickUpConversation>();
+
+            ChertRightHand = Chert.transform.Find("Traveller_HEA_Chert_ANIM_Chatter_Chipper/Chert_Skin_02:Child_Rig_V01:Trajectory_Jnt/Chert_Skin_02:Child_Rig_V01:ROOT_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_01_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_02_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_Top_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Clavicle_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Shoulder_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Elbow_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Wrist_Jnt");
         }
     }
 }
