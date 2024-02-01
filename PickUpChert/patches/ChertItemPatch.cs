@@ -103,6 +103,33 @@ namespace PickUpChert {
             }
         }
 
+        // this method prevents to play drums on ending talk when stopping the playing
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(OWAudioSource), nameof(OWAudioSource.FadeIn))]
+        public static bool OWAudioSource_FadeIn_Prefix(OWAudioSource __instance) {
+            if(!ChertItem.Instance || BringChert.Instance == null || !BringChert.Instance.SignalDrums) {
+                return true;
+            }
+            if(__instance != BringChert.Instance.SignalDrums.GetOWAudioSource()) {
+                return true;
+            }
+            if(!ChertItem.Instance.Playing) {
+                return false;
+            }
+            return true;
+        }
+
+        //[HarmonyPrefix]
+        //[HarmonyPatch(typeof(TravelerAudioManager), nameof(TravelerAudioManager.Update))]
+        //public static void TravelerAudioManager_Update_Prefix(TravelerAudioManager __instance) {
+        //    if(!ChertItem.Instance || BringChert.Instance == null || !BringChert.Instance.SignalDrums) {
+        //        return;
+        //    }
+        //    if(__instance._playAfterDelay)
+
+        //    __instance._signals
+        //}
+
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TravelerController), nameof(TravelerController.OnUnpause))]
         public static bool TravelerController_OnUnpause_Prefix(TravelerController __instance) {
@@ -113,6 +140,7 @@ namespace PickUpChert {
                 return true;
             }
             if(!ChertItem.Instance.Playing) {
+                //PickUpChert.Log("OnUnpause is called and playing is not called");
                 return false;
             }
             return true;
