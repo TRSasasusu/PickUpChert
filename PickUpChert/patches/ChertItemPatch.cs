@@ -192,11 +192,10 @@ namespace PickUpChert {
             }
 
             var focusedOWItem = firstPersonManipulator.GetFocusedOWItem();
-            if(!focusedOWItem) {
-                return;
+            var focusedItemSocket = firstPersonManipulator.GetFocusedItemSocket();
+            if(focusedOWItem || (focusedItemSocket && focusedItemSocket.IsSocketOccupied())) {
+                __instance._heldItem = null;
             }
-
-            __instance._heldItem = null;
         }
         [HarmonyPostfix]
         [HarmonyPatch(typeof(ItemTool), nameof(ItemTool.UpdateInteract))]
