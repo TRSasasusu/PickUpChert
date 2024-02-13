@@ -31,6 +31,12 @@
     <None Update="assets\dialogues\initial_pick_up.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="assets\dialogues\outerwilds\sector\BH.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\dialogues\outerwilds\sector\WhiteholeStation.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\dialogues\outerwilds\sector\City.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

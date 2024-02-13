@@ -8,21 +8,32 @@
   "ChertPickUpChert_InitialPickUpINITIAL_PICKUP_0_Q": "でも昔、Gabbroがあなたをそうやって運んでるのを見たことがある。",
   "PickUpChert_InitialPickUp_AnswerINITIAL_PICKUP_0_A": "あのなあ、こいつはそのためにあるんじゃなくて…。<Pause/>えっ、もしかしてそのために付いてるのか？",
 
-  // Sunless City
+  // Sector_City
   "PickUpChert_SunlessCitySUNLESS_CITY_0": "これは…<Pause/>驚いた。まさか砂の降り積もる洞窟の奥にここまで壮大な居住地を作っていたとは。",
   "PickUpChert_SunlessCitySUNLESS_CITY_1": "Nomaiはどうやってこんなものを作り上げたんだ？控えめに言って砂が積もるまでに何か建築するなんて無理だろう。",
   "PickUpChert_SunlessCitySUNLESS_CITY_2": "いや、そもそも作り上げたとしてもここに住むなんてできっこない。少しでも居眠りなんかしたら…<Pause/>考えるだけで恐ろしい。",
 
-  // Sunless City - Forum
+  // Sector_Forum
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_0": "…本当にNomaiはここに住んでいたのか。この数々の遺構、Riebeckに見せてやりたいところだが、しかし…",
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_1": "このNomaiの滅び方は<Pause/>…そう、とても物悲しいものだ。この有様からして突然の出来事だったんだろうな…",
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_2": "だが、それよりも問題なのは、Nomaiが生きていた頃はここは住める場所だったということだ。つまり、砂の行き来する間隔が長かったのだろう。",
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_3": "いつから今の間隔になったんだ？いや、そもそも私がひよっ子の頃はこんなに速くなかった。なんなら昨日よりも明らかに速く感じる！",
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_4": "何か嫌な予感がする。今日見つけた超新星もそうだが、何か…。<Pause/>いや、すまないひよっ子。せっかく今日は出発の日だというのに…気にしないでくれ。",
 
-  // Sunless City - FossilCave
+  // Sector_FossilCave
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_0": "まさかこんなところでアンコウを見ることになるとは！…だが、これで裏付けられた！",
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_1": "以前、アトルロックのクレーターで氷の破片を見つけたんだ。あれは第5惑星 - そう、闇のイバラのかつての姿だ - から飛来したものだと仮説を立てた。その立証のために別の惑星にもその由来のものが見つかればいいと思っていたのだが…これは想像以上のものだよ。",
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_2": "このアンコウはどれだけの間ここで生きていたのだろう？実はこの洞窟は元々水中にあった部分も多いんだ。…ほら、よく見れば他の化石も埋まってるだろう？だから、この大きさのアンコウが飛来したわけではなく、ある程度ここで成長したかもしれないんだ。",
-  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_3": "いや、それにしても面白いものを見れた！ありがとう、ひよっ子。<size=20>たまにはこうやって持ち歩かれるのも悪くないな…</size>"
+  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_3": "いや、それにしても面白いものを見れた！ありがとう、ひよっ子。<size=20>たまにはこうやって持ち歩かれるのも悪くないな…</size>",
+
+  // Sector_WhiteholeStation
+  "PickUpChert_WhiteholeStationWHITEHOLE_STATION_0": "ホワイトホール近くの構造物はこうなっているのか！",
+  "ChertPickUpChert_WhiteholeStationWHITEHOLE_STATION_0_Q": "この構造物のことを知ってたの？",
+  "PickUpChert_WhiteholeStation_0_AWHITEHOLE_STATION_1": "ああもちろん知ってる。あのホワイトホールのすぐ近くに浮遊しているんだ。太陽ステーション程ではないにせよ気になるに決まっている！",
+
+  // Sector_BH
+  "PickUpChert_BHBH_0": "待ってくれ、なんだこの隕石の頻度は？<Pause/>ありえない量だぞこれは！",
+  "PickUpChert_BHBH_1": "それに地表のうちほとんどの表面完全性がかなり不安定だ…。いや、ひよっ子、惑星の地面でこの数値が100%でないのはあまりに異常だ！",
+  "PickUpChert_BHBH_2": "…おい、ここにまさかRiebeckがいる<Pause/>…というのか？<Pause/>すぐさまこんな場所から連れ帰らなくては！",
+  "PickUpChert_BHBH_3": "このペースでは1時間ももたないうちに脆い空洞という惑星は失われてしまう…。いったい何が起きているというんだ…？",
 }
