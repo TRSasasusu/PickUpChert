@@ -9,10 +9,6 @@ namespace PickUpChert {
     public class ChertPickUpConversation : MonoBehaviour {
         public static ChertPickUpConversation Instance;
 
-        static readonly Dictionary<string, string> SECTOR_DIALOGUE_DICT = new Dictionary<string, string>() {
-            {"Sector_City", "sunless_city"},
-        };
-
         enum InitialPickUpState {
             BEFORE_PICKUP,
             AFTER_PICKUP,
@@ -32,10 +28,15 @@ namespace PickUpChert {
             }
 
             _sectorXMLDict = new Dictionary<string, TextAsset>();
-            foreach(var (sectorName, dialogueFileName) in SECTOR_DIALOGUE_DICT) {
-                var path = PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + $"assets/dialogues/{dialogueFileName}.xml";
-                _sectorXMLDict.Add(sectorName, new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(path)));
+            foreach(var dialogueFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/dialogues/outerwilds/sector", "*.xml", System.IO.SearchOption.AllDirectories)) {
+                PickUpChert.Log(dialogueFilePath);
+                var sectorName = "Sector_" + System.IO.Path.GetFileNameWithoutExtension(dialogueFilePath);
+                _sectorXMLDict.Add(sectorName, new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath)));
             }
+            //foreach(var (sectorName, dialogueFileName) in SECTOR_DIALOGUE_DICT) {
+            //    var path = PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + $"assets/dialogues/{dialogueFileName}.xml";
+            //    _sectorXMLDict.Add(sectorName, new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(path)));
+            //}
         }
 
         public bool OnStartConversation() {

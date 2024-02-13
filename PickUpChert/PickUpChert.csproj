@@ -31,7 +31,13 @@
     <None Update="assets\dialogues\initial_pick_up.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\sunless_city.xml">
+    <None Update="assets\dialogues\outerwilds\sector\City.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\dialogues\outerwilds\sector\Forum.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\dialogues\outerwilds\sector\FossilCave.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="assets\translations\english.json">

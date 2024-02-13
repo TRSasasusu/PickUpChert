@@ -1,0 +1,13 @@
+﻿<DialogueTree>
+  <NameField>Chert</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_SunlessCityFossil</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>SUNLESS_CITY_FOSSIL_0</Page>
+      <Page>SUNLESS_CITY_FOSSIL_1</Page>
+      <Page>SUNLESS_CITY_FOSSIL_2</Page>
+      <Page>SUNLESS_CITY_FOSSIL_3</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>
