@@ -38,8 +38,19 @@ namespace PickUpChert {
         [HarmonyPatch(typeof(OWItem), nameof(OWItem.MoveAndChildToTransform))]
         public static void OWItem_MoveAndChildToTransform_Postfix(ref Transform socketTransform, OWItem __instance) {
             if(socketTransform == BringChert.Instance.ChertRightHand) {
-                __instance.transform.localPosition = new Vector3(0.2f, -0.1f, 0);
-                __instance.transform.localEulerAngles = new Vector3(330, 280, 0);
+                if(__instance._type == ItemType.DreamLantern) {
+                    __instance.transform.localPosition = new Vector3(0.4f, -0.2f, 0.9f);
+                    __instance.transform.localEulerAngles = new Vector3(0, 90, 250);
+                    foreach(var renderer in __instance.transform.GetComponentsInChildren<MeshRenderer>(true)) {
+                        if(renderer.name.Contains("ViewModelPrepass")) {
+                            renderer.gameObject.SetActive(false);
+                        }
+                    }
+                }
+                else {
+                    __instance.transform.localPosition = new Vector3(0.2f, -0.1f, 0);
+                    __instance.transform.localEulerAngles = new Vector3(330, 280, 0);
+                }
             }
         }
 
