@@ -26,6 +26,13 @@
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_2": "このアンコウはどれだけの間ここで生きていたのだろう？実はこの洞窟は元々水中にあった部分も多いんだ。…ほら、よく見れば他の化石も埋まってるだろう？だから、この大きさのアンコウが飛来したわけではなく、ある程度ここで成長したかもしれないんだ。",
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_3": "いや、それにしても面白いものを見れた！ありがとう、ひよっ子。<size=20>たまにはこうやって持ち歩かれるのも悪くないな…</size>",
 
+  // Sector_TimeLoopExperiment
+  "PickUpChert_TimeLoopExperimentTIME_LOOP_EXPERIMENT_0": "この施設は知っている。外側から中をリトル･スカウトで撮ったこともある。だが、やはりそれだけでは何の施設かはわからなかった。おそらく地下から通じる道があるのだろう。",
+  "ChertPickUpChert_TimeLoopExperimentTIME_LOOP_EXPERIMENT_0_Q_0": "そのとおり。ここではワープ時に生じるマイナスの時間差が、エネルギーを加えることで拡大することが検証されていたんだ。",
+  "ChertPickUpChert_TimeLoopExperimentTIME_LOOP_EXPERIMENT_0_Q_1": "なるほど。",
+  "PickUpChert_TimeLoopExperiment_0_A_0TIME_LOOP_EXPERIMENT_1": "Nomaiはそんなことをやっていたのか！ふむ…<Pause/>確かに光速を超えたワープをすれば時間が巻き戻るのは道理にかなっている。そこにエネルギーを加えてそれをさらに拡大すると…",
+  "PickUpChert_TimeLoopExperiment_0_A_0TIME_LOOP_EXPERIMENT_2": "待て。そんなことをやって問題ないのか？少なくともその間は同じものが2つ同時に存在することになる。それは…<Pause/>何かしらに反してしまうんじゃないのか？だが、世界が今のところ保たれていることを思うとそれだけではまだ問題ではないのか？<Pause/>…わからない。",
+
   // Sector_WhiteholeStation
   "PickUpChert_WhiteholeStationWHITEHOLE_STATION_0": "ホワイトホール近くの構造物はこうなっているのか！",
   "ChertPickUpChert_WhiteholeStationWHITEHOLE_STATION_0_Q": "この構造物のことを知ってたの？",

@@ -31,6 +31,9 @@
     <None Update="assets\dialogues\initial_pick_up.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="assets\dialogues\outerwilds\sector\TimeLoopExperiment.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\dialogues\outerwilds\sector\BH.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

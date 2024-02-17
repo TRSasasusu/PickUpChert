@@ -1,0 +1,28 @@
+﻿<DialogueTree>
+  <NameField>Chert</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_TimeLoopExperiment</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>TIME_LOOP_EXPERIMENT_0</Page>
+    </Dialogue>
+    <DialogueOptionsList>
+      <DialogueOption>
+        <RequiredLogCondition>CT_HIGH_ENERGY_LAB_X1</RequiredLogCondition>
+        <Text>TIME_LOOP_EXPERIMENT_0_Q_0</Text>
+        <DialogueTarget>PickUpChert_TimeLoopExperiment_0_A_0</DialogueTarget>
+      </DialogueOption>
+      <DialogueOption>
+        <Text>TIME_LOOP_EXPERIMENT_0_Q_1</Text>
+      </DialogueOption>
+    </DialogueOptionsList>
+  </DialogueNode>
+
+  <DialogueNode>
+    <Name>PickUpChert_TimeLoopExperiment_0_A_0</Name>
+    <Dialogue>
+      <Page>TIME_LOOP_EXPERIMENT_1</Page>
+      <Page>TIME_LOOP_EXPERIMENT_2</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>
