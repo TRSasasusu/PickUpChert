@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,12 +32,19 @@ namespace PickUpChert {
             foreach(var dialogueFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/dialogues/outerwilds/sector", "*.xml", System.IO.SearchOption.AllDirectories)) {
                 PickUpChert.Log(dialogueFilePath);
                 var sectorName = "Sector_" + System.IO.Path.GetFileNameWithoutExtension(dialogueFilePath);
-                _sectorXMLDict.Add(sectorName, new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath)));
+                _sectorXMLDict[sectorName] = new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath));
             }
-            //foreach(var (sectorName, dialogueFileName) in SECTOR_DIALOGUE_DICT) {
-            //    var path = PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + $"assets/dialogues/{dialogueFileName}.xml";
-            //    _sectorXMLDict.Add(sectorName, new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(path)));
-            //}
+
+            foreach(var dialogueSettingFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/dialogues/outerwilds/sector", "*.json", System.IO.SearchOption.AllDirectories)) {
+                PickUpChert.Log(dialogueSettingFilePath);
+                var sectorName = "Sector_" + System.IO.Path.GetFileNameWithoutExtension(dialogueSettingFilePath);
+                var dict = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueSettingFilePath));
+                if(dict.ContainsKey("common")) {
+                    foreach(var targetSectorBodyName in dict["common"]) {
+                        _sectorXMLDict.Add("Sector_" + targetSectorBodyName, _sectorXMLDict[sectorName]);
+                    }
+                }
+            }
         }
 
         public bool OnStartConversation() {
