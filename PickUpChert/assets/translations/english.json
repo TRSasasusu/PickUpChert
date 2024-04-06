@@ -1,4 +1,46 @@
 ﻿{
   "Play Drums": "Play Drums",
-  "Stop Drums": "Stop Drums"
+  "Stop Drums": "Stop Drums",
+
+  // Initial Pick Up
+  "PickUpChert_InitialPickUpINITIAL_PICKUP_0_0": "Hey, where are you going to take me?",
+  "PickUpChert_InitialPickUpINITIAL_PICKUP_0_1": "This part of the space suit isn't really a handle or anything.",
+  "ChertPickUpChert_InitialPickUpINITIAL_PICKUP_0_Q": "But I once saw Gabbro carry you like that.",
+  "PickUpChert_InitialPickUp_AnswerINITIAL_PICKUP_0_A": "You know, that's not what this guy is for... <Pause/>Huh, maybe that's why it's attached?",
+
+  // Sector_City
+  "PickUpChert_SunlessCitySUNLESS_CITY_0": "This... <Pause/>surprised me. I had no idea that they had built such a magnificent residence deep inside a cave filled with sand.",
+  "PickUpChert_SunlessCitySUNLESS_CITY_1": "How did Nomai create something like this? To put it mildly, it would be impossible to build something before the sand piles up.",
+  "PickUpChert_SunlessCitySUNLESS_CITY_2": "No, even if I built it in the first place, I wouldn't be able to live here. If I fall asleep even for a little while... <Pause/>just thinking about it is terrifying.",
+
+  // Sector_Forum
+  "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_0": "…Did Nomai really live here? I would like to show Riebeck these many ruins, but...",
+  "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_1": "The way Nomai is destroyed is<Pause/>...yes, it's very sad. Judging from this situation, it must have happened suddenly...",
+  "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_2": "But the bigger problem is that when Nomai was alive, this was a place to live. In other words, the interval between sand movement was probably long.",
+  "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_3": "When did this interval start? No, in the first place, when I was a hatchling, the sand wasn't this fast. It definitely feels faster than yesterday!",
+  "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_4": "I have a feeling that something is wrong. The same goes for the supernova we discovered today, but... <Pause/>Uh, I'm sorry, hatchling. Even though today is the day of departure...don't worry about it.",
+
+  // Sector_FossilCave
+  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_0": "I never expected to see an anglerfish in a place like this! ...But this is confirmed!",
+  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_1": "I once found a piece of ice in Attlerock crater. I hypothesized that it came from the fifth planet - yes, the former form of Dark Bramble. To prove that I was hoping to find something in another planet...but this is more than I could have imagined.",
+  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_2": "How long has this anglerfish been living here? In fact, many parts of this cave were originally underwater. ...Look, if you look closely, you'll see other fossils buried there too, right? So it's possible that anglerfish of this size didn't just fly in, but rather that they grew here to some extent.",
+  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_3": "Anyway, I saw something interesting! Thank you, hatchling. <size=20>It's not bad to be carried around like this once in a while...</size>",
+
+  // Sector_TimeLoopExperiment
+  "PickUpChert_TimeLoopExperimentTIME_LOOP_EXPERIMENT_0": "I know this facility. I once took photos of the inside from the outside using Little Scout. However, I still couldn't tell what kind of facility it was. There's probably a path that leads from underground.",
+  "ChertPickUpChert_TimeLoopExperimentTIME_LOOP_EXPERIMENT_0_Q_0": "That's right. Here, it was verified that the negative time interval that occurs during warp can be expanded by adding energy.",
+  "ChertPickUpChert_TimeLoopExperimentTIME_LOOP_EXPERIMENT_0_Q_1": "I see.",
+  "PickUpChert_TimeLoopExperiment_0_A_0TIME_LOOP_EXPERIMENT_1": "Was Nomai doing something like that? Hmm... <Pause/>It certainly makes sense that if you warp faster than the speed of light, you can rewind time. If we add energy to it and expand it further...",
+  "PickUpChert_TimeLoopExperiment_0_A_0TIME_LOOP_EXPERIMENT_2": "Wait. Is there any problem with doing that? At least for a while, two of the same things will exist at the same time. <Pause/>Wouldn't that go against something? But considering the world is preserved for now, isn't that still a problem? <Pause/>…I don't know.",
+
+  // Sector_WhiteholeStation
+  "PickUpChert_WhiteholeStationWHITEHOLE_STATION_0": "This is what the structures near the white hole look like!",
+  "ChertPickUpChert_WhiteholeStationWHITEHOLE_STATION_0_Q": "Did you know about this structure?",
+  "PickUpChert_WhiteholeStation_0_AWHITEHOLE_STATION_1": "Oh of course I know. It's floating right next to that white hole. Although it's not as much as the Sun Station, it's definitely interesting!",
+
+  // Sector_BH
+  "PickUpChert_BHBH_0": "Wait, what is the frequency of these meteorites? <Pause/>This is an impossible amount!",
+  "PickUpChert_BHBH_1": "And the surface integrity of most of this planet's surface is quite unstable... No, hatchling, it's too abnormal that this value is not 100% on a planet's ground!",
+  "PickUpChert_BHBH_2": "...Hey, Riebeck is <Pause/>actually here...? <Pause/>We have to bring them home from this place right away!",
+  "PickUpChert_BHBH_3": "At this pace, Brittle Hollow will be lost in less than an hour. What on the planet is going on...?",
 }
