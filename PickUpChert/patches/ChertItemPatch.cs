@@ -211,7 +211,7 @@ namespace PickUpChert {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(ItemTool), nameof(ItemTool.UpdateInteract))]
         public static void ItemTool_UpdateInteract_Postfix(ItemTool __instance) {
-            if(!__instance._heldItem && ChertItem.Instance.Brought) {
+            if(!__instance._heldItem && ChertItem.Instance && ChertItem.Instance.Brought) {
                 __instance._heldItem = ChertItem.Instance;
             }
         }
