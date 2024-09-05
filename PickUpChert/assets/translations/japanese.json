@@ -18,13 +18,13 @@
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_1": "このNomaiの滅び方は<Pause/>…そう、とても物悲しいものだ。この有様からして突然の出来事だったんだろうな…",
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_2": "だが、それよりも問題なのは、Nomaiが生きていた頃はここは住める場所だったということだ。つまり、砂の行き来する間隔が長かったのだろう。",
   "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_3": "いつから今の間隔になったんだ？いや、そもそも私がひよっ子の頃はこんなに速くなかった。なんなら昨日よりも明らかに速く感じる！",
-  "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_4": "何か嫌な予感がする。今日見つけた超新星もそうだが、何か…。<Pause/>いや、すまないひよっ子。せっかく今日は出発の日だというのに…気にしないでくれ。",
+  "PickUpChert_SunlessCityForumSUNLESS_CITY_FORUM_4": "何か嫌な予感がする。今日見つけた超新星もそうだが、何か…。<Pause/>いや、すまない。せっかく今日はお前の出発の日だというのに…気にしないでくれ。",
 
   // Sector_FossilCave
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_0": "まさかこんなところでアンコウを見ることになるとは！…だが、これで裏付けられた！",
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_1": "以前、アトルロックのクレーターで氷の破片を見つけたんだ。あれは第5惑星 - そう、闇のイバラのかつての姿だ - から飛来したものだと仮説を立てた。その立証のために別の惑星にもその由来のものが見つかればいいと思っていたのだが…これは想像以上のものだよ。",
   "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_2": "このアンコウはどれだけの間ここで生きていたのだろう？実はこの洞窟は元々水中にあった部分も多いんだ。…ほら、よく見れば他の化石も埋まってるだろう？だから、この大きさのアンコウが飛来したわけではなく、ある程度ここで成長したかもしれないんだ。",
-  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_3": "いや、それにしても面白いものを見れた！ありがとう、ひよっ子。<size=20>たまにはこうやって持ち歩かれるのも悪くないな…</size>",
+  "PickUpChert_SunlessCityFossilSUNLESS_CITY_FOSSIL_3": "いや、それにしても面白いものを見れた！ありがとう。<size=20>たまにはこうやって持ち歩かれるのも悪くないな…</size>",
 
   // Sector_TimeLoopExperiment
   "PickUpChert_TimeLoopExperimentTIME_LOOP_EXPERIMENT_0": "この施設は知っている。外側から中をリトル･スカウトで撮ったこともある。だが、やはりそれだけでは何の施設かはわからなかった。おそらく地下から通じる道があるのだろう。",
@@ -40,7 +40,16 @@
 
   // Sector_BH
   "PickUpChert_BHBH_0": "待ってくれ、なんだこの隕石の頻度は？<Pause/>ありえない量だぞこれは！",
-  "PickUpChert_BHBH_1": "それに地表のうちほとんどの表面完全性がかなり不安定だ…。いや、ひよっ子、惑星の地面でこの数値が100%でないのはあまりに異常だ！",
+  "PickUpChert_BHBH_1": "それに地表のうちほとんどの表面完全性がかなり不安定だ…。いや、惑星の地面でこの数値が100%でないのはあまりに異常だ！",
   "PickUpChert_BHBH_2": "…おい、ここにまさかRiebeckがいる<Pause/>…というのか？<Pause/>すぐさまこんな場所から連れ帰らなくては！",
   "PickUpChert_BHBH_3": "このペースでは1時間ももたないうちに脆い空洞という惑星は失われてしまう…。いったい何が起きているというんだ…？",
+
+  // See Riebeck
+  "PickUpChert_Riebeck_See_0_Chert": "Riebeck！この惑星は間もなく崩壊する！すぐに木の炉辺へ戻るんだ！",
+  "PickUpChert_Riebeck_See_1_Riebeck": "崩壊する？！この脆い空洞が？間もなく？！<Pause/>…そんなばかな…",
+  "PickUpChert_Riebeck_See_2_Chert": "残念ながら本当だ。隕石の数が大いに増えていて、実際にいくつもの大地が崩れ始めてる。もうあまり時間はない。早く探査艇に乗るんだ。",
+  "PickUpChert_Riebeck_See_3_Riebeck": "…Chertが言うから本当なんだろう。<Pause/>でも、そうだとすると<Pause/>…空中都市はどうなってしまう？私の夢なんだ。ひよっ子の頃からの夢なんだよ！",
+  "PickUpChert_Riebeck_See_4_Chert": "…<Pause/>すまない、頼む、諦めてくれ、Riebeck。<Pause/>その夢は知ってる。<Pause/>何度も、何度も語ってくれたし、あんなに怖がりなのに、ここまでたどり着いたんだって、私も知ってる。<Pause/>…あぁ、お前もRibeckに言ってやってくれないか。私にはもうこれ以上は…",
+  "RiebeckPickUpChert_Riebeck_See_Q_0": "今から空中都市へ行こう。それからでも遅くない。",
+  "RiebeckPickUpChert_Riebeck_See_Q_1": "ああ、早く探査艇に乗るべきだ。",
 }
