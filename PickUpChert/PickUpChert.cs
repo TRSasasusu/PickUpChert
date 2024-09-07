@@ -10,6 +10,8 @@ namespace PickUpChert {
     public class PickUpChert : ModBehaviour {
         public static PickUpChert Instance;
 
+        public RuntimeAnimatorController _riebeckAnimatorController;
+
         public static void Log(string text, MessageType messageType = MessageType.Message) {
             Instance.ModHelper.Console.WriteLine(text, messageType);
         }
@@ -36,6 +38,7 @@ namespace PickUpChert {
             // Starting here, you'll have access to OWML's mod helper.
             ModHelper.Console.WriteLine($"{nameof(PickUpChert)} is loaded!", MessageType.Success);
 
+            var bundle = ModHelper.Assets.LoadBundle("assets/assetbundles/pickupchert");
 
             // Example of accessing game code.
             LoadManager.OnCompleteSceneLoad += (scene, loadScene) => {
@@ -43,6 +46,9 @@ namespace PickUpChert {
                 ModHelper.Console.WriteLine("Loaded into solar system!", MessageType.Success);
                 var bringChert = new BringChert();
                 bringChert.Initialize();
+
+                _riebeckAnimatorController = bundle.LoadAsset<RuntimeAnimatorController>("Assets/MyAssets/Animators/riebeck.controller");
+                Log($"{_riebeckAnimatorController}");
             };
 
             ChertPickUpConversation.Initialize();

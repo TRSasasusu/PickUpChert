@@ -28,6 +28,12 @@
     <Content Include="PickUpChert.csproj.user" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="assets\assetbundles\pickupchert">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\assetbundles\pickupchert.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\dialogues\initial_pick_up.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
