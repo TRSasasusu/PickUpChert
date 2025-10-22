@@ -26,12 +26,12 @@ namespace PickUpChert {
                 for (var i = BringChert.Instance.Sector_Lakebed._staticRenderers.Count - 1; i >= 0; i--) {
                     var name = BringChert.Instance.Sector_Lakebed._staticRenderers[i].name;
                     if (name == "NewDrum:polySurface1" || name == "NewDrum:polySurface2" || name == "Chert_Skin_02:Chert_Mesh:Traveller_HEA_Chert 1" || name == "Chert_DrumStick_Geo1") {
-                        BringChert.Instance.Sector_Lakebed._staticRenderers.RemoveAt(i);
+                        BringChert.Instance.Sector_Lakebed._staticRenderers.RemoveAt(i); // remove Chert parts from a disabled renderer queue of the sector
                     }
                 }
             }
             else if(ChertItem.Instance && ChertItem.Instance.Brought) {
-                socketTransform = BringChert.Instance.ChertRightHand;
+                socketTransform = BringChert.Instance.ChertRightHand; // set socket as the right hand of Chert
             }
         }
         [HarmonyPostfix]
@@ -42,7 +42,7 @@ namespace PickUpChert {
                     __instance.transform.localPosition = new Vector3(0.4f, -0.2f, 0.9f);
                     __instance.transform.localEulerAngles = new Vector3(0, 90, 250);
                     foreach(var renderer in __instance.transform.GetComponentsInChildren<MeshRenderer>(true)) {
-                        if(renderer.name.Contains("ViewModelPrepass")) {
+                        if(renderer.name.Contains("ViewModelPrepass")) { // dream lantern has special parts displayed above any objects including Chert, so disable them.
                             renderer.gameObject.SetActive(false);
                         }
                     }
@@ -109,7 +109,7 @@ namespace PickUpChert {
                 return;
             }
 
-            if (BringChert.Instance.ChertSocket.transform.childCount > 0 && BringChert.Instance.ShipCockpitController._playerAtFlightConsole) {
+            if (BringChert.Instance.ChertSocket.transform.childCount > 0 && BringChert.Instance.ShipCockpitController._playerAtFlightConsole) { // keep holding Chert when player is in cockpit
                 __instance._isPuttingAway = false;
                 __instance._isEquipped = false;
                 __instance.enabled = false;
@@ -214,6 +214,12 @@ namespace PickUpChert {
             if(!__instance._heldItem && ChertItem.Instance && ChertItem.Instance.Brought) {
                 __instance._heldItem = ChertItem.Instance;
             }
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(DialogueNode), nameof(DialogueNode.GetNextPage))]
+        public static void DialogueNode_GetNextPage(string mainText, List<DialogueOption> options) {
+            PickUpChert.Log(mainText);
         }
     }
 }
