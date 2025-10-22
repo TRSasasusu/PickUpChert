@@ -47,6 +47,10 @@ namespace PickUpChert {
                         }
                     }
                 }
+                else if(__instance._type == ItemType.Lantern) {
+                    __instance.transform.localPosition = new Vector3(1.2059f, 0.1778f, 0.4878f);
+                    __instance.transform.localEulerAngles = new Vector3(33.623f, 14.4807f, 85.7819f);
+                }
                 else {
                     __instance.transform.localPosition = new Vector3(0.2f, -0.1f, 0);
                     __instance.transform.localEulerAngles = new Vector3(330, 280, 0);
