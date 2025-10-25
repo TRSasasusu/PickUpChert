@@ -225,5 +225,13 @@ namespace PickUpChert {
         public static void DialogueNode_GetNextPage(string mainText, List<DialogueOption> options) {
             PickUpChert.Log(mainText);
         }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(DreamCampfire), nameof(DreamCampfire.WakeInDreamWorld))]
+        public static void DreamCampfire_WakeInDreamWorld_Postfix() {
+            if(BringChert.Instance != null && BringChert.Instance.Chert) {
+                BringChert.Instance.Chert.transform.Find("Traveller_HEA_Chert_ANIM_Chatter_Chipper").GetComponent<Animator>().enabled = true;
+            }
+        }
     }
 }
