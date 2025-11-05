@@ -83,7 +83,7 @@ namespace PickUpChert {
                 return;
             }
             if(_initialPickUpState == InitialPickUpState.BEFORE_PICKUP) {
-                if(ChertItem.Instance.Brought) {
+                if(ChertItem.Brought) {
                     _initialPickUpState = InitialPickUpState.AFTER_PICKUP;
                 }
             }

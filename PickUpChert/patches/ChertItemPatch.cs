@@ -30,7 +30,7 @@ namespace PickUpChert {
                     }
                 }
             }
-            else if(ChertItem.Instance && ChertItem.Instance.Brought) {
+            else if(ChertItem.Instance && ChertItem.Brought) {
                 socketTransform = BringChert.Instance.ChertRightHand; // set socket as the right hand of Chert
             }
         }
@@ -40,7 +40,8 @@ namespace PickUpChert {
             if(socketTransform == BringChert.Instance.ChertRightHand) {
                 if(__instance._type == ItemType.DreamLantern) {
                     __instance.transform.localPosition = new Vector3(0.4f, -0.2f, 0.9f);
-                    __instance.transform.localEulerAngles = new Vector3(0, 90, 250);
+                    //__instance.transform.localEulerAngles = new Vector3(0, 90, 250);
+                    __instance.transform.localEulerAngles = new Vector3(358.8174f, 66.9519f, 247.5879f);
                     foreach(var renderer in __instance.transform.GetComponentsInChildren<MeshRenderer>(true)) {
                         if(renderer.name.Contains("ViewModelPrepass")) { // dream lantern has special parts displayed above any objects including Chert, so disable them.
                             renderer.gameObject.SetActive(false);
@@ -50,6 +51,7 @@ namespace PickUpChert {
                 else if(__instance._type == ItemType.Lantern) {
                     __instance.transform.localPosition = new Vector3(1.2059f, 0.1778f, 0.4878f);
                     __instance.transform.localEulerAngles = new Vector3(33.623f, 14.4807f, 85.7819f);
+                    //__instance.transform.localEulerAngles = new Vector3(358.8174f, 66.9519f, 247.5879f);
                 }
                 else {
                     __instance.transform.localPosition = new Vector3(0.2f, -0.1f, 0);
@@ -199,7 +201,7 @@ namespace PickUpChert {
             if(!ChertItem.Instance || BringChert.Instance == null || !BringChert.Instance.SignalDrums) {
                 return;
             }
-            if(!ChertItem.Instance.Brought) {
+            if(!ChertItem.Brought) {
                 return;
             }
             if(__instance._heldItem != ChertItem.Instance) {
@@ -215,7 +217,7 @@ namespace PickUpChert {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(ItemTool), nameof(ItemTool.UpdateInteract))]
         public static void ItemTool_UpdateInteract_Postfix(ItemTool __instance) {
-            if(!__instance._heldItem && ChertItem.Instance && ChertItem.Instance.Brought) {
+            if(!__instance._heldItem && ChertItem.Instance && ChertItem.Brought) {
                 __instance._heldItem = ChertItem.Instance;
             }
         }
@@ -231,6 +233,57 @@ namespace PickUpChert {
         public static void DreamCampfire_WakeInDreamWorld_Postfix() {
             if(BringChert.Instance != null && BringChert.Instance.Chert) {
                 BringChert.Instance.Chert.transform.Find("Traveller_HEA_Chert_ANIM_Chatter_Chipper").GetComponent<Animator>().enabled = true;
+            }
+            if(ChertItem.Brought && ChertItem.Instance) {
+                ChertItem.Instance._inDream = true;
+            }
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(DreamCampfire), nameof(DreamCampfire.OnExitDreamWorld))]
+        public static void DreamCampfire_OnExitDreamWorld_Postfix() {
+            PickUpChert.Log("hogehoge");
+            if(ChertItem.Instance) {
+                PickUpChert.Log($"indream: {ChertItem.Instance._inDream}, brought: {ChertItem.Brought}");
+                if(ChertItem.Instance._inDream) {
+                    var itemTool = Locator.GetToolModeSwapper().GetItemCarryTool();
+                    var dreamWorldController = Locator.GetDreamWorldController();
+                    var dreamWorldSector = dreamWorldController._dreamWorldSector;
+                    PickUpChert.Log($"helditemtype: {itemTool.GetHeldItemType()}, helditem: {itemTool._heldItem.name}");
+                    if(!ChertItem.Brought) {
+                        if(itemTool._heldItem != null) {
+                            itemTool.DropItemInstantly(dreamWorldSector, dreamWorldController.transform);
+                        }
+                        itemTool.PickUpItemInstantly(ChertItem.Instance);
+                        itemTool.PickUpItemInstantly(dreamWorldController._playerLantern);
+                    }
+                    //else if(itemTool.GetHeldItemType() != ItemType.DreamLantern) {
+                    //    PickUpChert.Log($"not brought! itemTool._heldItem: {itemTool._heldItem.name}, playerlantern: {dreamWorldController._playerLantern}");
+                    //    if(itemTool._heldItem != null) {
+                    //        itemTool.DropItemInstantly(dreamWorldSector, dreamWorldController.transform);
+                    //    }
+                    //    itemTool.PickUpItemInstantly(dreamWorldController._playerLantern);
+                    //}
+                }
+                ChertItem.Instance._inDream = false;
+            }
+        }
+
+        //[HarmonyPrefix]
+        //[HarmonyPatch(typeof(ItemTool), nameof(ItemTool.DropItemInstantly))]
+        //public static bool ItemTool_DropItemInstantly_Prefix(ItemTool __instance, Sector sector, Transform socket) {
+        //    if (sector == Locator.GetDreamWorldController()._dreamWorldSector && ChertItem.Brought) {
+        //        return false;
+        //    }
+        //    return true;
+        //}
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(ItemTool), nameof(ItemTool.PickUpItemInstantly))]
+        public static void ItemTool_PickUpItemInstantly_Prefix(ItemTool __instance, OWItem item) {
+            //if(ChertItem.Instance && item == ChertItem.Instance) {
+            if(ChertItem.Brought) {
+                __instance._heldItem = null;
             }
         }
     }
