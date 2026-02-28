@@ -54,6 +54,7 @@ namespace PickUpChert {
             var conversationZone = Chert.transform.Find("ConversationZone_Chert");
             conversationZone.transform.localPosition = new Vector3(0.009f, 0.363f, 0.355f);
 
+            //KeepLoaded.MakeKeepLoaded(Chert, false);
             Chert.AddComponent<ChertItem>();
 
             var sphereCollider = Chert.AddComponent<SphereCollider>();

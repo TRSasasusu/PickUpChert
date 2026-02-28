@@ -64,5 +64,16 @@
     <None Update="assets\translations\japanese.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="planets\ember_twin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Libs\xen.NewHorizons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="NewHorizons">
+      <HintPath>Libs\xen.NewHorizons\NewHorizons.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
