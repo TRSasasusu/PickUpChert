@@ -78,7 +78,7 @@ namespace PickUpChert {
             ////    Log(assembly.FullName);
             ////}
 
-            var bundle = ModHelper.Assets.LoadBundle("assets/assetbundles/pickupchert");
+            //var bundle = ModHelper.Assets.LoadBundle("assets/assetbundles/pickupchert");
 
             // Example of accessing game code.
             LoadManager.OnCompleteSceneLoad += (scene, loadScene) => {
@@ -87,8 +87,8 @@ namespace PickUpChert {
                 var bringChert = new BringChert();
                 bringChert.Initialize();
 
-                _riebeckAnimatorController = bundle.LoadAsset<RuntimeAnimatorController>("Assets/MyAssets/Animators/riebeck.controller");
-                Log($"{_riebeckAnimatorController}");
+                //_riebeckAnimatorController = bundle.LoadAsset<RuntimeAnimatorController>("Assets/MyAssets/Animators/riebeck.controller");
+                //Log($"{_riebeckAnimatorController}");
             };
 
             ChertPickUpConversation.Initialize();

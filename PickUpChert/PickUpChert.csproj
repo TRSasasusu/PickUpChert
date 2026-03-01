@@ -67,6 +67,9 @@
     <None Update="planets\ember_twin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="planets\timber_hearth.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Libs\xen.NewHorizons\" />

@@ -1,19 +1,37 @@
 ManifestFileVersion: 0
-CRC: 2129784430
+CRC: 2704734468
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ee84aecf90ba629830e976aed368efec
+    Hash: 938ef72c1aba6f96739e734201479497
   TypeTreeHash:
     serializedVersion: 2
-    Hash: fdf6c57a251b9f6ec27bdd2fe01b033c
+    Hash: a09239ab90a30d9ceb9c2aee41b41464
 HashAppended: 0
 ClassTypes:
-- Class: 74
+- Class: 1
   Script: {instanceID: 0}
-- Class: 91
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0053d129d589d30957bcc3b1958fc878, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 136
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/MyAssets/Animators/riebeck.controller
+- Assets/MyAssets/Prefabs/shortcut_chert.prefab
 Dependencies: []
