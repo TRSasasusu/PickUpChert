@@ -75,6 +75,9 @@
     <Folder Include="Libs\xen.NewHorizons\" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="DOTween">
+      <HintPath>Libs\DOTween\DOTween.dll</HintPath>
+    </Reference>
     <Reference Include="NewHorizons">
       <HintPath>Libs\xen.NewHorizons\NewHorizons.dll</HintPath>
     </Reference>

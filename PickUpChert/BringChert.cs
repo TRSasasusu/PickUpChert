@@ -28,12 +28,21 @@ namespace PickUpChert {
         public PlayerSectorDetector SectorDetector { get; private set; }
         public CharacterDialogueTree ChertDialogueTree { get; private set; }
 
+        Coroutine _initializeBody;
+
         public BringChert() {
             Instance = this;
         }
 
         public void Initialize() {
-            PickUpChert.Instance.StartCoroutine(InitializeBody());
+            _initializeBody = PickUpChert.Instance.StartCoroutine(InitializeBody());
+        }
+
+        public void DestroyResources() {
+            if(_initializeBody != null) {
+                PickUpChert.Instance.StopCoroutine(_initializeBody);
+                _initializeBody = null;
+            }
         }
 
         IEnumerator InitializeBody() {

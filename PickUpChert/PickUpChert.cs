@@ -80,12 +80,24 @@ namespace PickUpChert {
 
             //var bundle = ModHelper.Assets.LoadBundle("assets/assetbundles/pickupchert");
 
-            // Example of accessing game code.
+            BringChert bringChert = null;
+            ModifyObjects modifyObjects = null;
             LoadManager.OnCompleteSceneLoad += (scene, loadScene) => {
                 if (loadScene != OWScene.SolarSystem) return;
                 ModHelper.Console.WriteLine("Loaded into solar system!", MessageType.Success);
-                var bringChert = new BringChert();
+
+                if(bringChert != null) {
+                    bringChert.DestroyResources();
+                }
+                bringChert = new BringChert();
                 bringChert.Initialize();
+
+                if(modifyObjects != null) {
+                    modifyObjects.DestroyResources();
+                }
+                modifyObjects = new ModifyObjects();
+                modifyObjects.Initialize();
+
 
                 //_riebeckAnimatorController = bundle.LoadAsset<RuntimeAnimatorController>("Assets/MyAssets/Animators/riebeck.controller");
                 //Log($"{_riebeckAnimatorController}");

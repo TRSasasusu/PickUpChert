@@ -2,6 +2,28 @@
   "$schema": "https://raw.githubusercontent.com/xen-42/outer-wilds-new-horizons/main/NewHorizons/Schemas/body_schema.json",
   "name": "TimberHearth",
   "Props": {
+    "singularities": [
+      {
+        "type": "whiteHole",
+        //"type": "blackHole",
+        "parentPath": "Sector_TH/shortcut_chert",
+        "isRelativeToParent": true,
+        "rename": "WarpChert",
+        //"horizonRadius": 0.1,
+        //"position": {
+        //  "x": 20.5935,
+        //  "y": -37.2129,
+        //  "z": 185.9088
+        //},
+        //"uniqueID": "warp_chert"
+        "horizonRadius": 0.5,
+        "position": {
+          "x": 0,
+          "y": 0.0962,
+          "z": 0
+        }
+      }
+    ],
     "details": [
       {
         "assetBundle": "assets/assetbundles/pickupchert",
@@ -20,7 +42,8 @@
       },
       {
         //"path": "CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_TimeLoopExperiment/WarpCoreWallSockets/WarpCoreSocket/Props_NOM_WarpCoreBroken (1)/Props_NOM_WarpCore_Simple",
-        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_TimeLoopExperiment/WarpCoreWallSockets/WarpCoreSocket/Props_NOM_WarpCoreBroken (2)/Props_NOM_WarpCoreWhite (1)",
+        //"path": "CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_TimeLoopExperiment/WarpCoreWallSockets/WarpCoreSocket/Props_NOM_WarpCoreBroken (2)/Props_NOM_WarpCoreWhite (1)",
+        "path": "CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_TimeLoopExperiment/WarpCoreWallSockets/WarpCoreSocket (2)/Props_NOM_WarpCoreWhite (1)",
         "parentPath": "Sector_TH/shortcut_chert",
         "isRelativeToParent": true,
         "rename": "WhiteHoleWarpCore",
