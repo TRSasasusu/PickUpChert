@@ -25,15 +25,17 @@
         "isRelativeToParent": true,
         "rename": "WhiteHoleWarpCore",
         "position": {
-          "x": 0,
-          "y": 0.085,
-          "z": 0.0105
+          "x": 0.0009,
+          "y": 0.0841,
+          "z": 0.0082
         },
         "rotation": {
           "x": 0,
           "y": 90,
           "z": 0
-        }
+        },
+        "scale": 0.05,
+        "removeComponents": true
       }
     ]
   }
