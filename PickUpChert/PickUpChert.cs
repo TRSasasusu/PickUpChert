@@ -82,7 +82,17 @@ namespace PickUpChert {
 
             BringChert bringChert = null;
             ModifyObjects modifyObjects = null;
+            TitleController titleController = null;
+            titleController = new TitleController();
+            titleController.OnSceneLoad();
             LoadManager.OnCompleteSceneLoad += (scene, loadScene) => {
+                if(loadScene == OWScene.TitleScreen) {
+                    if(titleController != null) {
+                        titleController.DestroyResources();
+                    }
+                    titleController = new TitleController();
+                    titleController.OnSceneLoad();
+                }
                 if (loadScene != OWScene.SolarSystem) return;
                 ModHelper.Console.WriteLine("Loaded into solar system!", MessageType.Success);
 

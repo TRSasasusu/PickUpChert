@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Outer-Wilds-New-Horizons/new-horizons/main/NewHorizons/Schemas/title_screen_schema.json",
+  "titleScreens": [
+    {
+      "MenuPlanet": {
+        "details": [
+          {
+            "assetBundle": "assets/assetbundles/pickupchert",
+            "path": "Assets/orclecleowrip/Traveller_HEA_Chert-wo-mesh-wo-scripts.prefab",
+            "rename": "chert",
+            "position": {
+              "x": 0.2777,
+              "y": 0.0125,
+              "z": 3.6224
+            },
+            "rotation": {
+              "x": 0,
+              "y": 235.4664,
+              "z": 0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
