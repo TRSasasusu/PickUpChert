@@ -1,0 +1,12 @@
+﻿<DialogueTree>
+  <NameField>Chert</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_TH_Campsite</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>CAMPSITE_0</Page>
+      <Page>CAMPSITE_1</Page>
+      <Page>CAMPSITE_2</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>

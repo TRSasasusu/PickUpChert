@@ -52,4 +52,13 @@
   "PickUpChert_Riebeck_See_4_Chert": "…<Pause/>すまない、頼む、諦めてくれ、Riebeck。<Pause/>その夢は知ってる。<Pause/>何度も、何度も語ってくれたし、あんなに怖がりなのに、ここまでたどり着いたんだって、私も知ってる。<Pause/>…あぁ、お前もRibeckに言ってやってくれないか。私にはもうこれ以上は…",
   "RiebeckPickUpChert_Riebeck_See_Q_0": "今から空中都市へ行こう。それからでも遅くない。",
   "RiebeckPickUpChert_Riebeck_See_Q_1": "ああ、早く探査艇に乗るべきだ。",
+
+  // See Gabbro
+  "PickUpChert_Gabbro_See_0_Gabbro": "うん？<Pause/>…おぉ。どうだい、なかなかいい持ち手だろう？",
+  "PickUpChert_Gabbro_See_1_Chert": "ああ、そうだな。なかなかいい持ち手だと思うよ。<Pause/>…はぁ",
+
+  // Timber Hearth
+  "PickUpChert_TH_CampsiteCAMPSITE_0": "打ち上げ前のキャンプ、お前はどうだった？",
+  "PickUpChert_TH_CampsiteCAMPSITE_1": "Slateに言わせりゃ神経過敏になるって言うが、統計的に有意じゃない。<Pause/>Riebeckのあれはいつも通りのことだ。",
+  "PickUpChert_TH_CampsiteCAMPSITE_2": "それに、仮になるんだとしても構わないと私は思ってる。ついにあの星々を、大気に覆われない外側から見られるんだって、実感できるからな。",
 }
