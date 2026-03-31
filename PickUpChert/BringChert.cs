@@ -27,6 +27,7 @@ namespace PickUpChert {
         public ScreenPrompt PlayDrumPrompt { get; private set; }
         public PlayerSectorDetector SectorDetector { get; private set; }
         public CharacterDialogueTree ChertDialogueTree { get; private set; }
+        public bool _hasChertBeenOnCockpit;
 
         Coroutine _initializeBody;
 

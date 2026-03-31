@@ -25,6 +25,7 @@ namespace PickUpChert {
         static TextAsset _initialPickUpXML;
         static Dictionary<string, TextAsset> _sectorXMLDict;
         static Dictionary<string, TextAsset> _triggerXMLDict;
+        static Dictionary<string, TextAsset> _conversationXMLDict;
 
         Sector _currentSector;
         TextAsset _triggerXML;
@@ -42,16 +43,16 @@ namespace PickUpChert {
                 _sectorXMLDict[sectorName] = new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath));
             }
 
-            foreach(var dialogueSettingFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/dialogues/outerwilds/sector", "*.json", System.IO.SearchOption.AllDirectories)) {
-                PickUpChert.Log(dialogueSettingFilePath);
-                var sectorName = "Sector_" + System.IO.Path.GetFileNameWithoutExtension(dialogueSettingFilePath);
-                var dict = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueSettingFilePath));
-                if(dict.ContainsKey("common")) {
-                    foreach(var targetSectorBodyName in dict["common"]) {
-                        _sectorXMLDict.Add("Sector_" + targetSectorBodyName, _sectorXMLDict[sectorName]);
-                    }
-                }
-            }
+            //foreach(var dialogueSettingFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/dialogues/outerwilds/sector", "*.json", System.IO.SearchOption.AllDirectories)) {
+            //    PickUpChert.Log(dialogueSettingFilePath);
+            //    var sectorName = "Sector_" + System.IO.Path.GetFileNameWithoutExtension(dialogueSettingFilePath);
+            //    var dict = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueSettingFilePath));
+            //    if(dict.ContainsKey("common")) {
+            //        foreach(var targetSectorBodyName in dict["common"]) {
+            //            _sectorXMLDict.Add("Sector_" + targetSectorBodyName, _sectorXMLDict[sectorName]);
+            //        }
+            //    }
+            //}
 
             _triggerXMLDict = new Dictionary<string, TextAsset>();
             foreach(var dialogueFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/dialogues/outerwilds/trigger", "*.xml", System.IO.SearchOption.AllDirectories)) {
@@ -61,9 +62,16 @@ namespace PickUpChert {
                 var triggerName = $"PUCTriggers{dirName}/{fileName}";
                 _triggerXMLDict[triggerName] = new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath));
             }
+
+            _conversationXMLDict = new Dictionary<string, TextAsset>();
+            foreach(var dialogueFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/dialogues/outerwilds/conversation", "*.xml", System.IO.SearchOption.AllDirectories)) {
+                PickUpChert.Log(dialogueFilePath);
+                var conversationName = System.IO.Path.GetFileNameWithoutExtension(dialogueFilePath);
+                _conversationXMLDict[conversationName] = new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath));
+            }
         }
 
-        public bool OnStartConversation() {
+        public bool OnChertStartConversation() {
             if(_initialPickUpState == InitialPickUpState.AFTER_PICKUP) {
                 BringChert.Instance.ChertDialogueTree.SetTextXml(_initialPickUpXML);
                 _initialPickUpState = InitialPickUpState.END_INITIAL_PICKUP;
@@ -93,6 +101,44 @@ namespace PickUpChert {
                 }
             }
             return true;
+        }
+
+        TextAsset _backupXml;
+        public void StartConversationPrefix(CharacterDialogueTree dialogueTree) {
+            if (!ChertItem.Brought) {
+                return;
+            }
+
+            if (_conversationXMLDict.ContainsKey(dialogueTree._characterName)) {
+                _backupXml = dialogueTree._xmlCharacterDialogueAsset;
+                dialogueTree.SetTextXml(_conversationXMLDict[dialogueTree._characterName]);
+            }
+        }
+        public void EndConversationPostfix(CharacterDialogueTree dialogueTree) {
+            if(_backupXml != null) {
+                dialogueTree.SetTextXml(_backupXml);
+                _backupXml = null;
+            }
+        }
+        //public void DisplayDialogueBox2Postfix(CharacterDialogueTree dialogueTree, ref DialogueBoxVer2 __result) {
+        public void SetMainFieldDialogueTextPrefix(DialogueBoxVer2 __instance, ref string richText) {
+            //PickUpChert.Log(__result._mainFieldTextEffect._strToDisplay);
+            PickUpChert.Log(richText);
+            //if(__result._mainFieldTextEffect._strToDisplay.StartsWith("<Chert/>")) {
+            if(richText.StartsWith("<Chert/>")) {
+                //__result._mainFieldTextEffect._strToDisplay = __result._mainFieldTextEffect._strToDisplay.Substring("<Chert/>".Length);
+                richText = richText.Substring("<Chert/>".Length);
+                Locator.GetToolModeSwapper().EquipToolMode(ToolMode.Item);
+            }
+            else {
+                Locator.GetToolModeSwapper().UnequipTool();
+            }
+
+            __instance._turnOnNameField = false;
+            if (_backupXml != null) {
+                __instance._turnOnNameField = true;
+                __instance.SetNameFieldVisible(true);
+            }
         }
 
         void Awake() {

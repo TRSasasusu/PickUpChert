@@ -169,9 +169,38 @@ namespace PickUpChert {
         [HarmonyPatch(typeof(ChertDialogueSwapper), nameof(ChertDialogueSwapper.OnStartConversation))]
         public static bool ChertDialogueSwapper_OnStartConversation_Prefix() {
             if(ChertPickUpConversation.Instance) {
-                return ChertPickUpConversation.Instance.OnStartConversation();
+                return ChertPickUpConversation.Instance.OnChertStartConversation();
             }
             return true;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.StartConversation))]
+        public static void CharacterDialogueTree_StartConversation_Prefix(CharacterDialogueTree __instance) {
+            if(ChertPickUpConversation.Instance) {
+                ChertPickUpConversation.Instance.StartConversationPrefix(__instance);
+            }
+        }
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.EndConversation))]
+        public static void CharacterDialogueTree_EndConversation_Postfix(CharacterDialogueTree __instance) {
+            if(ChertPickUpConversation.Instance) {
+                ChertPickUpConversation.Instance.EndConversationPostfix(__instance);
+            }
+        }
+        //[HarmonyPostfix]
+        //[HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.DisplayDialogueBox2))]
+        //public static void CharacterDialogueTree_DisplayDialogueBox2_Postfix(CharacterDialogueTree __instance, ref DialogueBoxVer2 __result) {
+        //    if(ChertPickUpConversation.Instance) {
+        //        ChertPickUpConversation.Instance.DisplayDialogueBox2Postfix(__instance, ref __result);
+        //    }
+        //}
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(DialogueBoxVer2), nameof(DialogueBoxVer2.SetMainFieldDialogueText))]
+        public static void DialogueBoxVer2_SetMainFieldDialogueText_Prefix(DialogueBoxVer2 __instance, ref string richText) {
+            if(ChertPickUpConversation.Instance) {
+                ChertPickUpConversation.Instance.SetMainFieldDialogueTextPrefix(__instance, ref richText);
+            }
         }
 
         //[HarmonyPrefix]
