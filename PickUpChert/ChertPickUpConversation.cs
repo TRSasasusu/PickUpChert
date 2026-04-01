@@ -104,7 +104,9 @@ namespace PickUpChert {
         }
 
         TextAsset _backupXml;
+        bool _chertSpeaking;
         public void StartConversationPrefix(CharacterDialogueTree dialogueTree) {
+            _chertSpeaking = false;
             if (!ChertItem.Brought) {
                 return;
             }
@@ -115,12 +117,23 @@ namespace PickUpChert {
             }
         }
         public void EndConversationPostfix(CharacterDialogueTree dialogueTree) {
-            if(_backupXml != null) {
-                dialogueTree.SetTextXml(_backupXml);
-                _backupXml = null;
+            //PickUpChert.Log($"EndConversationPostfix: dialogueTree.enabled {dialogueTree.enabled}");
+            PickUpChert.Log($"EndConversationPostfix: dialogueTree._currentDialogueBox {dialogueTree._currentDialogueBox}");
+        }
+        public void InputDialogueOptionPostfix(CharacterDialogueTree __instance, ref bool __result) {
+            PickUpChert.Log($"InputDialoueOption __result: {__result}");
+            if(!__result) {
+                if(_backupXml != null) {
+                    __instance.SetTextXml(_backupXml);
+                    _backupXml = null;
+                }
             }
         }
-        //public void DisplayDialogueBox2Postfix(CharacterDialogueTree dialogueTree, ref DialogueBoxVer2 __result) {
+        public void DisplayDialogueBox2Postfix(CharacterDialogueTree dialogueTree, ref DialogueBoxVer2 __result) {
+            if (_chertSpeaking) {
+                __result.SetNameField(TextTranslation.Translate("Chert"));
+            }
+        }
         public void SetMainFieldDialogueTextPrefix(DialogueBoxVer2 __instance, ref string richText) {
             //PickUpChert.Log(__result._mainFieldTextEffect._strToDisplay);
             PickUpChert.Log(richText);
@@ -129,9 +142,11 @@ namespace PickUpChert {
                 //__result._mainFieldTextEffect._strToDisplay = __result._mainFieldTextEffect._strToDisplay.Substring("<Chert/>".Length);
                 richText = richText.Substring("<Chert/>".Length);
                 Locator.GetToolModeSwapper().EquipToolMode(ToolMode.Item);
+                _chertSpeaking = true;
             }
             else {
                 Locator.GetToolModeSwapper().UnequipTool();
+                _chertSpeaking = false;
             }
 
             __instance._turnOnNameField = false;

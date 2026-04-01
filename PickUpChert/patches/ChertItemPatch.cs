@@ -188,18 +188,25 @@ namespace PickUpChert {
                 ChertPickUpConversation.Instance.EndConversationPostfix(__instance);
             }
         }
-        //[HarmonyPostfix]
-        //[HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.DisplayDialogueBox2))]
-        //public static void CharacterDialogueTree_DisplayDialogueBox2_Postfix(CharacterDialogueTree __instance, ref DialogueBoxVer2 __result) {
-        //    if(ChertPickUpConversation.Instance) {
-        //        ChertPickUpConversation.Instance.DisplayDialogueBox2Postfix(__instance, ref __result);
-        //    }
-        //}
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.DisplayDialogueBox2))]
+        public static void CharacterDialogueTree_DisplayDialogueBox2_Postfix(CharacterDialogueTree __instance, ref DialogueBoxVer2 __result) {
+            if(ChertPickUpConversation.Instance) {
+                ChertPickUpConversation.Instance.DisplayDialogueBox2Postfix(__instance, ref __result);
+            }
+        }
         [HarmonyPrefix]
         [HarmonyPatch(typeof(DialogueBoxVer2), nameof(DialogueBoxVer2.SetMainFieldDialogueText))]
         public static void DialogueBoxVer2_SetMainFieldDialogueText_Prefix(DialogueBoxVer2 __instance, ref string richText) {
             if(ChertPickUpConversation.Instance) {
                 ChertPickUpConversation.Instance.SetMainFieldDialogueTextPrefix(__instance, ref richText);
+            }
+        }
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.InputDialogueOption))]
+        public static void CharacterDialogueTree_InputDialogueOption_Postfix(CharacterDialogueTree __instance, ref bool __result) {
+            if(ChertPickUpConversation.Instance) {
+                ChertPickUpConversation.Instance.InputDialogueOptionPostfix(__instance, ref __result);
             }
         }
 
