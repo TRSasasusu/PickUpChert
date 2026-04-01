@@ -138,6 +138,11 @@ namespace PickUpChert {
             //PickUpChert.Log(__result._mainFieldTextEffect._strToDisplay);
             PickUpChert.Log(richText);
             //if(__result._mainFieldTextEffect._strToDisplay.StartsWith("<Chert/>")) {
+
+            if(TextTranslation.s_theTable.GetLanguage() == TextTranslation.Language.JAPANESE) {
+                richText += "<i></i>"; // magic to use dynamic font in japanese, which has many characters
+            }
+
             if(richText.StartsWith("<Chert/>")) {
                 //__result._mainFieldTextEffect._strToDisplay = __result._mainFieldTextEffect._strToDisplay.Substring("<Chert/>".Length);
                 richText = richText.Substring("<Chert/>".Length);
