@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using UniRx;
 
 namespace PickUpChert {
     public class ChertItem : OWItem {
@@ -16,9 +18,13 @@ namespace PickUpChert {
         }
         public bool _inDream;
 
+        bool _prevBrought;
+
         public override void Awake() {
             base.Awake();
             Instance = this;
+
+            _localDropOffset = new Vector3(0, -0.3f, 0.5f);
         }
 
         public override string GetDisplayName() {
@@ -71,6 +77,21 @@ namespace PickUpChert {
                     }
                 }
                 //BringChert.Instance.StopDrumPrompt
+
+                if(!_prevBrought) {
+                    Observable.NextFrame().Subscribe(_ => {
+                        PickUpChert.Locomotion.ChertEndOnFloor();
+                    }).AddTo(this);
+                    _prevBrought = true;
+                }
+            }
+            else {
+                if(_prevBrought) {
+                    Observable.NextFrame().Subscribe(_ => {
+                        PickUpChert.Locomotion.ChertSitDown();
+                    }).AddTo(this);
+                    _prevBrought = false;
+                }
             }
         }
     }

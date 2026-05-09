@@ -133,6 +133,8 @@ namespace PickUpChert {
             Chert.AddComponent<ChertPickUpConversation>();
 
             ChertRightHand = Chert.transform.Find("Traveller_HEA_Chert_ANIM_Chatter_Chipper/Chert_Skin_02:Child_Rig_V01:Trajectory_Jnt/Chert_Skin_02:Child_Rig_V01:ROOT_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_01_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_02_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_Top_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Clavicle_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Shoulder_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Elbow_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Wrist_Jnt");
+
+            PickUpChert.Locomotion.ChertInitialize(Chert);
         }
     }
 }

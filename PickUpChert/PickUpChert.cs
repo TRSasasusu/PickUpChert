@@ -7,12 +7,15 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using TravelersLocomotionPack;
 using UnityEngine;
 
 namespace PickUpChert {
     public class PickUpChert : ModBehaviour {
         public static PickUpChert Instance;
         public INewHorizons NewHorizons;
+        public static ILocomotion Locomotion;
+
         public static class NHAssembly {
             public static MethodInfo _streamingHandlerSetUpStreaming;
             public static MethodInfo _detailBuilderFixComponent;
@@ -50,6 +53,9 @@ namespace PickUpChert {
 
             NewHorizons = ModHelper.Interaction.TryGetModApi<INewHorizons>("xen.NewHorizons");
             NewHorizons.LoadConfigs(this);
+
+            Locomotion = ModHelper.Interaction.TryGetModApi<ILocomotion>("orclecle.TravelersLocomotionPack");
+            Log(Locomotion.ToString());
 
 
             //var newHorizons = ModHelper.Interaction.TryGetMod("xen.NewHorizons");
