@@ -54,8 +54,16 @@
   "RiebeckPickUpChert_Riebeck_See_Q_1": "ああ、早く探査艇に乗るべきだ。",
 
   // See Gabbro
-  "PickUpChert_Gabbro_See_0_Gabbro": "うん？<Pause/>…おぉ。どうだい、なかなかいい持ち手だろう？",
-  "PickUpChert_Gabbro_See_1_Chert": "ああ、そうだな。なかなかいい持ち手だと思うよ。<Pause/>…はぁ",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_0": "うん？<Pause/>…おぉ。どうだい、なかなかいい持ち手だろう？",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_1": "<Chert/>ああ、そうだな。なかなかいい持ち手だと思うよ。<Pause/>…はぁ",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_2": "その持ち手にはちょっとした細工がしてあってね…相棒、次に目を覚ましたら草むらの中を覗いてみるといい。",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_3": "<Chert/>何の話をしてるのか知らないが、明日までにこの持ち手とやらを調べておかないとな。<Pause/>…そんなことよりGabbro、お前、探査艇はどうした？",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_4": "ああ、やつはバカンスで海水浴に出かけてるところさ。そして私はここで優雅にハンモックに揺られている。最高の休暇だ。",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_5": "<Chert/>ロストしたんだな。…まったく、その無線は何のためにあると思ってるんだ。「Hornfelsの長話を聞くため」じゃないからな。",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_6": "正確には、Hornfelsのまどろみを誘うような長話を聞くため、だな。",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_7": "<Chert/>…<Pause/>はあ。<Pause/>だが、良いニュースだ。ここに期待の宇宙飛行士が探査艇を持ってきてくれた。Gabbro、一緒に乗って村へ帰るぞ。こいつの腕は十分だ。",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_8": "…なるほど…<Pause/>…いや、たまにはいいかもしれないな。我らが期待の相棒、行き先は任せるよ。",
+  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_9": "<Chert/>いや、村へ帰るんじゃないのか？…まあ、少しくらいは付き合ってやるが、あまり無茶はするなよ。",
 
   // Timber Hearth
   "PickUpChert_TH_CampsiteCAMPSITE_0": "打ち上げ前のキャンプ、お前はどうだった？",

@@ -9,6 +9,7 @@ using IEnumerator = System.Collections.IEnumerator;
 namespace PickUpChert {
     public class ModifyObjects {
         const string SHORTCUT_CHERT_PATH = "TimberHearth_Body/Sector_TH/shortcut_chert";
+        const string GABBRO_PATH = "GabbroIsland_Body/Sector_GabbroIsland/Interactables_GabbroIsland/Traveller_HEA_Gabbro/Traveller_HEA_Gabbro_ANIM_IdleFlute";
 
         Coroutine _initializeBody;
 
@@ -29,6 +30,16 @@ namespace PickUpChert {
                 shortcutChert = GameObject.Find(SHORTCUT_CHERT_PATH);
                 if(shortcutChert) {
                     shortcutChert.AddComponent<ShortCutChert>();
+                    break;
+                }
+                yield return null;
+            }
+
+            GameObject gabbro = null;
+            while(true) {
+                gabbro = GameObject.Find(GABBRO_PATH);
+                if(gabbro) {
+                    PickUpChert.Locomotion.GabbroInitialize(gabbro);
                     break;
                 }
                 yield return null;

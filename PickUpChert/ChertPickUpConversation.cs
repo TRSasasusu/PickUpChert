@@ -105,6 +105,7 @@ namespace PickUpChert {
 
         TextAsset _backupXml;
         bool _chertSpeaking;
+        string _speakingCharacterName;
         public void StartConversationPrefix(CharacterDialogueTree dialogueTree) {
             _chertSpeaking = false;
             if (!ChertItem.Brought) {
@@ -113,6 +114,7 @@ namespace PickUpChert {
 
             if (_conversationXMLDict.ContainsKey(dialogueTree._characterName)) {
                 _backupXml = dialogueTree._xmlCharacterDialogueAsset;
+                _speakingCharacterName = dialogueTree._characterName;
                 dialogueTree.SetTextXml(_conversationXMLDict[dialogueTree._characterName]);
             }
         }
@@ -126,6 +128,11 @@ namespace PickUpChert {
                 if(_backupXml != null) {
                     __instance.SetTextXml(_backupXml);
                     _backupXml = null;
+
+                    if(_speakingCharacterName == "Gabbro") {
+                        PickUpChert.Locomotion.GabbroStandUp();
+                    }
+                    _speakingCharacterName = null;
                 }
             }
         }

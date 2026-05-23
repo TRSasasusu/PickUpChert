@@ -1,0 +1,19 @@
+﻿<DialogueTree>
+  <NameField>Gabbro</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_Gabbro_Chert_See</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>GABBRO_CHERT_SEE_0</Page>
+      <Page>GABBRO_CHERT_SEE_1</Page>
+      <Page>GABBRO_CHERT_SEE_2</Page>
+      <Page>GABBRO_CHERT_SEE_3</Page>
+      <Page>GABBRO_CHERT_SEE_4</Page>
+      <Page>GABBRO_CHERT_SEE_5</Page>
+      <Page>GABBRO_CHERT_SEE_6</Page>
+      <Page>GABBRO_CHERT_SEE_7</Page>
+      <Page>GABBRO_CHERT_SEE_8</Page>
+      <Page>GABBRO_CHERT_SEE_9</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>
