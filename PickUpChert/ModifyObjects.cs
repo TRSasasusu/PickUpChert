@@ -13,6 +13,8 @@ namespace PickUpChert {
 
         Coroutine _initializeBody;
 
+        public static GameObject Gabbro { get; private set; }
+
         public void Initialize() {
             _initializeBody = PickUpChert.Instance.StartCoroutine(InitializeBody());
         }
@@ -40,6 +42,7 @@ namespace PickUpChert {
                 gabbro = GameObject.Find(GABBRO_PATH);
                 if(gabbro) {
                     PickUpChert.Locomotion.GabbroInitialize(gabbro);
+                    Gabbro = gabbro;
                     break;
                 }
                 yield return null;
