@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3857050585
+CRC: 3734395830
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ca4b6113db1fc4b6e5aa4b6f57215852
+    Hash: 119fae00ef5e713957236fe89950373a
   TypeTreeHash:
     serializedVersion: 2
     Hash: b3ec3dc95e867f09f43c1e20850f01a9
@@ -57,6 +57,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/orclecleprefabs/PUCPathProbesTH.prefab
 - Assets/orclecleprefabs/PUCTriggersTH.prefab
 - Assets/orclecleprefabs/PUCPathProbesGabbroIsland.prefab
 - Assets/MyAssets/Prefabs/shortcut_chert.prefab

@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace PickUpChert {
     public class Traveler : MonoBehaviour {
+        public bool IsActivated { get; private set; }
+        public bool IsInShip { get; private set; }
+
         Stack<PathProbe> _stackedPathProbes = new Stack<PathProbe>();
         bool _goingToShip;
 
@@ -16,6 +19,7 @@ namespace PickUpChert {
 
         public void ReachProbe(PathProbe probe) {
             if (probe) {
+                IsActivated = true;
                 if(_goingToShip) {
                     GoToShip();
                 }
@@ -32,6 +36,7 @@ namespace PickUpChert {
         }
 
         public void GoToShip() {
+            IsActivated = true;
             _goingToShip = true;
             if (_stackedPathProbes.Count > 0) {
                 PathProbe probe = _stackedPathProbes.Pop();
@@ -42,6 +47,11 @@ namespace PickUpChert {
             else {
                 PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -0.5f, 0));
             }
+        }
+
+        public void CompleteEnteringShip() {
+            _goingToShip = false;
+            IsInShip = true;
         }
     }
 }
