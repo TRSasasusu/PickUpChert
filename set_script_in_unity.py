@@ -26,9 +26,11 @@ def set_script(filepath: str):
 
     basename = os.path.basename(filepath)
     new_content = '\n'.join(lines)
-    with open('../../../Unity/OWWhole/RetryExport/ExportedProject/Assets/orclecledll/' + basename, 'w') as f:
-        f.write(new_content)
-    with open('../../../Unity/OWPickUpChert/Assets/orclecledll/' + basename, 'w') as f:
+    #with open('../../../Unity/OWWhole/RetryExport/ExportedProject/Assets/orclecledll/' + basename, 'w') as f:
+    #    f.write(new_content)
+    #with open('../../../Unity/OWPickUpChert/Assets/orclecledll/' + basename, 'w') as f:
+    #    f.write(new_content)
+    with open('DummyForUnity/' + basename, 'w') as f:
         f.write(new_content)
 
 def main():

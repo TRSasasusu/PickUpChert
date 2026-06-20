@@ -8,3 +8,6 @@ echo "copying ILocomotionAPI.cs..."
 cp ../TravelersLocomotionPack/TravelersLocomotionPack/ILocomotionAPI.cs PickUpChert/.
 
 python3 set_script_in_unity.py
+
+cp DummyForUnity/bin/Debug/net48/PickUpChert.dll ../../../Unity/OWWhole/RetryExport/ExportedProject/Assets/orclecledll/.
+cp DummyForUnity/bin/Debug/net48/PickUpChert.dll ../../../Unity/OWPickUpChert/Assets/orclecledll/.
