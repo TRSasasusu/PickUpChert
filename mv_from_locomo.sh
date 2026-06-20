@@ -6,3 +6,5 @@ if [ -e ../TravelersLocomotionPack/TravelersLocomotionPack/assets/assetbundles/p
 fi
 echo "copying ILocomotionAPI.cs..."
 cp ../TravelersLocomotionPack/TravelersLocomotionPack/ILocomotionAPI.cs PickUpChert/.
+
+python3 set_script_in_unity.py

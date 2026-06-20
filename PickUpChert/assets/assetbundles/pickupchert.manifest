@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1219035356
+CRC: 4197732442
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4d12c92f4e28b53eb0ad014c0f848945
+    Hash: 4931ccf665dc92f8e1a8a44a870f3cdc
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e93ed7c6e7eb5c52c440da08adb07325
+    Hash: e1ddc3ddcef6b1050c9a67dc9fb958cb
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -45,6 +45,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: f913c288c393f80a7e923fc1c775f4fb, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0053d129d589d30957bcc3b1958fc878, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 256a893394350e84c84cf1a3d82ea660, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 135
@@ -56,6 +58,7 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/orclecleprefabs/PUCTriggersTH.prefab
+- Assets/orclecleprefabs/PUCPathProbesGabbroIsland.prefab
 - Assets/MyAssets/Prefabs/shortcut_chert.prefab
 - Assets/orclecleowrip/Traveller_HEA_Chert-wo-mesh-wo-scripts.prefab
 Dependencies: []

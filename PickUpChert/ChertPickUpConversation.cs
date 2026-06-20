@@ -132,7 +132,7 @@ namespace PickUpChert {
                     if(_speakingCharacterName == "Gabbro") {
                         PickUpChert.Locomotion.GabbroStandUp();
                         Observable.Timer(System.TimeSpan.FromSeconds(2)).Subscribe(_ => {
-                            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3);
+                            ModifyObjects.Gabbro.GoToShip();
                         }).AddTo(ModifyObjects.Gabbro);
                     }
                     _speakingCharacterName = null;

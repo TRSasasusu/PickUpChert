@@ -19,6 +19,6 @@ namespace TravelersLocomotionPack {
 
         public void GabbroStandUp();
 
-        public void GabbroMoveTo(Transform target, float radius, float speed);
+        public void GabbroMoveTo(Transform target, float radius, float speed, Vector3 offset);
     }
 }
