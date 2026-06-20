@@ -17,6 +17,10 @@ namespace TravelersLocomotionPack {
 
         public void GabbroInitialize(GameObject gabbro);
 
+        public bool GabbroIsInitialized();
+
+        public GameObject GetGabbro();
+
         public void GabbroStandUp();
 
         public void GabbroMoveTo(Transform target, float radius, float speed, Vector3 offset);

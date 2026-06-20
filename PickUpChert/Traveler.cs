@@ -7,12 +7,8 @@ using UnityEngine;
 
 namespace PickUpChert {
     public class Traveler : MonoBehaviour {
-        Stack<PathProbe> _stackedPathProbes;
+        Stack<PathProbe> _stackedPathProbes = new Stack<PathProbe>();
         bool _goingToShip;
-
-        void Awake() {
-            _stackedPathProbes = new Stack<PathProbe>();
-        }
 
         public void AddStackedPathProbe(PathProbe probe) {
             _stackedPathProbes.Push(probe);
@@ -24,13 +20,20 @@ namespace PickUpChert {
                     GoToShip();
                 }
                 else {
-                    PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
+                    if(probe._moveTarget) {
+                        PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
+                    }
+                }
+
+                if(probe._isStackedForShip) {
+                    _stackedPathProbes.Push(probe);
                 }
             }
         }
 
         public void GoToShip() {
-            if(_stackedPathProbes.Count > 0) {
+            _goingToShip = true;
+            if (_stackedPathProbes.Count > 0) {
                 PathProbe probe = _stackedPathProbes.Pop();
                 if (probe) {
                     PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);

@@ -10,6 +10,7 @@ namespace PickUpChert {
     public class ModifyObjects {
         const string SHORTCUT_CHERT_PATH = "TimberHearth_Body/Sector_TH/shortcut_chert";
         const string GABBRO_PATH = "GabbroIsland_Body/Sector_GabbroIsland/Interactables_GabbroIsland/Traveller_HEA_Gabbro/Traveller_HEA_Gabbro_ANIM_IdleFlute";
+        const string GABBRO_INITIAL_PROBE_PATH = "GabbroIsland_Body/Sector_GabbroIsland/PUCPathProbesGabbroIsland/AfterHammock";
 
         Coroutine _initializeBody;
 
@@ -37,12 +38,31 @@ namespace PickUpChert {
                 yield return null;
             }
 
-            GameObject gabbro = null;
-            while(true) {
-                gabbro = GameObject.Find(GABBRO_PATH);
-                if(gabbro) {
-                    PickUpChert.Locomotion.GabbroInitialize(gabbro);
+
+            GameObject originalGabbro = null;
+            while (true) {
+                originalGabbro = GameObject.Find(GABBRO_PATH);
+                if (originalGabbro) {
+                    PickUpChert.Locomotion.GabbroInitialize(originalGabbro);
+                    break;
+                }
+                yield return null;
+            }
+
+            while (true) {
+                if(PickUpChert.Locomotion.GabbroIsInitialized()) {
+                    var gabbro = PickUpChert.Locomotion.GetGabbro();
                     Gabbro = gabbro.AddComponent<Traveler>();
+                    break;
+                }
+                yield return null;
+            }
+
+            GameObject gabborInitialProbe = null;
+            while(true) {
+                gabborInitialProbe = GameObject.Find(GABBRO_INITIAL_PROBE_PATH);
+                if (gabborInitialProbe) {
+                    Gabbro.AddStackedPathProbe(gabborInitialProbe.GetComponent<PathProbe>());
                     break;
                 }
                 yield return null;
