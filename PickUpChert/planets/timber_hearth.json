@@ -31,6 +31,10 @@
       },
       {
         "assetBundle": "assets/assetbundles/pickupchert",
+        "path": "Assets/orclecleprefabs/PUCPathProbesTH.prefab"
+      },
+      {
+        "assetBundle": "assets/assetbundles/pickupchert",
         "path": "Assets/MyAssets/Prefabs/shortcut_chert.prefab",
         "position": {
           "x": 20.5935,
