@@ -26,6 +26,7 @@ namespace PickUpChert {
                 }
                 __instance._isPlayerInShip = true;
                 GlobalMessenger.FireEvent("EnterShip");
+                ModifyObjects.Hatchling.CompleteEnteringShip();
                 return false;
             }
             return true;
@@ -39,6 +40,41 @@ namespace PickUpChert {
                 return true;
             }
             return false;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(HatchController), nameof(HatchController.OnExit))]
+        public static bool HatchController_OnExit_Prefix(HatchController __instance, GameObject hitObj) {
+            if(hitObj.gameObject == ModifyObjects.Gabbro.gameObject) {
+                ModifyObjects.Gabbro.CompleteExitingShip();
+                return false;
+            }
+            if(hitObj.CompareTag("PlayerDetector")) {
+                if(ModifyObjects.Gabbro.IsActivated) {
+                    ModifyObjects.Gabbro.GoToCenterOfShipToExit();
+                }
+            }
+            return true;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(ShipTractorBeamSwitch), nameof(ShipTractorBeamSwitch.OnTriggerExit))]
+        public static bool ShipTractorBeamSwitch_OnTriggerExit_Prefix(ShipTractorBeamSwitch __instance, Collider hitCollider) {
+            if(hitCollider.gameObject == ModifyObjects.Gabbro.gameObject) {
+                ModifyObjects.Gabbro.CompleteExitingShipBeamVolume();
+                if(!ModifyObjects.Hatchling.IsInsideShipBeamVolume) {
+                    __instance.ActivateTractorBeam();
+                }
+                return false;
+            }
+            if(!__instance._isPlayerInShip && __instance._functional && hitCollider.CompareTag("PlayerDetector")) {
+                if(!ModifyObjects.Gabbro.IsActivated || !ModifyObjects.Gabbro.IsInsideShipBeamVolume) {
+                    __instance.ActivateTractorBeam();
+                }
+                ModifyObjects.Hatchling.CompleteExitingShipBeamVolume();
+                return false;
+            }
+            return true;
         }
     }
 }

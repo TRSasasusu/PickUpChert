@@ -14,7 +14,9 @@ namespace PickUpChert {
 
         Coroutine _initializeBody;
 
+        public static Hatchling Hatchling { get; private set; }
         public static Traveler Gabbro { get; private set; }
+
 
         public void Initialize() {
             _initializeBody = PickUpChert.Instance.StartCoroutine(InitializeBody());
@@ -38,6 +40,14 @@ namespace PickUpChert {
                 yield return null;
             }
 
+            while(true) {
+                var playerBody = Locator.GetPlayerBody();
+                if (playerBody) {
+                    Hatchling = playerBody.gameObject.AddComponent<Hatchling>();
+                    break;
+                }
+                yield return null;
+            }
 
             GameObject originalGabbro = null;
             while (true) {
