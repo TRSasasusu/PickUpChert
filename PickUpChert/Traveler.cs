@@ -32,6 +32,9 @@ namespace PickUpChert {
                     PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
                     _currentProbe = probe;
                 }
+                else {
+                    PickUpChert.Locomotion.GabbroMoveStop();
+                }
 
                 if(probe._isStackedForShip) {
                     _stackedPathProbes.Push(probe);
@@ -72,7 +75,9 @@ namespace PickUpChert {
         }
 
         public void CompleteExitingShipBeamVolume() {
-            IsInsideShipBeamVolume = false;
+            if(!IsInShip) {
+                IsInsideShipBeamVolume = false;
+            }
         }
 
         void Update() {
@@ -89,10 +94,10 @@ namespace PickUpChert {
                 return;
             }
 
-            if (Vector3.Distance(Locator.GetPlayerTransform().position, transform.position) < 3.0f) {
+            if (Vector3.Distance(Locator.GetPlayerTransform().position, transform.position) < 6.0f) {
                 return;
             }
-            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 3f, 3f, Vector3.zero);
+            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 6f, 3f, Vector3.zero);
         }
     }
 }

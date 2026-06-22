@@ -61,6 +61,7 @@ namespace PickUpChert {
         [HarmonyPatch(typeof(ShipTractorBeamSwitch), nameof(ShipTractorBeamSwitch.OnTriggerExit))]
         public static bool ShipTractorBeamSwitch_OnTriggerExit_Prefix(ShipTractorBeamSwitch __instance, Collider hitCollider) {
             if(hitCollider.gameObject == ModifyObjects.Gabbro.gameObject) {
+                PickUpChert.Log("gabbro exit the tractor beam volume");
                 ModifyObjects.Gabbro.CompleteExitingShipBeamVolume();
                 if(!ModifyObjects.Hatchling.IsInsideShipBeamVolume) {
                     __instance.ActivateTractorBeam();
@@ -69,6 +70,7 @@ namespace PickUpChert {
             }
             if(!__instance._isPlayerInShip && __instance._functional && hitCollider.CompareTag("PlayerDetector")) {
                 if(!ModifyObjects.Gabbro.IsActivated || !ModifyObjects.Gabbro.IsInsideShipBeamVolume) {
+                    PickUpChert.Log("tractor beam is activated");
                     __instance.ActivateTractorBeam();
                 }
                 ModifyObjects.Hatchling.CompleteExitingShipBeamVolume();
