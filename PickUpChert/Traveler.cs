@@ -12,19 +12,26 @@ namespace PickUpChert {
         public bool IsInsideShipBeamVolume { get; private set; }
 
         Stack<PathProbe> _stackedPathProbes = new Stack<PathProbe>();
+        HashSet<PathProbe> _setForStackedPathProbes = new HashSet<PathProbe>();
         bool _goingToShip;
         PathProbe _currentProbe;
         bool _stop;
 
         public void AddStackedPathProbe(PathProbe probe) {
+            if(_setForStackedPathProbes.Contains(probe)) {
+                return;
+            }
             _stackedPathProbes.Push(probe);
+            _setForStackedPathProbes.Add(probe);
         }
 
         public void ReachProbe(PathProbe probe) {
             if (probe) {
                 IsActivated = true;
                 if(_goingToShip) {
-                    GoToShip();
+                    if(probe == _currentProbe) {
+                        GoToShip();
+                    }
                     return;
                 }
 
@@ -37,7 +44,7 @@ namespace PickUpChert {
                 }
 
                 if(probe._isStackedForShip) {
-                    _stackedPathProbes.Push(probe);
+                    AddStackedPathProbe(probe);
                 }
             }
         }
@@ -47,6 +54,7 @@ namespace PickUpChert {
             _goingToShip = true;
             if (_stackedPathProbes.Count > 0) {
                 PathProbe probe = _stackedPathProbes.Pop();
+                _setForStackedPathProbes.Remove(probe);
                 if (probe) {
                     PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);
                     _currentProbe = probe;
@@ -97,7 +105,7 @@ namespace PickUpChert {
             if (Vector3.Distance(Locator.GetPlayerTransform().position, transform.position) < 6.0f) {
                 return;
             }
-            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 6f, 3f, Vector3.zero);
+            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 4f, 3f, Vector3.zero);
         }
     }
 }

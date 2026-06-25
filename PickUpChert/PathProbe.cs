@@ -14,7 +14,7 @@ namespace PickUpChert {
 
         public static PathProbe _nearestProbeToShip;
 
-        void OnTriggerEnter(Collider other) {
+        void OnTriggerStay(Collider other) {
             var traveler = other.GetComponent<Traveler>();
             if(traveler) {
                 traveler.ReachProbe(this);
