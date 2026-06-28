@@ -26,6 +26,7 @@ namespace PickUpChert {
         static Dictionary<string, TextAsset> _sectorXMLDict;
         static Dictionary<string, TextAsset> _triggerXMLDict;
         static Dictionary<string, TextAsset> _conversationXMLDict;
+        static Dictionary<string, List<Dictionary<string, object>>> _movingConversationJsonDict;
 
         Sector _currentSector;
         TextAsset _triggerXML;
@@ -69,6 +70,20 @@ namespace PickUpChert {
                 var conversationName = System.IO.Path.GetFileNameWithoutExtension(dialogueFilePath);
                 _conversationXMLDict[conversationName] = new TextAsset(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath));
             }
+
+            _movingConversationJsonDict = new Dictionary<string, List<Dictionary<string, object>>>();
+            foreach(var dialogueFilePath in System.IO.Directory.EnumerateFiles(PickUpChert.Instance.ModHelper.Manifest.ModFolderPath + "assets/moving_conversations/outerwilds", "*.json", System.IO.SearchOption.AllDirectories)) {
+                PickUpChert.Log(dialogueFilePath);
+                var dirName = new DirectoryInfo(dialogueFilePath).Parent.Name;
+                var fileName = System.IO.Path.GetFileNameWithoutExtension(dialogueFilePath);
+                var name = $"{dirName}/{fileName}";
+                var dict = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, object>>>>(PickUpChert.ReadAndRemoveByteOrderMarkFromPath(dialogueFilePath));
+                _movingConversationJsonDict[name] = dict["texts"];
+            }
+        }
+
+        public List<Dictionary<string, object>> GetMovingConversationItem(string filename) {
+            return _movingConversationJsonDict[filename];
         }
 
         public bool OnChertStartConversation() {

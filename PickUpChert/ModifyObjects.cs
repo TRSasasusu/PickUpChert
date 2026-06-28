@@ -77,6 +77,15 @@ namespace PickUpChert {
                 }
                 yield return null;
             }
+
+            while(true) {
+                var dialogue = GameObject.FindWithTag("DialogueGui").GetRequiredComponent<DialogueBoxVer2>();
+                if(dialogue != null) {
+                    dialogue.gameObject.AddComponent<MovingConversation>();
+                    break;
+                }
+                yield return null;
+            }
         }
     }
 }

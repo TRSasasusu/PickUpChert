@@ -15,6 +15,7 @@ namespace PickUpChert {
         HashSet<PathProbe> _setForStackedPathProbes = new HashSet<PathProbe>();
         bool _goingToShip;
         PathProbe _currentProbe;
+        PathProbe _targetProbe;
         bool _stop;
 
         public void AddStackedPathProbe(PathProbe probe) {
@@ -26,10 +27,14 @@ namespace PickUpChert {
         }
 
         public void ReachProbe(PathProbe probe) {
-            if (probe) {
+            if (probe != null) {
                 IsActivated = true;
                 if(_goingToShip) {
-                    if(probe == _currentProbe) {
+                    if(!string.IsNullOrEmpty(probe._conversationFileName)) {
+                        MovingConversation.Instance.DisplayDialogue(probe._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(probe._conversationFileName));
+                    }
+                    if(probe == _targetProbe) {
+                        _currentProbe = probe;
                         GoToShip();
                     }
                     return;
@@ -37,10 +42,24 @@ namespace PickUpChert {
 
                 if(probe._moveTarget) {
                     PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
-                    _currentProbe = probe;
+                    _targetProbe = probe._moveTarget.GetComponent<PathProbe>(); // maybe null
                 }
                 else {
                     PickUpChert.Locomotion.GabbroMoveStop();
+                }
+
+                if(_currentProbe != probe) {
+                    if(probe._stopPlaying) {
+                        PickUpChert.Locomotion.GabbroStopPlaying();
+                    }
+                    else {
+                        PickUpChert.Locomotion.GabbroStartPlaying();
+                    }
+
+                    if(!string.IsNullOrEmpty(probe._conversationFileName)) {
+                        MovingConversation.Instance.DisplayDialogue(probe._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(probe._conversationFileName));
+                    }
+                    _currentProbe = probe;
                 }
 
                 if(probe._isStackedForShip) {
@@ -57,11 +76,12 @@ namespace PickUpChert {
                 _setForStackedPathProbes.Remove(probe);
                 if (probe) {
                     PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);
-                    _currentProbe = probe;
+                    _targetProbe = probe;
                 }
             }
             else {
                 PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -0.5f, 0));
+                _targetProbe = null;
             }
         }
 
@@ -74,12 +94,14 @@ namespace PickUpChert {
             IsInShip = true;
             IsInsideShipBeamVolume = true;
             _currentProbe = null;
+            _targetProbe = null;
         }
 
         public void CompleteExitingShip() {
             _goingToShip = false;
             IsInShip = false;
             _currentProbe = null;
+            _targetProbe = null;
         }
 
         public void CompleteExitingShipBeamVolume() {
@@ -95,6 +117,9 @@ namespace PickUpChert {
             if (_currentProbe) {
                 return;
             }
+            if(_targetProbe) {
+                return;
+            }
             if (IsInShip) {
                 return;
             }
@@ -105,7 +130,7 @@ namespace PickUpChert {
             if (Vector3.Distance(Locator.GetPlayerTransform().position, transform.position) < 6.0f) {
                 return;
             }
-            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 4f, 3f, Vector3.zero);
+            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
         }
     }
 }
