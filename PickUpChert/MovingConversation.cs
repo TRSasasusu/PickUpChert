@@ -31,8 +31,9 @@ namespace PickUpChert {
 
         public void PauseDiaplaying() {
             _displayPaused = true;
+            _dialogue._turnOnNameField = false;
 
-            _dialogue.ResetAllText();
+            //_dialogue.ResetAllText();
             _dialogue._buttonPromptElement.gameObject.SetActive(true);
         }
 
@@ -76,10 +77,12 @@ namespace PickUpChert {
             _dialogue.ResetAllText();
             //_dialogue.SetVisible(true);
             if(name != null) {
+                _dialogue._turnOnNameField = true;
                 _dialogue.SetNameField(TextTranslation.Translate(name));
                 _dialogue.SetNameFieldVisible(true);
             }
             else {
+                _dialogue._turnOnNameField = false;
                 _dialogue.SetNameFieldVisible(false);
             }
             _dialogue.SetMainFieldDialogueText(TextTranslation.Translate(text));
@@ -95,6 +98,8 @@ namespace PickUpChert {
 
         void EndText() {
             _dialogue.SetVisible(false);
+            _dialogue._turnOnNameField = false;
+            _dialogue._buttonPromptElement.gameObject.SetActive(true);
 
             if(ModifyObjects.Gabbro.IsActivated) {
                 PickUpChert.Locomotion.GabbroStartPlaying();

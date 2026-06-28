@@ -160,6 +160,10 @@ namespace PickUpChert {
             }
         }
         public void SetMainFieldDialogueTextPrefix(DialogueBoxVer2 __instance, ref string richText) {
+            if(_backupXml == null) {
+                return;
+            }
+
             //PickUpChert.Log(__result._mainFieldTextEffect._strToDisplay);
             PickUpChert.Log(richText);
             //if(__result._mainFieldTextEffect._strToDisplay.StartsWith("<Chert/>")) {
