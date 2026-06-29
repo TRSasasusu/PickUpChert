@@ -68,6 +68,7 @@ namespace PickUpChert {
                 UpdateText($"PickUpChert_{filename}{text}", name);
                 yield return new WaitForSeconds(time);
                 yield return new WaitUntil(() => !_displayPaused);
+                yield return null;
             }
             EndText();
         }

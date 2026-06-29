@@ -35,7 +35,7 @@ namespace PickUpChert {
                     }
                     if(probe == _targetProbe) {
                         _currentProbe = probe;
-                        GoToShip();
+                        GoToShipRecursive();
                     }
                     return;
                 }
@@ -69,6 +69,21 @@ namespace PickUpChert {
         }
 
         public void GoToShip() {
+            var ship = Locator.GetShipBody();
+            if(ship == null) {
+                return; // no ship!?
+            }
+
+            var probes = ship.GetComponentsInChildren<PathProbe>();
+            var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+            if(probe != null) {
+                AddStackedPathProbe(probe);
+            }
+
+            GoToShipRecursive();
+        }
+
+        void GoToShipRecursive() {
             IsActivated = true;
             _goingToShip = true;
             if (_stackedPathProbes.Count > 0) {
@@ -80,7 +95,7 @@ namespace PickUpChert {
                 }
             }
             else {
-                PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -0.5f, 0));
+                PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -1f, 0));
                 _targetProbe = null;
             }
         }

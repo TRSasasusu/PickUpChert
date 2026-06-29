@@ -86,6 +86,34 @@ namespace PickUpChert {
                 }
                 yield return null;
             }
+
+            while (true) {
+                var ship = Locator.GetShipBody();
+                if (ship != null) {
+                    var objs = new GameObject[] {
+                        new GameObject("probe_0"),
+                        new GameObject("probe_1"),
+                        new GameObject("probe_2"),
+                    };
+                    var positions = new Vector3[] {
+                        new Vector3(1, 0, 0),
+                        new Vector3(-1, 0, 0),
+                        new Vector3(0, 0, 1),
+                    };
+                    foreach (var obj in objs) {
+                        obj.transform.parent = ship.transform;
+                        obj.transform.localPosition = new Vector3(1, 0, 0);
+                        obj.transform.localEulerAngles = Vector3.zero;
+                        var collider = obj.AddComponent<SphereCollider>();
+                        collider.isTrigger = true;
+                        //collider.enabled = false; // false now!! so I need to enable it when going to ship
+                        var probe = obj.AddComponent<PathProbe>();
+                        //probe._isStackedForShip = true;
+                    }
+                    break;
+                }
+                yield return null;
+            }
         }
     }
 }
