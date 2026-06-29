@@ -62,7 +62,7 @@ namespace PickUpChert {
             while (true) {
                 if(PickUpChert.Locomotion.GabbroIsInitialized()) {
                     var gabbro = PickUpChert.Locomotion.GetGabbro();
-                    Gabbro = gabbro.AddComponent<Traveler>();
+                    Gabbro = gabbro.AddComponent<Gabbro>();
                     break;
                 }
                 yield return null;

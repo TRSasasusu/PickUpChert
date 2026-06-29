@@ -1,4 +1,4 @@
-﻿<DialogueTree>
+﻿<DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/xen-42/outer-wilds-new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">
   <NameField>Gabbro</NameField>
   <DialogueNode>
     <Name>PickUpChert_Gabbro_Chert_See</Name>
@@ -14,6 +14,14 @@
       <Page>GABBRO_CHERT_SEE_7</Page>
       <Page>GABBRO_CHERT_SEE_8</Page>
       <Page>GABBRO_CHERT_SEE_9</Page>
+    </Dialogue>
+  </DialogueNode>
+  <DialogueNode>
+    <Name>PUC_Gabbro_After_Start</Name>
+    <EntryCondition>PUC_GABBRO_AFTER_START</EntryCondition>
+    <Dialogue>
+      <Page>0</Page>
+      <Page>1</Page>
     </Dialogue>
   </DialogueNode>
 </DialogueTree>

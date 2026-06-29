@@ -110,7 +110,15 @@ namespace PickUpChert {
             }
         }
 
-        void Update() {
+        virtual public void ConversationStart() {
+
+        }
+
+        virtual public void ConversationEnd() {
+
+        }
+
+        virtual protected void Update() {
             if (_goingToShip) {
                 return;
             }

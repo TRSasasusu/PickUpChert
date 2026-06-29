@@ -130,6 +130,7 @@ namespace PickUpChert {
             if (_conversationXMLDict.ContainsKey(dialogueTree._characterName)) {
                 _backupXml = dialogueTree._xmlCharacterDialogueAsset;
                 _speakingCharacterName = dialogueTree._characterName;
+                ConversationStartCharacter(_speakingCharacterName);
                 dialogueTree.SetTextXml(_conversationXMLDict[dialogueTree._characterName]);
             }
         }
@@ -144,12 +145,7 @@ namespace PickUpChert {
                     __instance.SetTextXml(_backupXml);
                     _backupXml = null;
 
-                    if(_speakingCharacterName == "Gabbro") {
-                        PickUpChert.Locomotion.GabbroStandUp();
-                        Observable.Timer(System.TimeSpan.FromSeconds(2)).Subscribe(_ => {
-                            ModifyObjects.Gabbro.GoToShip();
-                        }).AddTo(ModifyObjects.Gabbro);
-                    }
+                    ConversationEndCharacter(_speakingCharacterName);
                     _speakingCharacterName = null;
                 }
             }
@@ -236,6 +232,18 @@ namespace PickUpChert {
             }
 
             _currentSector = BringChert.Instance.SectorDetector.GetLastEnteredSector();
+        }
+
+        void ConversationStartCharacter(string characterName) {
+            if(characterName == "Gabbro") {
+                ModifyObjects.Gabbro.ConversationStart();
+            }
+        }
+
+        void ConversationEndCharacter(string characterName) {
+            if(characterName == "Gabbro") {
+                ModifyObjects.Gabbro.ConversationEnd();
+            }
         }
     }
 }
