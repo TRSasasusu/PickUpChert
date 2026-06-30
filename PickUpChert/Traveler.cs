@@ -11,18 +11,25 @@ namespace PickUpChert {
         public bool IsInShip { get; private set; }
         public bool IsInsideShipBeamVolume { get; private set; }
 
-        Stack<PathProbe> _stackedPathProbes = new Stack<PathProbe>();
+        //Stack<PathProbe> _stackedPathProbes = new Stack<PathProbe>();
+        LinkedList<PathProbe> _stackedPathProbes = new LinkedList<PathProbe>();
         HashSet<PathProbe> _setForStackedPathProbes = new HashSet<PathProbe>();
         bool _goingToShip;
         PathProbe _currentProbe;
         PathProbe _targetProbe;
         bool _stop;
 
-        public void AddStackedPathProbe(PathProbe probe) {
+        public void AddStackedPathProbe(PathProbe probe, bool head = true) {
             if(_setForStackedPathProbes.Contains(probe)) {
                 return;
             }
-            _stackedPathProbes.Push(probe);
+            if(head) {
+                _stackedPathProbes.AddFirst(probe);
+            }
+            else {
+                _stackedPathProbes.AddLast(probe);
+            }
+            //_stackedPathProbes.Push(probe);
             _setForStackedPathProbes.Add(probe);
         }
 
@@ -40,15 +47,15 @@ namespace PickUpChert {
                     return;
                 }
 
-                if(probe._moveTarget) {
-                    PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
-                    _targetProbe = probe._moveTarget.GetComponent<PathProbe>(); // maybe null
-                }
-                else {
-                    PickUpChert.Locomotion.GabbroMoveStop();
-                }
-
                 if(_currentProbe != probe) {
+                    if(probe._moveTarget) {
+                        PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
+                        _targetProbe = probe._moveTarget.GetComponent<PathProbe>(); // maybe null
+                    }
+                    else {
+                        PickUpChert.Locomotion.GabbroMoveStop();
+                    }
+
                     if(probe._stopPlaying) {
                         PickUpChert.Locomotion.GabbroStopPlaying();
                     }
@@ -77,7 +84,7 @@ namespace PickUpChert {
             var probes = ship.GetComponentsInChildren<PathProbe>();
             var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
             if(probe != null) {
-                AddStackedPathProbe(probe);
+                AddStackedPathProbe(probe, false);
             }
 
             GoToShipRecursive();
@@ -87,7 +94,8 @@ namespace PickUpChert {
             IsActivated = true;
             _goingToShip = true;
             if (_stackedPathProbes.Count > 0) {
-                PathProbe probe = _stackedPathProbes.Pop();
+                PathProbe probe = _stackedPathProbes.First.Value;
+                _stackedPathProbes.RemoveFirst();
                 _setForStackedPathProbes.Remove(probe);
                 if (probe) {
                     PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);
@@ -95,7 +103,7 @@ namespace PickUpChert {
                 }
             }
             else {
-                PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -1f, 0));
+                PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -3.7f, 0));
                 _targetProbe = null;
             }
         }
@@ -110,6 +118,7 @@ namespace PickUpChert {
             IsInsideShipBeamVolume = true;
             _currentProbe = null;
             _targetProbe = null;
+            PickUpChert.Locomotion.GabbroMoveStop();
         }
 
         public void CompleteExitingShip() {
@@ -135,9 +144,6 @@ namespace PickUpChert {
 
         virtual protected void Update() {
             if (_goingToShip) {
-                return;
-            }
-            if (_currentProbe) {
                 return;
             }
             if(_targetProbe) {

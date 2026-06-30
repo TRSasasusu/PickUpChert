@@ -27,6 +27,9 @@ namespace PickUpChert {
                 __instance._isPlayerInShip = true;
                 GlobalMessenger.FireEvent("EnterShip");
                 ModifyObjects.Hatchling.CompleteEnteringShip();
+                if(ModifyObjects.Gabbro.IsActivated && !ModifyObjects.Gabbro.IsInShip) {
+                    ModifyObjects.Gabbro.GoToShip();
+                }
                 return false;
             }
             return true;

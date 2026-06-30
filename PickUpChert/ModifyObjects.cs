@@ -96,16 +96,21 @@ namespace PickUpChert {
                         new GameObject("probe_2"),
                     };
                     var positions = new Vector3[] {
-                        new Vector3(1, 0, 0),
-                        new Vector3(-1, 0, 0),
-                        new Vector3(0, 0, 1),
+                        new Vector3(-5.381f, -3.9314f, 3.7078f),
+                        new Vector3(4.5668f, -3.8204f, 3.2332f),
+                        new Vector3(-0.0396f, -3.7802f, -6.2688f),
                     };
-                    foreach (var obj in objs) {
+                    for(var i = 0; i < objs.Length; ++i) {
+                    //foreach (var obj in objs) {
+                        var obj = objs[i];
+                        var pos = positions[i];
+
                         obj.transform.parent = ship.transform;
-                        obj.transform.localPosition = new Vector3(1, 0, 0);
+                        obj.transform.localPosition = pos;
                         obj.transform.localEulerAngles = Vector3.zero;
                         var collider = obj.AddComponent<SphereCollider>();
                         collider.isTrigger = true;
+                        collider.radius = 1f;
                         //collider.enabled = false; // false now!! so I need to enable it when going to ship
                         var probe = obj.AddComponent<PathProbe>();
                         //probe._isStackedForShip = true;
