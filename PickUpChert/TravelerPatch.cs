@@ -81,5 +81,22 @@ namespace PickUpChert {
             }
             return true;
         }
+
+        // ## campfire
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(Campfire), nameof(Campfire.StartRoasting))]
+        public static void Campfire_StartRoasting_Postfix() {
+            if(ModifyObjects.Gabbro.IsActivated) {
+                PickUpChert.Locomotion.GabbroSitting();
+            }
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(Campfire), nameof(Campfire.StopRoasting))]
+        public static void Campfire_StopRoasting_Postfix() {
+            if(ModifyObjects.Gabbro.IsActivated) {
+                PickUpChert.Locomotion.GabbroStandUp();
+            }
+        }
     }
 }
