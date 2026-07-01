@@ -85,18 +85,19 @@ namespace PickUpChert {
         // ## campfire
         [HarmonyPostfix]
         [HarmonyPatch(typeof(Campfire), nameof(Campfire.StartRoasting))]
-        public static void Campfire_StartRoasting_Postfix() {
+        public static void Campfire_StartRoasting_Postfix(Campfire __instance) {
             if(ModifyObjects.Gabbro.IsActivated) {
-                PickUpChert.Locomotion.GabbroSitting();
+                ModifyObjects.Gabbro.StartSitting();
+                PickUpChert.Locomotion.GabbroLookAt(__instance.transform, Vector3.zero);
             }
         }
 
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(Campfire), nameof(Campfire.StopRoasting))]
-        public static void Campfire_StopRoasting_Postfix() {
-            if(ModifyObjects.Gabbro.IsActivated) {
-                PickUpChert.Locomotion.GabbroStandUp();
-            }
-        }
+        //[HarmonyPostfix]
+        //[HarmonyPatch(typeof(Campfire), nameof(Campfire.StopRoasting))]
+        //public static void Campfire_StopRoasting_Postfix() {
+        //    if(ModifyObjects.Gabbro.IsActivated) {
+        //        ModifyObjects.Gabbro.StopSitting();
+        //    }
+        //}
     }
 }

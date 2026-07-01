@@ -18,6 +18,7 @@ namespace PickUpChert {
         PathProbe _currentProbe;
         PathProbe _targetProbe;
         bool _stop;
+        bool _isSitting;
 
         public void AddStackedPathProbe(PathProbe probe, bool head = true) {
             if(_setForStackedPathProbes.Contains(probe)) {
@@ -81,6 +82,10 @@ namespace PickUpChert {
                 return; // no ship!?
             }
 
+            if(_isSitting) {
+                StopSitting();
+            }
+
             var probes = ship.GetComponentsInChildren<PathProbe>();
             var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
             if(probe != null) {
@@ -134,6 +139,17 @@ namespace PickUpChert {
             }
         }
 
+        public void StartSitting() {
+            _isSitting = true;
+            PickUpChert.Locomotion.GabbroMoveStop();
+            PickUpChert.Locomotion.GabbroSitting();
+        }
+
+        public void StopSitting() {
+            _isSitting = false;
+            PickUpChert.Locomotion.GabbroStandUp();
+        }
+
         virtual public void ConversationStart() {
 
         }
@@ -154,6 +170,12 @@ namespace PickUpChert {
             }
             if(_stop) {
                 return;
+            }
+            if(_isSitting) {
+                if (Vector3.Distance(Locator.GetPlayerTransform().position, transform.position) < 10.0f) {
+                    return;
+                }
+                StopSitting();
             }
 
             if (Vector3.Distance(Locator.GetPlayerTransform().position, transform.position) < 6.0f) {
