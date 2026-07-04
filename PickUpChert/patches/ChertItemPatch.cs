@@ -90,10 +90,10 @@ namespace PickUpChert {
         }
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.EndConversation))]
-        public static void CharacterDialogueTree_EndConversation_Postfix(CharacterDialogueTree __instance) {
-            if(ChertPickUpConversation.Instance) {
-                ChertPickUpConversation.Instance.EndConversationPostfix(__instance);
-            }
+        public static void CharacterDialogueTree_EndConversation_Postfix(CharacterDialogueTree __instance) { // this method can be called even though the conversation is not finished, so it is not recommended to use this method
+            //if(ChertPickUpConversation.Instance) {
+            //    ChertPickUpConversation.Instance.EndConversationPostfix(__instance);
+            //}
         }
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CharacterDialogueTree), nameof(CharacterDialogueTree.DisplayDialogueBox2))]

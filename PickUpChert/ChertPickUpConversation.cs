@@ -122,6 +122,8 @@ namespace PickUpChert {
         bool _chertSpeaking;
         string _speakingCharacterName;
         public void StartConversationPrefix(CharacterDialogueTree dialogueTree) {
+            MovingConversation.Instance.PauseDiaplaying();
+
             _chertSpeaking = false;
             if (!ChertItem.Brought) {
                 return;
@@ -135,10 +137,6 @@ namespace PickUpChert {
                 ConversationStartCharacter(_speakingCharacterName);
                 dialogueTree.SetTextXml(_conversationXMLDict[dialogueTree._characterName]);
             }
-        }
-        public void EndConversationPostfix(CharacterDialogueTree dialogueTree) {
-            //PickUpChert.Log($"EndConversationPostfix: dialogueTree.enabled {dialogueTree.enabled}");
-            PickUpChert.Log($"EndConversationPostfix: dialogueTree._currentDialogueBox {dialogueTree._currentDialogueBox}");
         }
         public void InputDialogueOptionPostfix(CharacterDialogueTree __instance, ref bool __result) {
             PickUpChert.Log($"InputDialoueOption __result: {__result}");
@@ -154,6 +152,8 @@ namespace PickUpChert {
                     ConversationEndCharacter(_speakingCharacterName);
                     _speakingCharacterName = null;
                 }
+
+                MovingConversation.Instance.ResumeDiaplaying();
             }
         }
         public void DisplayDialogueBox2Postfix(CharacterDialogueTree dialogueTree, ref DialogueBoxVer2 __result) {
