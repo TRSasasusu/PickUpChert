@@ -12,17 +12,14 @@ namespace PickUpChert {
 
         public static BringChert Instance;
 
-        static AssetBundle _assetBundle;
 
         public GameObject Chert { get; private set; }
         public ChertTravelerController ChertTraveler { get; private set; }
         public Transform ChertSocket { get; private set; }
         public Transform ChertRightHand { get; private set; }
-        public SectorCullGroup Sector_Lakebed { get; private set; }
         public Mesh Drum { get; private set; }
         public Mesh DrumStick { get; private set; }
         public ShipCockpitController ShipCockpitController { get; private set; }
-        public AudioSignal SignalDrums { get; private set; }
         public ScreenPrompt StopDrumPrompt { get; private set; }
         public ScreenPrompt PlayDrumPrompt { get; private set; }
         public PlayerSectorDetector SectorDetector { get; private set; }
@@ -47,19 +44,15 @@ namespace PickUpChert {
         }
 
         IEnumerator InitializeBody() {
-            //if(_assetBundle != null) {
-            //    _assetBundle.Unload(true);
-            //    _assetBundle = null;
-            //}
-
             while(true) {
                 yield return null;
-                Chert = GameObject.Find(PATH_CHERT);
-                if(Chert) {
+                var chert = GameObject.Find(PATH_CHERT);
+                if(chert) {
+                    PickUpChert.Locomotion.ChertInitialize(chert);
+                    Chert = PickUpChert.Locomotion.GetChert();
                     break;
                 }
             }
-            Sector_Lakebed = Chert.transform.parent.GetComponent<SectorCullGroup>();
 
             var conversationZone = Chert.transform.Find("ConversationZone_Chert");
             conversationZone.transform.localPosition = new Vector3(0.009f, 0.363f, 0.355f);
@@ -99,25 +92,14 @@ namespace PickUpChert {
                 }
             }
 
-            GameObject signalDrums;
-            while(true) {
-                yield return null;
-                signalDrums = GameObject.Find("CaveTwin_Body/Sector_CaveTwin/Sector_NorthHemisphere/Sector_NorthSurface/Sector_Lakebed/Volumes_Lakebed/Signal_Drums");
-                if(signalDrums) {
-                    SignalDrums = signalDrums.GetComponent<AudioSignal>();
-                    break;
-                }
-            }
-            SignalDrums.transform.parent = Chert.transform;
-
-            StopDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, TextTranslation.Translate("Stop Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
-            PlayDrumPrompt = new ScreenPrompt(InputLibrary.toolActionSecondary, TextTranslation.Translate("Play Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            StopDrumPrompt = new ScreenPrompt(InputLibrary.toolOptionDown, TextTranslation.Translate("Stop Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            PlayDrumPrompt = new ScreenPrompt(InputLibrary.toolOptionDown, TextTranslation.Translate("Play Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
             Locator.GetPromptManager().AddScreenPrompt(StopDrumPrompt, PromptPosition.UpperRight, false);
             Locator.GetPromptManager().AddScreenPrompt(PlayDrumPrompt, PromptPosition.UpperRight, false);
             StopDrumPrompt.SetVisibility(false);
             PlayDrumPrompt.SetVisibility(false);
 
-            ChertTraveler = Chert.GetComponent<ChertTravelerController>();
+            ChertTraveler = Chert.transform.parent.GetComponentInChildren<ChertTravelerController>(true);
 
             GameObject sectorDetector;
             while(true) {
@@ -133,8 +115,6 @@ namespace PickUpChert {
             Chert.AddComponent<ChertPickUpConversation>();
 
             ChertRightHand = Chert.transform.Find("Traveller_HEA_Chert_ANIM_Chatter_Chipper/Chert_Skin_02:Child_Rig_V01:Trajectory_Jnt/Chert_Skin_02:Child_Rig_V01:ROOT_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_01_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_02_Jnt/Chert_Skin_02:Child_Rig_V01:Spine_Top_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Clavicle_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Shoulder_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Elbow_Jnt/Chert_Skin_02:Child_Rig_V01:RT_Arm_Wrist_Jnt");
-
-            PickUpChert.Locomotion.ChertInitialize(Chert);
         }
     }
 }

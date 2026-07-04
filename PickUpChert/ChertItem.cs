@@ -33,17 +33,12 @@ namespace PickUpChert {
 
         public void StopDrum() {
             Playing = false;
-            BringChert.Instance.SignalDrums._active = false;
-            BringChert.Instance.SignalDrums.GetOWAudioSource().FadeOut(0.5f, OWAudioSource.FadeOutCompleteAction.STOP, 0f);
-            BringChert.Instance.ChertTraveler._animator.SetTrigger("Talking");
+            PickUpChert.Locomotion.ChertStopPlaying();
         }
 
         public void PlayDrum() {
             Playing = true;
-            BringChert.Instance.SignalDrums._active = true;
-            BringChert.Instance.SignalDrums.GetOWAudioSource().FadeIn(0.5f, false, false, 1f);
-            BringChert.Instance.SignalDrums.GetOWAudioSource().timeSamples = 0;
-            BringChert.Instance.ChertTraveler._animator.SetTrigger("Playing");
+            PickUpChert.Locomotion.ChertStartPlaying();
         }
 
         void Update() {
@@ -63,7 +58,8 @@ namespace PickUpChert {
             //}
 
             if(BringChert.Instance.ChertSocket.transform.childCount > 0) {
-                var pressAction = OWInput.IsNewlyPressed(InputLibrary.toolActionSecondary);
+                //var pressAction = OWInput.IsNewlyPressed(InputLibrary.toolActionSecondary);
+                var pressAction = OWInput.IsNewlyPressed(InputLibrary.toolOptionDown);
                 if(Playing) {
                     BringChert.Instance.StopDrumPrompt.SetVisibility(true);
                     if(pressAction) {

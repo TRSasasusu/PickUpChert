@@ -81,7 +81,7 @@
   // ### After Start w/ Chert
   "PUC_Gabbro_After_Start0": "<Chert/>なあGabbro、お前こいつとそんなに、その、通じ合うような仲だったか？",
   "PUC_Gabbro_After_Start1": "言うなれば、私と運命共同体なんだよ。そう、どこかの取っ手を本来の用途として使うという意味において、ね。",
-  "PUC_Gabbro_After_Start2": "ああ納得したよ。",
+  "PUC_Gabbro_After_Start2": "<Chert/>ああ納得したよ。",
   // ### After Start w/o Chert
   "PickUpChert_Gabbro_AfterStart0": "どうした相棒、そんなじっと見つめてきて。",
   "GabbroPickUpChert_Gabbro_AfterStartQ0": "実のところ、どうして今回は一緒に来てくれたんだ？",

@@ -127,6 +127,8 @@ namespace PickUpChert {
                 return;
             }
 
+            BringChert.Instance.ChertTraveler.OnStartConversation();
+
             if (_conversationXMLDict.ContainsKey(dialogueTree._characterName)) {
                 _backupXml = dialogueTree._xmlCharacterDialogueAsset;
                 _speakingCharacterName = dialogueTree._characterName;
@@ -141,6 +143,10 @@ namespace PickUpChert {
         public void InputDialogueOptionPostfix(CharacterDialogueTree __instance, ref bool __result) {
             PickUpChert.Log($"InputDialoueOption __result: {__result}");
             if(!__result) {
+                if(ChertItem.Brought) {
+                    BringChert.Instance.ChertTraveler.OnEndConversation();
+                }
+
                 if(_backupXml != null) {
                     __instance.SetTextXml(_backupXml);
                     _backupXml = null;
