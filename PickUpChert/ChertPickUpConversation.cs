@@ -177,7 +177,9 @@ namespace PickUpChert {
             if(richText.StartsWith("<Chert/>")) {
                 //__result._mainFieldTextEffect._strToDisplay = __result._mainFieldTextEffect._strToDisplay.Substring("<Chert/>".Length);
                 richText = richText.Substring("<Chert/>".Length);
-                Locator.GetToolModeSwapper().EquipToolMode(ToolMode.Item);
+                Observable.NextFrame().Subscribe(_ => {
+                    Locator.GetToolModeSwapper().EquipToolMode(ToolMode.Item);
+                }).AddTo(this);
                 _chertSpeaking = true;
             }
             else {
