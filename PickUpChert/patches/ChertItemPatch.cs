@@ -153,9 +153,9 @@ namespace PickUpChert {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(DreamCampfire), nameof(DreamCampfire.WakeInDreamWorld))]
         public static void DreamCampfire_WakeInDreamWorld_Postfix() {
-            if(BringChert.Instance != null && BringChert.Instance.Chert) {
-                BringChert.Instance.Chert.transform.Find("Traveller_HEA_Chert_ANIM_Chatter_Chipper").GetComponent<Animator>().enabled = true;
-            }
+            //if(BringChert.Instance != null && BringChert.Instance.Chert) {
+            //    BringChert.Instance.Chert.transform.Find("Traveller_HEA_Chert_ANIM_Chatter_Chipper").GetComponent<Animator>().enabled = true;
+            //}
             if(ChertItem.Brought && ChertItem.Instance) {
                 ChertItem.Instance._inDream = true;
             }

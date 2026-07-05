@@ -63,6 +63,7 @@ namespace PickUpChert {
                 if(PickUpChert.Locomotion.GabbroIsInitialized()) {
                     var gabbro = PickUpChert.Locomotion.GetGabbro();
                     Gabbro = gabbro.AddComponent<Gabbro>();
+                    Gabbro.Initialize();
                     break;
                 }
                 yield return null;

@@ -16,6 +16,10 @@ namespace PickUpChert {
         public INewHorizons NewHorizons;
         public static ILocomotion Locomotion;
 
+        public static class Key {
+            public static IInputCommands SwitchPlaying = InputLibrary.toolOptionDown;
+        }
+
         public static class NHAssembly {
             public static MethodInfo _streamingHandlerSetUpStreaming;
             public static MethodInfo _detailBuilderFixComponent;

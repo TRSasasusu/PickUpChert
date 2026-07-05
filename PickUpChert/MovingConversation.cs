@@ -92,8 +92,10 @@ namespace PickUpChert {
                 _dialogue._mainFieldTextEffect.StartTextEffect();
             }
 
+            BringChert.Instance.ChertTraveler.OnStartConversation();
             if(ModifyObjects.Gabbro.IsActivated) {
-                PickUpChert.Locomotion.GabbroStopPlaying();
+                ModifyObjects.Gabbro._travelerController.OnStartConversation();
+                //PickUpChert.Locomotion.GabbroStopPlaying();
             }
         }
 
@@ -102,8 +104,10 @@ namespace PickUpChert {
             _dialogue._turnOnNameField = false;
             _dialogue._buttonPromptElement.gameObject.SetActive(true);
 
+            BringChert.Instance.ChertTraveler.OnEndConversation();
             if(ModifyObjects.Gabbro.IsActivated) {
-                PickUpChert.Locomotion.GabbroStartPlaying();
+                ModifyObjects.Gabbro._travelerController.OnEndConversation();
+                //PickUpChert.Locomotion.GabbroStartPlaying();
             }
         }
     }

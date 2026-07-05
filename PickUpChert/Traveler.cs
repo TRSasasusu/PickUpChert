@@ -10,6 +10,7 @@ namespace PickUpChert {
         public bool IsActivated { get; private set; }
         public bool IsInShip { get; private set; }
         public bool IsInsideShipBeamVolume { get; private set; }
+        public TravelerController _travelerController { get; private set; }
 
         //Stack<PathProbe> _stackedPathProbes = new Stack<PathProbe>();
         LinkedList<PathProbe> _stackedPathProbes = new LinkedList<PathProbe>();
@@ -19,6 +20,10 @@ namespace PickUpChert {
         PathProbe _targetProbe;
         bool _stop;
         bool _isSitting;
+
+        public void Initialize() {
+            _travelerController = transform.parent.GetComponentInChildren<TravelerController>(true);
+        }
 
         public void AddStackedPathProbe(PathProbe probe, bool head = true) {
             if(_setForStackedPathProbes.Contains(probe)) {

@@ -59,7 +59,7 @@ namespace PickUpChert {
 
             if(BringChert.Instance.ChertSocket.transform.childCount > 0) {
                 //var pressAction = OWInput.IsNewlyPressed(InputLibrary.toolActionSecondary);
-                var pressAction = OWInput.IsNewlyPressed(InputLibrary.toolOptionDown);
+                var pressAction = OWInput.IsNewlyPressed(PickUpChert.Key.SwitchPlaying);
                 if(Playing) {
                     BringChert.Instance.StopDrumPrompt.SetVisibility(true);
                     if(pressAction) {

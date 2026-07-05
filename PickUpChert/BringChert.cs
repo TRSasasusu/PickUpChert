@@ -92,8 +92,8 @@ namespace PickUpChert {
                 }
             }
 
-            StopDrumPrompt = new ScreenPrompt(InputLibrary.toolOptionDown, TextTranslation.Translate("Stop Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
-            PlayDrumPrompt = new ScreenPrompt(InputLibrary.toolOptionDown, TextTranslation.Translate("Play Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            StopDrumPrompt = new ScreenPrompt(PickUpChert.Key.SwitchPlaying, TextTranslation.Translate("Stop Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
+            PlayDrumPrompt = new ScreenPrompt(PickUpChert.Key.SwitchPlaying, TextTranslation.Translate("Play Drums") + "   <CMD>", 0, ScreenPrompt.DisplayState.Normal, false);
             Locator.GetPromptManager().AddScreenPrompt(StopDrumPrompt, PromptPosition.UpperRight, false);
             Locator.GetPromptManager().AddScreenPrompt(PlayDrumPrompt, PromptPosition.UpperRight, false);
             StopDrumPrompt.SetVisibility(false);
