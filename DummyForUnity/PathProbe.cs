@@ -6,5 +6,6 @@ namespace PickUpChert {
         [SerializeField] public float _baseSpeed = 1;
         [SerializeField] public bool _isStackedForShip;
         [SerializeField] public bool _stopPlaying;
+        [SerializeField] public Transform[] _connectedProbes;
     }
 }

@@ -12,8 +12,20 @@ namespace PickUpChert {
         [SerializeField] public float _baseSpeed = 1;
         [SerializeField] public bool _isStackedForShip;
         [SerializeField] public bool _stopPlaying;
+        [SerializeField] public Transform[] _connectedProbes;
 
         public static PathProbe _nearestProbeToShip;
+
+        void OnDrawGizmos() {
+            Gizmos.color = Color.red;
+            if (_connectedProbes != null) {
+                foreach (var probe in _connectedProbes) {
+                    if (probe) {
+                        Gizmos.DrawLine(transform.position, probe.position);
+                    }
+                }
+            }
+        }//endgizmo
 
         void OnTriggerStay(Collider other) {
             var traveler = other.GetComponent<Traveler>();

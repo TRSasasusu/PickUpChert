@@ -7,6 +7,8 @@ def set_script(filepath: str):
     original_lines = content.split('\n')
     original_lines = [line for line in original_lines if line != '' and line != '\n']
     lines = ['using UnityEngine;']
+
+    force_copy_now = False
     for line in original_lines:
         strip_line = line.strip()
         if '[SerializeField]' in strip_line:
@@ -18,6 +20,20 @@ def set_script(filepath: str):
             continue
 
         if strip_line.startswith('public class'):
+            lines.append(line)
+            continue
+
+        if '//startcopy' in strip_line:
+            lines.append(line)
+            force_copy_now = True
+            continue
+
+        if '//endcopy' in strip_line:
+            lines.append(line)
+            force_copy_now = False
+            continue
+
+        if force_copy_now:
             lines.append(line)
             continue
 
@@ -35,6 +51,7 @@ def set_script(filepath: str):
 
 def main():
     set_script('PickUpChert/PathProbe.cs')
+    set_script('PickUpChert/PathGraph.cs')
 
 if __name__ == '__main__':
     main()
