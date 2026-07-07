@@ -20,7 +20,7 @@ namespace PickUpChert {
             internal float _cost;
 
             public int CompareTo(Node other) {
-                return other._pos.sqrMagnitude.CompareTo(_pos.sqrMagnitude); // inverse order for priority queue
+                return other._pos.magnitude.CompareTo(_pos.magnitude); // inverse order for priority queue
             }
         }
 
@@ -29,10 +29,10 @@ namespace PickUpChert {
         void OnDrawGizmos() {
             Gizmos.color = Color.red;
             foreach(var node in _nodes) {
-                Gizmos.DrawSphere(node._pos + transform.position, node._radius);
+                Gizmos.DrawSphere(transform.TransformPoint(node._pos), node._radius);
                 foreach (var connectedNodeIndex in node._connectedNodes) {
                     var connectedNode = _nodes[connectedNodeIndex];
-                    Gizmos.DrawLine(node._pos + transform.position, connectedNode._pos + transform.position);
+                    Gizmos.DrawLine(transform.TransformPoint(node._pos), transform.TransformPoint(connectedNode._pos));
                 }
             }
         }
@@ -46,6 +46,7 @@ namespace PickUpChert {
             foreach(var node in _nodes) {
                 node._cost = float.MaxValue;
             }
+            fromNode._cost = 0;
 
             var prev = new Dictionary<Node, Node>();
         
@@ -58,7 +59,7 @@ namespace PickUpChert {
                 }
                 foreach (var connectedNodeIndex in currentNode._connectedNodes) {
                     var connectedNode = _nodes[connectedNodeIndex];
-                    float newCost = currentNode._cost + (currentNode._pos - connectedNode._pos).sqrMagnitude;
+                    float newCost = currentNode._cost + (transform.TransformPoint(currentNode._pos) - transform.TransformPoint(connectedNode._pos)).magnitude;
                     if (newCost < connectedNode._cost) {
                         connectedNode._cost = newCost;
                         q.Enqueue(connectedNode);
@@ -80,7 +81,7 @@ namespace PickUpChert {
         }
 
         public Node NearestNode(Vector3 pos) {
-            return _nodes.OrderBy(n => (n._pos + transform.position - pos).sqrMagnitude).FirstOrDefault();
+            return _nodes.OrderBy(n => (transform.TransformPoint(n._pos) - pos).magnitude).FirstOrDefault();
         }
     }
 }

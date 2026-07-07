@@ -6,6 +6,11 @@
       {
         "assetBundle": "assets/assetbundles/pickupchert",
         "path": "Assets/orclecleprefabs/PUCPathProbesGabbroIsland.prefab",
+        "rotation": {
+          "x": -29.171,
+          "y": -0.586,
+          "z": -97.769
+        }
       }
     ]
   }

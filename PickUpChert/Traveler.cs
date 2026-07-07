@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using IEnumerator = System.Collections.IEnumerator;
 
 namespace PickUpChert {
     public class Traveler : MonoBehaviour {
@@ -20,6 +21,7 @@ namespace PickUpChert {
         PathProbe _targetProbe;
         bool _stop;
         bool _isSitting;
+        Coroutine _trackPathToTargetCoroutine;
 
         public void Initialize() {
             _travelerController = transform.parent.GetComponentInChildren<TravelerController>(true);
@@ -155,6 +157,21 @@ namespace PickUpChert {
             PickUpChert.Locomotion.GabbroStandUp();
         }
 
+        IEnumerator TrackPathToTarget(List<PathGraph.Node> nodes, PathGraph graph, Transform target) {
+            foreach(var node in nodes) {
+                PickUpChert.Locomotion.GabbroMoveTo(graph.transform, node._radius, node._baseSpeed * 3f, node._pos);
+                while((transform.position - graph.transform.TransformPoint(node._pos)).sqrMagnitude > node._radius * node._radius) {
+                    yield return null;
+                }
+            }
+
+            var nearestNode = graph.NearestNode(target.position);
+            if(nearestNode != nodes.Last()) {
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(nearestNode._pos, target.position), graph, target));
+                yield break;
+            }
+        }
+
         virtual public void ConversationStart() {
 
         }
@@ -186,7 +203,8 @@ namespace PickUpChert {
             if (Vector3.Distance(Locator.GetPlayerTransform().position, transform.position) < 6.0f) {
                 return;
             }
-            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
+            //PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
+            //StartCoroutine(TrackPathToTarget(Locator.GetPathGraph().ComputePath(transform.position, Locator.GetPlayerTransform().position), Locator.GetPathGraph(), Locator.GetPlayerTransform())); // TODO
         }
     }
 }
