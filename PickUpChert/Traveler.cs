@@ -170,6 +170,8 @@ namespace PickUpChert {
                 _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(nearestNode._pos, target.position), graph, target));
                 yield break;
             }
+
+            PickUpChert.Locomotion.GabbroMoveTo(target, 2f, 3f, Vector3.zero);
         }
 
         virtual public void ConversationStart() {
