@@ -27,11 +27,11 @@ namespace PickUpChert {
             }
         }//endgizmo
 
-        void OnTriggerStay(Collider other) {
-            var traveler = other.GetComponent<Traveler>();
-            if(traveler) {
-                traveler.ReachProbe(this);
-            }
-        }
+        //void OnTriggerStay(Collider other) {
+        //    var traveler = other.GetComponent<Traveler>();
+        //    if(traveler) {
+        //        traveler.ReachProbe(this);
+        //    }
+        //}
     }
 }

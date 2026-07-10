@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,11 @@ namespace PickUpChert {
         bool _stop;
         bool _isSitting;
         Coroutine _trackPathToTargetCoroutine;
+        SectorDetector _sectorDetector;
 
         public void Initialize() {
             _travelerController = transform.parent.GetComponentInChildren<TravelerController>(true);
+            _sectorDetector = GetComponentInChildren<SectorDetector>(true);
         }
 
         public void AddStackedPathProbe(PathProbe probe, bool head = true) {
@@ -93,13 +96,21 @@ namespace PickUpChert {
                 StopSitting();
             }
 
-            var probes = ship.GetComponentsInChildren<PathProbe>();
-            var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
-            if(probe != null) {
-                AddStackedPathProbe(probe, false);
+            var (pathGraph, nearestNode) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
+            if(Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, Locator.GetPlayerTransform().position)) {
+                StartCoroutine(TrackPathToTarget(null, null, ship.transform, true));
+            }
+            else {
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(nearestNode._pos, ship.transform.position), pathGraph, ship.transform, true));
             }
 
-            GoToShipRecursive();
+            //var probes = ship.GetComponentsInChildren<PathProbe>();
+            //var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+            //if(probe != null) {
+            //    AddStackedPathProbe(probe, false);
+            //}
+
+            //GoToShipRecursive();
         }
 
         void GoToShipRecursive() {
@@ -157,21 +168,34 @@ namespace PickUpChert {
             PickUpChert.Locomotion.GabbroStandUp();
         }
 
-        IEnumerator TrackPathToTarget(List<PathGraph.Node> nodes, PathGraph graph, Transform target) {
-            foreach(var node in nodes) {
-                PickUpChert.Locomotion.GabbroMoveTo(graph.transform, node._radius, node._baseSpeed * 3f, node._pos);
-                while((transform.position - graph.transform.TransformPoint(node._pos)).sqrMagnitude > node._radius * node._radius) {
-                    yield return null;
+        IEnumerator TrackPathToTarget(List<PathGraph.Node> nodes, PathGraph graph, Transform target, bool isTargetShip) {
+            if (graph != null) {
+                foreach (var node in nodes) {
+                    PickUpChert.Locomotion.GabbroMoveTo(graph.transform, node._radius, node._baseSpeed * 3f, node._pos);
+                    while ((transform.position - graph.transform.TransformPoint(node._pos)).sqrMagnitude > node._radius * node._radius) {
+                        yield return null;
+                    }
+                }
+
+                var nearestNode = graph.NearestNode(target.position);
+                if (nearestNode != nodes.Last()) {
+                    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(nearestNode._pos, target.position), graph, target, isTargetShip));
+                    yield break;
                 }
             }
 
-            var nearestNode = graph.NearestNode(target.position);
-            if(nearestNode != nodes.Last()) {
-                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(nearestNode._pos, target.position), graph, target));
-                yield break;
+            if(!isTargetShip) {
+                PickUpChert.Locomotion.GabbroMoveTo(target, 2f, 3f, Vector3.zero);
             }
-
-            PickUpChert.Locomotion.GabbroMoveTo(target, 2f, 3f, Vector3.zero);
+            else {
+                var probes = target.GetComponentsInChildren<PathProbe>();
+                var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+                PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);
+                while((transform.position - probe.transform.position).sqrMagnitude > 0.5f * 0.5f) {
+                    yield return null;
+                }
+                PickUpChert.Locomotion.GabbroMoveTo(target, 0.5f, 3f, new Vector3(0, -3.7f, 0));
+            }
         }
 
         virtual public void ConversationStart() {
@@ -207,6 +231,14 @@ namespace PickUpChert {
             }
             //PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
             //StartCoroutine(TrackPathToTarget(Locator.GetPathGraph().ComputePath(transform.position, Locator.GetPlayerTransform().position), Locator.GetPathGraph(), Locator.GetPlayerTransform())); // TODO
+            var (pathGraph, nearestNode) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
+            if(Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, Locator.GetPlayerTransform().position)) {
+                //PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, null, Locator.GetPlayerTransform(), false));
+            }
+            else {
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(nearestNode._pos, Locator.GetPlayerTransform().position), pathGraph, Locator.GetPlayerTransform(), false));
+            }
         }
     }
 }

@@ -38,6 +38,20 @@ namespace PickUpChert {
         }
         //endcopy
 
+        public static (PathGraph, Node) SearchPathGraphFromSectors(SectorDetector sectorDetector) {
+            var pathGraphs = new HashSet<PathGraph>();
+            foreach (var sector in sectorDetector._sectorList) {
+                foreach (var pathGraph in sector.GetComponentsInChildren<PathGraph>()) {
+                    pathGraphs.Add(pathGraph);
+                }
+            }
+
+            var pgAndNearestNode = pathGraphs.Select(pg => (pg, pg.NearestNode(sectorDetector.transform.position)))
+                .OrderBy(pgAndNode => (pgAndNode.Item1.transform.TransformPoint(pgAndNode.Item2._pos) - sectorDetector.transform.position).magnitude)
+                .FirstOrDefault();
+            return pgAndNearestNode;
+        }
+
         public List<Node> ComputePath(Vector3 fromPos, Vector3 targetPos) {
             var fromNode = NearestNode(fromPos);
             var targetNode = NearestNode(targetPos);

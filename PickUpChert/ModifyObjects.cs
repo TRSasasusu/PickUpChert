@@ -69,15 +69,15 @@ namespace PickUpChert {
                 yield return null;
             }
 
-            GameObject gabborInitialProbe = null;
-            while(true) {
-                gabborInitialProbe = GameObject.Find(GABBRO_INITIAL_PROBE_PATH);
-                if (gabborInitialProbe) {
-                    Gabbro.AddStackedPathProbe(gabborInitialProbe.GetComponent<PathProbe>());
-                    break;
-                }
-                yield return null;
-            }
+            //GameObject gabborInitialProbe = null;
+            //while(true) {
+            //    gabborInitialProbe = GameObject.Find(GABBRO_INITIAL_PROBE_PATH);
+            //    if (gabborInitialProbe) {
+            //        Gabbro.AddStackedPathProbe(gabborInitialProbe.GetComponent<PathProbe>());
+            //        break;
+            //    }
+            //    yield return null;
+            //}
 
             while(true) {
                 var dialogue = GameObject.FindWithTag("DialogueGui").GetRequiredComponent<DialogueBoxVer2>();
