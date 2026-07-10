@@ -23,8 +23,15 @@ namespace PickUpChert {
                 return other._pos.magnitude.CompareTo(_pos.magnitude); // inverse order for priority queue
             }
         }
+        [SerializeField] public List<Node> _nodes;
 
-        public List<Node> _nodes;
+        [HideInInspector] public List<string> _nodesSerialized;
+
+        void OnValidate() {
+            if (_nodes != null) {
+                _nodesSerialized = _nodes.Select(n => JsonUtility.ToJson(n)).ToList();
+            }
+        }
 
         void OnDrawGizmos() {
             Gizmos.color = Color.red;
@@ -37,6 +44,12 @@ namespace PickUpChert {
             }
         }
         //endcopy
+
+        void Awake() {
+            if(_nodes == null && _nodesSerialized != null) {
+                _nodes = _nodesSerialized.Select(s => JsonUtility.FromJson<Node>(s)).ToList();
+            }
+        }
 
         public static (PathGraph, Node) SearchPathGraphFromSectors(SectorDetector sectorDetector) {
             var pathGraphs = new HashSet<PathGraph>();
@@ -55,9 +68,11 @@ namespace PickUpChert {
         public List<Node> ComputePath(Vector3 fromPos, Vector3 targetPos) {
             var fromNode = NearestNode(fromPos);
             var targetNode = NearestNode(targetPos);
+            PickUpChert.Log($"Computing path from {fromNode._pos} to {targetNode._pos}");
+
             // Implementation for pathfinding algorithm would go here
 
-            foreach(var node in _nodes) {
+            foreach (var node in _nodes) {
                 node._cost = float.MaxValue;
             }
             fromNode._cost = 0;
@@ -91,6 +106,7 @@ namespace PickUpChert {
             }
             path.Add(fromNode);
             path.Reverse();
+            PickUpChert.Log($"path: {string.Join(" -> ", path.Select(n => n._pos.ToString()))}");
             return path;
         }
 

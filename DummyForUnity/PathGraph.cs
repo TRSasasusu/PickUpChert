@@ -14,7 +14,13 @@ namespace PickUpChert {
                 return other._pos.magnitude.CompareTo(_pos.magnitude); // inverse order for priority queue
             }
         }
-        public List<Node> _nodes;
+        [SerializeField] public List<Node> _nodes;
+        [HideInInspector] public List<string> _nodesSerialized;
+        void OnValidate() {
+            if (_nodes != null) {
+                _nodesSerialized = _nodes.Select(n => JsonUtility.ToJson(n)).ToList();
+            }
+        }
         void OnDrawGizmos() {
             Gizmos.color = Color.red;
             foreach(var node in _nodes) {

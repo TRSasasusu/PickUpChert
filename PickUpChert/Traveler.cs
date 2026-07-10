@@ -101,7 +101,7 @@ namespace PickUpChert {
                 StartCoroutine(TrackPathToTarget(null, null, ship.transform, true));
             }
             else {
-                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(nearestNode._pos, ship.transform.position), pathGraph, ship.transform, true));
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(pathGraph.transform.TransformPoint(nearestNode._pos), ship.transform.position), pathGraph, ship.transform, true));
             }
 
             //var probes = ship.GetComponentsInChildren<PathProbe>();
@@ -179,7 +179,7 @@ namespace PickUpChert {
 
                 var nearestNode = graph.NearestNode(target.position);
                 if (nearestNode != nodes.Last()) {
-                    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(nearestNode._pos, target.position), graph, target, isTargetShip));
+                    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(graph.transform.TransformPoint(nearestNode._pos), target.position), graph, target, isTargetShip));
                     yield break;
                 }
             }
@@ -237,7 +237,7 @@ namespace PickUpChert {
                 _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, null, Locator.GetPlayerTransform(), false));
             }
             else {
-                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(nearestNode._pos, Locator.GetPlayerTransform().position), pathGraph, Locator.GetPlayerTransform(), false));
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(pathGraph.transform.TransformPoint(nearestNode._pos), Locator.GetPlayerTransform().position), pathGraph, Locator.GetPlayerTransform(), false));
             }
         }
     }
