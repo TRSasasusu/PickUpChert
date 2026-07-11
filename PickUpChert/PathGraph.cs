@@ -83,6 +83,7 @@ namespace PickUpChert {
             q.Enqueue(fromNode);
             while(q.Count > 0) {
                 var currentNode = q.Dequeue();
+                PickUpChert.Log($"Visiting node {currentNode._pos} with cost {currentNode._cost}");
                 if (currentNode == targetNode) {
                     break;
                 }
@@ -94,6 +95,7 @@ namespace PickUpChert {
                         q.Enqueue(connectedNode);
                         prev[connectedNode] = currentNode;
                     }
+                    PickUpChert.Log($"Checking connected node {connectedNode._pos} with new cost {newCost}");
                 }
             }
 
@@ -104,7 +106,9 @@ namespace PickUpChert {
                 path.Add(current);
                 current = prev[current];
             }
-            path.Add(fromNode);
+            if(!path.Contains(fromNode)) {
+                path.Add(fromNode);
+            }
             path.Reverse();
             PickUpChert.Log($"path: {string.Join(" -> ", path.Select(n => n._pos.ToString()))}");
             return path;

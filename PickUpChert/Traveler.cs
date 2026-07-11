@@ -18,75 +18,82 @@ namespace PickUpChert {
         LinkedList<PathProbe> _stackedPathProbes = new LinkedList<PathProbe>();
         HashSet<PathProbe> _setForStackedPathProbes = new HashSet<PathProbe>();
         bool _goingToShip;
+        bool _goingToHatchling;
         PathProbe _currentProbe;
         PathProbe _targetProbe;
         bool _stop;
         bool _isSitting;
         Coroutine _trackPathToTargetCoroutine;
         SectorDetector _sectorDetector;
+        float _baseSpeed = 5f;
 
         public void Initialize() {
             _travelerController = transform.parent.GetComponentInChildren<TravelerController>(true);
             _sectorDetector = GetComponentInChildren<SectorDetector>(true);
         }
 
-        public void AddStackedPathProbe(PathProbe probe, bool head = true) {
-            if(_setForStackedPathProbes.Contains(probe)) {
-                return;
-            }
-            if(head) {
-                _stackedPathProbes.AddFirst(probe);
-            }
-            else {
-                _stackedPathProbes.AddLast(probe);
-            }
-            //_stackedPathProbes.Push(probe);
-            _setForStackedPathProbes.Add(probe);
-        }
+        //public void AddStackedPathProbe(PathProbe probe, bool head = true) {
+        //    if(_setForStackedPathProbes.Contains(probe)) {
+        //        return;
+        //    }
+        //    if(head) {
+        //        _stackedPathProbes.AddFirst(probe);
+        //    }
+        //    else {
+        //        _stackedPathProbes.AddLast(probe);
+        //    }
+        //    //_stackedPathProbes.Push(probe);
+        //    _setForStackedPathProbes.Add(probe);
+        //}
 
-        public void ReachProbe(PathProbe probe) {
-            if (probe != null) {
-                IsActivated = true;
-                if(_goingToShip) {
-                    if(!string.IsNullOrEmpty(probe._conversationFileName)) {
-                        MovingConversation.Instance.DisplayDialogue(probe._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(probe._conversationFileName));
-                    }
-                    if(probe == _targetProbe) {
-                        _currentProbe = probe;
-                        GoToShipRecursive();
-                    }
-                    return;
-                }
+        //public void ReachProbe(PathProbe probe) {
+        //    if (probe != null) {
+        //        IsActivated = true;
+        //        if(_goingToShip) {
+        //            if(!string.IsNullOrEmpty(probe._conversationFileName)) {
+        //                MovingConversation.Instance.DisplayDialogue(probe._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(probe._conversationFileName));
+        //            }
+        //            if(probe == _targetProbe) {
+        //                _currentProbe = probe;
+        //                GoToShipRecursive();
+        //            }
+        //            return;
+        //        }
 
-                if(_currentProbe != probe) {
-                    if(probe._moveTarget) {
-                        PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
-                        _targetProbe = probe._moveTarget.GetComponent<PathProbe>(); // maybe null
-                    }
-                    else {
-                        PickUpChert.Locomotion.GabbroMoveStop();
-                    }
+        //        if(_currentProbe != probe) {
+        //            if(probe._moveTarget) {
+        //                PickUpChert.Locomotion.GabbroMoveTo(probe._moveTarget, 0.5f, probe._baseSpeed * 3, Vector3.zero);
+        //                _targetProbe = probe._moveTarget.GetComponent<PathProbe>(); // maybe null
+        //            }
+        //            else {
+        //                PickUpChert.Locomotion.GabbroMoveStop();
+        //            }
 
-                    if(probe._stopPlaying) {
-                        PickUpChert.Locomotion.GabbroStopPlaying();
-                    }
-                    else {
-                        PickUpChert.Locomotion.GabbroStartPlaying();
-                    }
+        //            if(probe._stopPlaying) {
+        //                PickUpChert.Locomotion.GabbroStopPlaying();
+        //            }
+        //            else {
+        //                PickUpChert.Locomotion.GabbroStartPlaying();
+        //            }
 
-                    if(!string.IsNullOrEmpty(probe._conversationFileName)) {
-                        MovingConversation.Instance.DisplayDialogue(probe._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(probe._conversationFileName));
-                    }
-                    _currentProbe = probe;
-                }
+        //            if(!string.IsNullOrEmpty(probe._conversationFileName)) {
+        //                MovingConversation.Instance.DisplayDialogue(probe._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(probe._conversationFileName));
+        //            }
+        //            _currentProbe = probe;
+        //        }
 
-                if(probe._isStackedForShip) {
-                    AddStackedPathProbe(probe);
-                }
-            }
-        }
+        //        if(probe._isStackedForShip) {
+        //            AddStackedPathProbe(probe);
+        //        }
+        //    }
+        //}
 
         public void GoToShip() {
+            if(_goingToShip) {
+                return;
+            }
+            IsActivated = true; // TODO: Riebeck and Feldspar would require it in another place
+
             var ship = Locator.GetShipBody();
             if(ship == null) {
                 return; // no ship!?
@@ -96,11 +103,16 @@ namespace PickUpChert {
                 StopSitting();
             }
 
+            if(_trackPathToTargetCoroutine != null) {
+                StopCoroutine(_trackPathToTargetCoroutine);
+                _trackPathToTargetCoroutine = null;
+            }
             var (pathGraph, nearestNode) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
-            if(Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, Locator.GetPlayerTransform().position)) {
-                StartCoroutine(TrackPathToTarget(null, null, ship.transform, true));
+            if(Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, ship.transform.position)) {
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, pathGraph, ship.transform, true));
             }
             else {
+                PickUpChert.Log($"compute path from {pathGraph.transform.TransformPoint(nearestNode._pos)} to {ship.transform.position}");
                 _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(pathGraph.transform.TransformPoint(nearestNode._pos), ship.transform.position), pathGraph, ship.transform, true));
             }
 
@@ -113,23 +125,23 @@ namespace PickUpChert {
             //GoToShipRecursive();
         }
 
-        void GoToShipRecursive() {
-            IsActivated = true;
-            _goingToShip = true;
-            if (_stackedPathProbes.Count > 0) {
-                PathProbe probe = _stackedPathProbes.First.Value;
-                _stackedPathProbes.RemoveFirst();
-                _setForStackedPathProbes.Remove(probe);
-                if (probe) {
-                    PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);
-                    _targetProbe = probe;
-                }
-            }
-            else {
-                PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -3.7f, 0));
-                _targetProbe = null;
-            }
-        }
+        //void GoToShipRecursive() {
+        //    IsActivated = true;
+        //    _goingToShip = true;
+        //    if (_stackedPathProbes.Count > 0) {
+        //        PathProbe probe = _stackedPathProbes.First.Value;
+        //        _stackedPathProbes.RemoveFirst();
+        //        _setForStackedPathProbes.Remove(probe);
+        //        if (probe) {
+        //            PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);
+        //            _targetProbe = probe;
+        //        }
+        //    }
+        //    else {
+        //        PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 3f, new Vector3(0, -3.7f, 0));
+        //        _targetProbe = null;
+        //    }
+        //}
 
         public void GoToCenterOfShipToExit() {
             PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 2f, Vector3.zero);
@@ -137,6 +149,11 @@ namespace PickUpChert {
 
         public void CompleteEnteringShip() {
             _goingToShip = false;
+            _goingToHatchling = false;
+            if(_trackPathToTargetCoroutine != null) {
+                StopCoroutine(_trackPathToTargetCoroutine);
+                _trackPathToTargetCoroutine = null;
+            }
             IsInShip = true;
             IsInsideShipBeamVolume = true;
             _currentProbe = null;
@@ -146,6 +163,11 @@ namespace PickUpChert {
 
         public void CompleteExitingShip() {
             _goingToShip = false;
+            _goingToHatchling = false;
+            if (_trackPathToTargetCoroutine != null) {
+                StopCoroutine(_trackPathToTargetCoroutine);
+                _trackPathToTargetCoroutine = null;
+            }
             IsInShip = false;
             _currentProbe = null;
             _targetProbe = null;
@@ -169,32 +191,118 @@ namespace PickUpChert {
         }
 
         IEnumerator TrackPathToTarget(List<PathGraph.Node> nodes, PathGraph graph, Transform target, bool isTargetShip) {
-            if (graph != null) {
+            if(isTargetShip) {
+                _goingToShip = true;
+                _goingToHatchling = false;
+            }
+            else {
+                _goingToShip = false;
+                _goingToHatchling = true;
+            }
+
+            if (nodes != null) {
                 foreach (var node in nodes) {
-                    PickUpChert.Locomotion.GabbroMoveTo(graph.transform, node._radius, node._baseSpeed * 3f, node._pos);
+                    if((transform.position - graph.transform.TransformPoint(node._pos)).sqrMagnitude <= node._radius * node._radius) {
+                        continue;
+                    }
+
+                    PickUpChert.Locomotion.GabbroMoveTo(graph.transform, node._radius, node._baseSpeed * _baseSpeed, node._pos);
                     while ((transform.position - graph.transform.TransformPoint(node._pos)).sqrMagnitude > node._radius * node._radius) {
                         yield return null;
                     }
+                    yield return null;
+
+                    if(!string.IsNullOrEmpty(node._conversationFileName)) {
+                        MovingConversation.Instance.DisplayDialogue(node._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(node._conversationFileName));
+                    }
+
+                    var nearestNode = graph.NearestNode(target.position);
+                    if(Vector3.Distance(target.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(target.position, transform.position)) {
+                    //if (Vector3.Distance(transform.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, target.position)) {
+                        break;
+                    }
+                    if (nearestNode != nodes.Last()) {
+                        PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
+                        _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
+                        yield break;
+                    }
                 }
 
-                var nearestNode = graph.NearestNode(target.position);
-                if (nearestNode != nodes.Last()) {
-                    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(graph.transform.TransformPoint(nearestNode._pos), target.position), graph, target, isTargetShip));
-                    yield break;
-                }
             }
 
             if(!isTargetShip) {
-                PickUpChert.Locomotion.GabbroMoveTo(target, 2f, 3f, Vector3.zero);
+                PickUpChert.Locomotion.GabbroMoveTo(target, 2f, _baseSpeed, Vector3.zero);
+                float time = 0;
+                float distance = Vector3.Distance(transform.position, target.position);
+                while ((transform.position - target.position).sqrMagnitude > 2 * 2) {
+                    yield return null;
+                    time += Time.deltaTime;
+                    if(time > 2) {
+                        if (Mathf.Abs(Vector3.Distance(transform.position, target.position) - distance) < 0.1f) {
+                            PickUpChert.Log($"Traveler seems stuck, recomputing path to {target.position}");
+                            var nearestNode = graph.NearestNode(target.position);
+                            //if (Vector3.Distance(target.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, target.position)) {
+                            //    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, graph, target, isTargetShip));
+                            //    yield break;
+                            //}
+                            PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
+                            _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
+                            yield break;
+                        }
+                        time = 0;
+                        distance = Vector3.Distance(transform.position, target.position);
+                    }
+                }
+                _goingToHatchling = false;
             }
             else {
                 var probes = target.GetComponentsInChildren<PathProbe>();
                 var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
-                PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * 3, Vector3.zero);
+                PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * _baseSpeed, Vector3.zero);
+                //_goingToShip = false;
+                float time = 0;
+                float distance = Vector3.Distance(transform.position, probe.transform.position);
                 while((transform.position - probe.transform.position).sqrMagnitude > 0.5f * 0.5f) {
                     yield return null;
+                    time += Time.deltaTime;
+                    if (time > 2) {
+                        if (Mathf.Abs(Vector3.Distance(transform.position, probe.transform.position) - distance) < 0.1f) {
+                            PickUpChert.Log($"Traveler seems stuck, recomputing path to {target.position} for probe ship");
+                            var nearestNode = graph.NearestNode(target.position);
+                            //if (Vector3.Distance(transform.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, probe.transform.position)) {
+                            //    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, graph, target, isTargetShip));
+                            //    yield break;
+                            //}
+                            _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
+                            yield break;
+                        }
+                        time = 0;
+                        distance = Vector3.Distance(transform.position, probe.transform.position);
+                    }
                 }
-                PickUpChert.Locomotion.GabbroMoveTo(target, 0.5f, 3f, new Vector3(0, -3.7f, 0));
+                PickUpChert.Locomotion.GabbroMoveTo(target, 0.5f, _baseSpeed, new Vector3(0, -3.7f, 0));
+                time = 0;
+                distance = Vector3.Distance(transform.position, target.position);
+                while ((transform.position - target.position).sqrMagnitude > 0.5f * 0.5f) {
+                    yield return null;
+                    time += Time.deltaTime;
+                    if (time > 2) {
+                        if (Mathf.Abs(Vector3.Distance(transform.position, target.position) - distance) < 0.1f) {
+                            PickUpChert.Log($"Traveler seems stuck, recomputing path to {target.position} for ship");
+                            var nearestNode = graph.NearestNode(target.position);
+                            //if (Vector3.Distance(transform.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, target.position)) {
+                            //    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, graph, target, isTargetShip));
+                            //    yield break;
+                            //}
+                            PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
+                            _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
+                            yield break;
+                        }
+                        time = 0;
+                        distance = Vector3.Distance(transform.position, target.position);
+                    }
+                }
+                _goingToShip = false;
             }
         }
 
@@ -208,6 +316,9 @@ namespace PickUpChert {
 
         virtual protected void Update() {
             if (_goingToShip) {
+                return;
+            }
+            if(_goingToHatchling) {
                 return;
             }
             if(_targetProbe) {
@@ -234,10 +345,10 @@ namespace PickUpChert {
             var (pathGraph, nearestNode) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
             if(Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, Locator.GetPlayerTransform().position)) {
                 //PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
-                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, null, Locator.GetPlayerTransform(), false));
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, pathGraph, Locator.GetPlayerTransform(), false));
             }
             else {
-                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(pathGraph.transform.TransformPoint(nearestNode._pos), Locator.GetPlayerTransform().position), pathGraph, Locator.GetPlayerTransform(), false));
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(transform.position, Locator.GetPlayerTransform().position), pathGraph, Locator.GetPlayerTransform(), false));
             }
         }
     }
