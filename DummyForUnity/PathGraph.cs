@@ -22,12 +22,25 @@ namespace PickUpChert {
             }
         }
         void OnDrawGizmos() {
-            Gizmos.color = Color.red;
             foreach(var node in _nodes) {
+                if(!string.IsNullOrEmpty(node._conversationFileName)) {
+                    Gizmos.color = Color.green;
+                }
+                else {
+                    Gizmos.color = Color.red;
+                }
                 Gizmos.DrawSphere(transform.TransformPoint(node._pos), node._radius);
+                Gizmos.color = Color.magenta;
                 foreach (var connectedNodeIndex in node._connectedNodes) {
                     var connectedNode = _nodes[connectedNodeIndex];
+                    var direction = (transform.TransformPoint(connectedNode._pos) - transform.TransformPoint(node._pos)).normalized;
                     Gizmos.DrawLine(transform.TransformPoint(node._pos), transform.TransformPoint(connectedNode._pos));
+                    float arrowHeadLength = 2f;
+                    float arrowHeadAngle = 30f;
+                    Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 + arrowHeadAngle, 0) * new Vector3(0, 0, 1);
+                    Gizmos.DrawRay(transform.TransformPoint(connectedNode._pos), right * arrowHeadLength);
+                    Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 - arrowHeadAngle, 0) * new Vector3(0, 0, 1);
+                    Gizmos.DrawRay(transform.TransformPoint(connectedNode._pos), left * arrowHeadLength);
                 }
             }
         }

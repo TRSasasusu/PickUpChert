@@ -108,7 +108,11 @@ namespace PickUpChert {
                 _trackPathToTargetCoroutine = null;
             }
             var (pathGraph, nearestNode) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
-            if(Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, ship.transform.position)) {
+            if(pathGraph == null) {
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, null, ship.transform, true));
+                return;
+            }
+            if (Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, ship.transform.position)) {
                 _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, pathGraph, ship.transform, true));
             }
             else {
@@ -240,6 +244,16 @@ namespace PickUpChert {
                     if(time > 2) {
                         if (Mathf.Abs(Vector3.Distance(transform.position, target.position) - distance) < 0.1f) {
                             PickUpChert.Log($"Traveler seems stuck, recomputing path to {target.position}");
+                            if(graph == null) {
+                                var (pathGraph, _) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
+                                if (pathGraph == null) {
+                                    PickUpChert.Log("Traveler seems stuck, but no path graph found!?");
+                                    time = 0;
+                                    distance = Vector3.Distance(transform.position, target.position);
+                                    continue;
+                                }
+                                graph = pathGraph;
+                            }
                             var nearestNode = graph.NearestNode(target.position);
                             //if (Vector3.Distance(target.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, target.position)) {
                             //    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, graph, target, isTargetShip));
@@ -268,6 +282,16 @@ namespace PickUpChert {
                     if (time > 2) {
                         if (Mathf.Abs(Vector3.Distance(transform.position, probe.transform.position) - distance) < 0.1f) {
                             PickUpChert.Log($"Traveler seems stuck, recomputing path to {target.position} for probe ship");
+                            if(graph == null) {
+                                var (pathGraph, _) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
+                                if (pathGraph == null) {
+                                    PickUpChert.Log("Traveler seems stuck, but no path graph found!?");
+                                    time = 0;
+                                    distance = Vector3.Distance(transform.position, target.position);
+                                    continue;
+                                }
+                                graph = pathGraph;
+                            }
                             var nearestNode = graph.NearestNode(target.position);
                             //if (Vector3.Distance(transform.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, probe.transform.position)) {
                             //    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, graph, target, isTargetShip));
@@ -289,6 +313,16 @@ namespace PickUpChert {
                     if (time > 2) {
                         if (Mathf.Abs(Vector3.Distance(transform.position, target.position) - distance) < 0.1f) {
                             PickUpChert.Log($"Traveler seems stuck, recomputing path to {target.position} for ship");
+                            if(graph == null) {
+                                var (pathGraph, _) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
+                                if (pathGraph == null) {
+                                    PickUpChert.Log("Traveler seems stuck, but no path graph found!?");
+                                    time = 0;
+                                    distance = Vector3.Distance(transform.position, target.position);
+                                    continue;
+                                }
+                                graph = pathGraph;
+                            }
                             var nearestNode = graph.NearestNode(target.position);
                             //if (Vector3.Distance(transform.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, target.position)) {
                             //    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, graph, target, isTargetShip));
@@ -343,6 +377,10 @@ namespace PickUpChert {
             //PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
             //StartCoroutine(TrackPathToTarget(Locator.GetPathGraph().ComputePath(transform.position, Locator.GetPlayerTransform().position), Locator.GetPathGraph(), Locator.GetPlayerTransform())); // TODO
             var (pathGraph, nearestNode) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
+            if(pathGraph == null) {
+                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, null, Locator.GetPlayerTransform(), false));
+                return;
+            }
             if(Vector3.Distance(pathGraph.transform.TransformPoint(nearestNode._pos), transform.position) > Vector3.Distance(transform.position, Locator.GetPlayerTransform().position)) {
                 //PickUpChert.Locomotion.GabbroMoveTo(Locator.GetPlayerTransform(), 2f, 3f, Vector3.zero);
                 _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, pathGraph, Locator.GetPlayerTransform(), false));

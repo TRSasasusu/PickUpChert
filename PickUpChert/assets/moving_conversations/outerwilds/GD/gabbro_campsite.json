@@ -1,0 +1,24 @@
+{
+  "texts": [
+    {
+      "name": "Chert",
+      "text": "0",
+      "time": 3
+    },
+    {
+      "name": "Gabbro",
+      "text": "1",
+      "time": 3
+    },
+    {
+      "name": "Chert",
+      "text": "2",
+      "time": 3
+    },
+    {
+      "name": "Gabbro",
+      "text": "3",
+      "time": 3
+    }
+  ]
+}
