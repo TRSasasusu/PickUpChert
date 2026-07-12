@@ -30,6 +30,8 @@ namespace PickUpChert {
                 itemTool.PickUpItemInstantly(ChertItem.Instance);
                 StreamingManager.LoadStreamingAssets("hourglasstwins/meshes/characters", 0);
 
+                MovingConversation.Instance.DisplayDialogue("TH/shortcut", ChertPickUpConversation.Instance.GetMovingConversationItem("TH/shortcut"));
+
                 _whiteHoleRenderer.DOScale(0.001f, 0.3f).SetLink(_whiteHoleRenderer.gameObject).onComplete += () => {
                     _whiteHole.SetActive(false);
                     _interactReceiver.SetInteractionEnabled(true);

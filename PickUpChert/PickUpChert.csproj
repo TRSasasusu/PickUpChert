@@ -93,6 +93,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="assets\moving_conversations\outerwilds\TH\" />
     <Folder Include="Libs\UniRx\" />
     <Folder Include="Libs\xen.NewHorizons\" />
   </ItemGroup>

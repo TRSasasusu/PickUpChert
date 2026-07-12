@@ -8,6 +8,7 @@ using UnityEngine;
 namespace PickUpChert {
     public class ConversationTrigger : MonoBehaviour {
         [SerializeField] public string _conversationFileName;
+        [SerializeField] public string _movingConversationFileName;
 
         void OnTriggerEnter(Collider other) {
             ChertPickUpConversation.Instance.EnterTrigger(this);
