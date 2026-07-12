@@ -16,6 +16,9 @@ namespace PickUpChert {
             public string _conversationFileName;
             public float _baseSpeed = 1;
             public List<int> _connectedNodes;
+            public Collider _constraintForNearestNode;
+
+            [HideInInspector] public string _constraintNameForNearestNode;
 
             internal float _cost;
 
@@ -29,6 +32,11 @@ namespace PickUpChert {
 
         void OnValidate() {
             if (_nodes != null) {
+                foreach (var node in _nodes) {
+                    if(node._constraintForNearestNode != null) {
+                        node._constraintNameForNearestNode = node._constraintForNearestNode.name;
+                    }
+                }
                 _nodesSerialized = _nodes.Select(n => JsonUtility.ToJson(n)).ToList();
             }
         }
@@ -63,6 +71,14 @@ namespace PickUpChert {
         void Awake() {
             if(_nodes == null && _nodesSerialized != null) {
                 _nodes = _nodesSerialized.Select(s => JsonUtility.FromJson<Node>(s)).ToList();
+                foreach (var node in _nodes) {
+                    if (!string.IsNullOrEmpty(node._constraintNameForNearestNode)) {
+                        var constraint = transform.Find(node._constraintNameForNearestNode);
+                        if (constraint != null) {
+                            node._constraintForNearestNode = constraint.GetComponent<Collider>();
+                        }
+                    }
+                }
             }
         }
 
@@ -130,7 +146,7 @@ namespace PickUpChert {
         }
 
         public Node NearestNode(Vector3 pos) {
-            return _nodes.OrderBy(n => (transform.TransformPoint(n._pos) - pos).magnitude).FirstOrDefault();
+            return _nodes.OrderBy(n => (transform.TransformPoint(n._pos) - pos).magnitude).FirstOrDefault(n => n._constraintForNearestNode == null || n._constraintForNearestNode.bounds.Contains(pos));
         }
     }
 }

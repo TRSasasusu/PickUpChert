@@ -97,6 +97,10 @@
   // ### TH
   // #### shortcut
   "PickUpChert_TH/shortcut0": "うわ、な、なんだ、木の炉辺か？",
+  // #### gabbro_picture
+  "PickUpChert_TH/gabbro_picture0": "なかなかよく撮れてるだろ？こいつを飾るHornfelsのセンスは見直したよ。",
+  "PickUpChert_TH/gabbro_picture1": "…まあこういう仕事を任せられるのはいまやお前とGossanくらいだからな。",
+  "PickUpChert_TH/gabbro_picture2": "Chertもいるじゃないか。それに…こいつだってもう適任なんだよ。",
   // ### GD
   // #### gabbro_initial
   "PickUpChert_GD/gabbro_initial0": "それにしても驚いた。まさかお前が本当に来るとは……何かきっかけでもあったのか？",

@@ -9,6 +9,8 @@ namespace PickUpChert {
             public string _conversationFileName;
             public float _baseSpeed = 1;
             public List<int> _connectedNodes;
+            public Collider _constraintForNearestNode;
+            [HideInInspector] public string _constraintNameForNearestNode;
             internal float _cost;
             public int CompareTo(Node other) {
                 return other._pos.magnitude.CompareTo(_pos.magnitude); // inverse order for priority queue
@@ -18,6 +20,11 @@ namespace PickUpChert {
         [HideInInspector] public List<string> _nodesSerialized;
         void OnValidate() {
             if (_nodes != null) {
+                foreach (var node in _nodes) {
+                    if(node._constraintForNearestNode != null) {
+                        node._constraintNameForNearestNode = node._constraintForNearestNode.name;
+                    }
+                }
                 _nodesSerialized = _nodes.Select(n => JsonUtility.ToJson(n)).ToList();
             }
         }

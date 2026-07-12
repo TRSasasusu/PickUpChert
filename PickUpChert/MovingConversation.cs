@@ -21,11 +21,16 @@ namespace PickUpChert {
             _dialogue = GetComponent<DialogueBoxVer2>();
         }
 
-        public void DisplayDialogue(string filename, List<Dictionary<string, object>> items) {
+        public void DisplayDialogue(string filename, List<Dictionary<string, object>> items = null) {
             if(_doneConversations.ContainsKey(filename)) {
                 return;
             }
             _doneConversations[filename] = true;
+
+            if(items == null) {
+                items = ChertPickUpConversation.Instance.GetMovingConversationItem(filename);
+            }
+
             _displaying = StartCoroutine(DisplayDialogueSeqentially(filename, items));
         }
 

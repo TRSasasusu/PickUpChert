@@ -12,6 +12,10 @@ namespace PickUpChert {
 
         void OnTriggerEnter(Collider other) {
             ChertPickUpConversation.Instance.EnterTrigger(this);
+
+            if(!string.IsNullOrEmpty(_movingConversationFileName)) {
+                MovingConversation.Instance.DisplayDialogue(_movingConversationFileName);
+            }
         }
 
         void OnTriggerExit(Collider other) {
