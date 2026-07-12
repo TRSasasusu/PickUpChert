@@ -34,28 +34,28 @@
     <None Update="assets\assetbundles\pickupchert.manifest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\initial_pick_up.xml">
+    <None Update="assets\dialogues\outerwilds\Chert\event\initial_pick_up.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\outerwilds\sector\Forum.json">
+    <None Update="assets\dialogues\outerwilds\Chert\sector\Forum.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\outerwilds\sector\TimeLoopExperiment.xml">
+    <None Update="assets\dialogues\outerwilds\Chert\sector\TimeLoopExperiment.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\outerwilds\sector\BH.xml">
+    <None Update="assets\dialogues\outerwilds\Chert\sector\BH.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\outerwilds\sector\WhiteholeStation.xml">
+    <None Update="assets\dialogues\outerwilds\Chert\sector\WhiteholeStation.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\outerwilds\sector\City.xml">
+    <None Update="assets\dialogues\outerwilds\Chert\sector\City.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\outerwilds\sector\Forum.xml">
+    <None Update="assets\dialogues\outerwilds\Chert\sector\Forum.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="assets\dialogues\outerwilds\sector\FossilCave.xml">
+    <None Update="assets\dialogues\outerwilds\Chert\sector\FossilCave.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="assets\translations\english.json">

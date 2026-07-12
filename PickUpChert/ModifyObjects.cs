@@ -16,6 +16,7 @@ namespace PickUpChert {
 
         public static Hatchling Hatchling { get; private set; }
         public static Traveler Gabbro { get; private set; }
+        public static OtherConversation OtherConversation { get; private set; }
 
 
         public void Initialize() {
@@ -30,6 +31,8 @@ namespace PickUpChert {
         }
 
         IEnumerator InitializeBody() {
+            OtherConversation = new OtherConversation();
+
             GameObject shortcutChert = null;
             while(true) {
                 shortcutChert = GameObject.Find(SHORTCUT_CHERT_PATH);

@@ -1,5 +1,11 @@
 import os
 
+SCRIPTS = [
+    'PickUpChert/PathProbe.cs',
+    'PickUpChert/PathGraph.cs',
+    'PickUpChert/ConversationTrigger.cs',
+]
+
 def set_script(filepath: str):
     with open(filepath, 'r') as f:
         content = f.read()
@@ -50,8 +56,8 @@ def set_script(filepath: str):
         f.write(new_content)
 
 def main():
-    set_script('PickUpChert/PathProbe.cs')
-    set_script('PickUpChert/PathGraph.cs')
+    for script in SCRIPTS:
+        set_script(script)
 
 if __name__ == '__main__':
     main()

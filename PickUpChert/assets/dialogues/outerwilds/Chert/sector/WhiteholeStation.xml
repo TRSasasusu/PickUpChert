@@ -1,0 +1,23 @@
+﻿<DialogueTree>
+  <NameField>Chert</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_WhiteholeStation</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>WHITEHOLE_STATION_0</Page>
+    </Dialogue>
+    <DialogueOptionsList>
+      <DialogueOption>
+        <Text>WHITEHOLE_STATION_0_Q</Text>
+        <DialogueTarget>PickUpChert_WhiteholeStation_0_A</DialogueTarget>
+      </DialogueOption>
+    </DialogueOptionsList>
+  </DialogueNode>
+
+  <DialogueNode>
+    <Name>PickUpChert_WhiteholeStation_0_A</Name>
+    <Dialogue>
+      <Page>WHITEHOLE_STATION_1</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>

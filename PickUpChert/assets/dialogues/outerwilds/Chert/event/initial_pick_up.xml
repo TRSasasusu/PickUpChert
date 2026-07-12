@@ -1,0 +1,24 @@
+﻿<DialogueTree>
+  <NameField>Chert</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_InitialPickUp</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>INITIAL_PICKUP_0_0</Page>
+      <Page>INITIAL_PICKUP_0_1</Page>
+    </Dialogue>
+    <DialogueOptionsList>
+      <DialogueOption>
+        <Text>INITIAL_PICKUP_0_Q</Text>
+        <DialogueTarget>PickUpChert_InitialPickUp_Answer</DialogueTarget>
+      </DialogueOption>
+    </DialogueOptionsList>
+  </DialogueNode>
+
+  <DialogueNode>
+    <Name>PickUpChert_InitialPickUp_Answer</Name>
+    <Dialogue>
+      <Page>INITIAL_PICKUP_0_A</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>

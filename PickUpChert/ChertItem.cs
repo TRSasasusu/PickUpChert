@@ -25,6 +25,8 @@ namespace PickUpChert {
             Instance = this;
 
             _localDropOffset = new Vector3(0, -0.3f, 0.5f);
+
+            gameObject.AddComponent<ChertForConversation>();
         }
 
         public override string GetDisplayName() {

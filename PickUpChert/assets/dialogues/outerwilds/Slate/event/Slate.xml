@@ -1,0 +1,14 @@
+﻿<DialogueTree>
+  <NameField>Slate</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_Slate_Chert</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>SLATE_CHERT_0</Page>
+      <Page>SLATE_CHERT_1</Page>
+      <Page>SLATE_CHERT_2</Page>
+      <Page>SLATE_CHERT_3</Page>
+      <Page>SLATE_CHERT_4</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>

@@ -340,11 +340,11 @@ namespace PickUpChert {
             }
         }
 
-        virtual public void ConversationStart() {
-
+        virtual public TextAsset ConversationStart(IEnumerable<ConversationTrigger> triggers, IEnumerable<Sector> sectors) {
+            return null;
         }
 
-        virtual public void ConversationEnd() {
+        virtual public void ConversationEnd(IEnumerable<ConversationTrigger> triggers, IEnumerable<Sector> sectors) {
 
         }
 

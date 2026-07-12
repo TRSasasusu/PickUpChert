@@ -4,20 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniRx;
+using UnityEngine;
 
 namespace PickUpChert {
     public class Gabbro : Traveler {
         bool _standUp;
-        string _conversationCondition;
 
-        public override void ConversationStart() {
-            if(_standUp) {
-                _conversationCondition = "PUC_GABBRO_AFTER_START";
-                DialogueConditionManager.SharedInstance.SetConditionState(_conversationCondition, true);
+        public override TextAsset ConversationStart(IEnumerable<ConversationTrigger> triggers, IEnumerable<Sector> sectors) {
+            if(!_standUp) {
+                return ChertPickUpConversation._conversationDataDict["Gabbro"]._eventXMLDict["before_standup"];
             }
+
+            if(ChertItem.Brought) {
+                return ChertPickUpConversation._conversationDataDict["Gabbro"]._eventXMLDict["after_standup"];
+            }
+            return ChertPickUpConversation._conversationDataDict["Gabbro"]._eventXMLDict["after_standup_wo_chert"];
         }
 
-        public override void ConversationEnd() {
+        public override void ConversationEnd(IEnumerable<ConversationTrigger> triggers, IEnumerable<Sector> sectors) {
             if(!_standUp) {
                 _standUp = true;
                 PickUpChert.Locomotion.GabbroStandUp();

@@ -66,36 +66,40 @@
   "PickUpChert_Slate_ChertSLATE_CHERT_3": "<Chert/>もうひよっ子とは呼べないよ、Slate。正直に言って、もう探査艇の操縦は私より上手いくらいだ。まるで自分の手足のように自在に操ってたよ。",
   "PickUpChert_Slate_ChertSLATE_CHERT_4": "驚いた。そこまでか？ふむ……<Pause/>ああ、おかげで口実ができたよ。そろそろGossanと話をしないととは思ってたんだ。<i>あの墜落</i>のあとにどんな過酷なコーチをしたのか問いただしてやろう。",
 
-  // ## Gabbro
-  // ### See Gabbro
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_0": "うん？<Pause/>…おぉ。どうだい、なかなかいい持ち手だろう？",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_1": "<Chert/>ああ、そうだな。なかなかいい持ち手だと思うよ。<Pause/>…はぁ",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_2": "その持ち手にはちょっとした細工がしてあってね…相棒、次に目を覚ましたら草むらの中を覗いてみるといい。",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_3": "<Chert/>何の話をしてるのか知らないが、明日までにこの持ち手とやらを調べておかないとな…そんなことよりGabbro、お前、探査艇はどうした？",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_4": "ああ、やつはバカンスで海水浴に出かけてるところさ。そして私はここで優雅にハンモックに揺られている。最高の休暇だ。",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_5": "<Chert/>ロストしたんだな…まったく、その無線は何のためにあると思ってるんだ。「Hornfelsの長話を聞くため」じゃないからな。",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_6": "正確には、Hornfelsのまどろみを誘うありがたい長話を聞くため、だな。",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_7": "<Chert/>……だが、良いニュースだ。ここに期待の宇宙飛行士が探査艇を持ってきてくれた。Gabbro、一緒に乗って村へ帰るぞ。こいつの腕は十分だ。",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_8": "…なるほど…<Pause/>…いや、たまにはいいかもしれないな。我らが期待の相棒、行き先は任せるよ。",
-  "PickUpChert_Gabbro_Chert_SeeGABBRO_CHERT_SEE_9": "<Chert/>いや、村へ帰るんじゃないのか？…まあ、少しくらいは付き合ってやるが、あまり無茶はするなよ。",
-  // ### After Start w/ Chert
-  "PUC_Gabbro_After_Start0": "<Chert/>なあGabbro、お前こいつとそんなに、その、通じ合うような仲だったか？",
-  "PUC_Gabbro_After_Start1": "言うなれば、私と運命共同体なんだよ。そう、どこかの取っ手を本来の用途として使うという意味において、ね。",
-  "PUC_Gabbro_After_Start2": "<Chert/>ああ納得したよ。",
-  // ### After Start w/o Chert
-  "PickUpChert_Gabbro_AfterStart0": "どうした相棒、そんなじっと見つめてきて。",
-  "GabbroPickUpChert_Gabbro_AfterStartQ0": "実のところ、どうして今回は一緒に来てくれたんだ？",
-  "GabbroPickUpChert_Gabbro_AfterStartQ1": "いや、何でもないよ。",
-  "PickUpChert_Gabbro_AfterStartA0_0": "気まぐれっていうやつだよ。まあ今回はChertが振り回される様を見たいというのは本当だけどね。",
-  "PickUpChert_Gabbro_AfterStartA0_1": "…そう、人が何を考えてるかなんてお前にもなんなら自分にも本当はわからないものだ。どこかの誰かだって、きっとそうだよ。",
+  // # dialogues
+  // ## outerwilds
+  // ### Gabbro
+  // #### event
+  // ##### before_standup
+  "PUC_Gabbro_before_standup0": "うん？<Pause/>…おぉ。どうだい、なかなかいい持ち手だろう？",
+  "PUC_Gabbro_before_standup1": "<Chert/>ああ、そうだな。なかなかいい持ち手だと思うよ。<Pause/>…はぁ",
+  "PUC_Gabbro_before_standup2": "その持ち手にはちょっとした細工がしてあってね…相棒、次に目を覚ましたら草むらの中を覗いてみるといい。",
+  "PUC_Gabbro_before_standup3": "<Chert/>何の話をしてるのか知らないが、明日までにこの持ち手とやらを調べておかないとな…そんなことよりGabbro、お前、探査艇はどうした？",
+  "PUC_Gabbro_before_standup4": "ああ、やつはバカンスで海水浴に出かけてるところさ。そして私はここで優雅にハンモックに揺られている。最高の休暇だ。",
+  "PUC_Gabbro_before_standup5": "<Chert/>ロストしたんだな…まったく、その無線は何のためにあると思ってるんだ。「Hornfelsの長話を聞くため」じゃないからな。",
+  "PUC_Gabbro_before_standup6": "正確には、Hornfelsのまどろみを誘うありがたい長話を聞くため、だな。",
+  "PUC_Gabbro_before_standup7": "<Chert/>……だが、良いニュースだ。ここに期待の宇宙飛行士が探査艇を持ってきてくれた。Gabbro、一緒に乗って村へ帰るぞ。こいつの腕は十分だ。",
+  "PUC_Gabbro_before_standup8": "…なるほど…<Pause/>…いや、たまにはいいかもしれないな。我らが期待の相棒、行き先は任せるよ。",
+  "PUC_Gabbro_before_standup9": "<Chert/>いや、村へ帰るんじゃないのか？…まあ、少しくらいは付き合ってやるが、あまり無茶はするなよ。",
+  // ##### after_standup
+  "PUC_Gabbro_after_standup0": "<Chert/>なあGabbro、お前こいつとそんなに、その、通じ合うような仲だったか？",
+  "PUC_Gabbro_after_standup1": "言うなれば、私と運命共同体なんだよ。そう、どこかの取っ手を本来の用途として使うという意味において、ね。",
+  "PUC_Gabbro_after_standup2": "<Chert/>ああ納得したよ。",
+  // ##### after_standup_wo_chert
+  "PUC_Gabbro_after_standup_wo_chert0": "どうした相棒、そんなじっと見つめてきて。",
+  "GabbroPUC_Gabbro_after_standup_wo_chertA": "実のところ、どうして今回は一緒に来てくれたんだ？",
+  "GabbroPUC_Gabbro_after_standup_wo_chertB": "いや、何でもないよ。",
+  "PUC_Gabbro_after_standup_wo_chert_A0": "気まぐれっていうやつだよ。まあ今回はChertが振り回される様を見たいというのは本当だけどね。",
+  "PUC_Gabbro_after_standup_wo_chert_A1": "…そう、人が何を考えてるかなんてお前にもなんなら自分にも本当はわからないものだ。どこぞの誰かだって、きっとそうだよ。",
 
-  // ## Moving Conversations
-  // ### outerwilds
-  // #### GD
+  // # moving_conversations
+  // ## outerwilds
+  // ### GD
+  // #### gabbro_initial
   "PickUpChert_GD/gabbro_initial0": "それにしても驚いた。まさかお前が本当に来るとは……何かきっかけでもあったのか？",
   "PickUpChert_GD/gabbro_initial1": "そりゃあ、さすがにお前が連れまわされるのを見ない手はないだろ？",
   "PickUpChert_GD/gabbro_initial2": "そんなことだろうと思ったよ。",
-
+  // #### gabbro_campsite
   "PickUpChert_GD/gabbro_campsite0": "うわ、鍋すら雨ざらしじゃないか。腹を壊しても知らないぞ。",
   "PickUpChert_GD/gabbro_campsite1": "Chert、わかってないな。今は絶賛調理中なんだよ。塩味が効いて最高だとこいつからもお墨付きさ。",
   "PickUpChert_GD/gabbro_campsite2": "……Gabbroに変なの食わされたらちゃんと言うんだぞ。私じゃなくてもHornfelsでもいい。",

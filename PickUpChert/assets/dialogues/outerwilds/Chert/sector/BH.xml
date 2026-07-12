@@ -1,0 +1,13 @@
+﻿<DialogueTree>
+  <NameField>Chert</NameField>
+  <DialogueNode>
+    <Name>PickUpChert_BH</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>BH_0</Page>
+      <Page>BH_1</Page>
+      <Page>BH_2</Page>
+      <Page>BH_3</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>

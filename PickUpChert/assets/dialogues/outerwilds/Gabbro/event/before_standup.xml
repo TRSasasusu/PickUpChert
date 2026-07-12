@@ -1,0 +1,19 @@
+﻿<DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/xen-42/outer-wilds-new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">
+  <NameField>Gabbro</NameField>
+  <DialogueNode>
+    <Name>PUC_Gabbro_before_standup</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>0</Page>
+      <Page>1</Page>
+      <Page>2</Page>
+      <Page>3</Page>
+      <Page>4</Page>
+      <Page>5</Page>
+      <Page>6</Page>
+      <Page>7</Page>
+      <Page>8</Page>
+      <Page>9</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>
