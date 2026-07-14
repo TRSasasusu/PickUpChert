@@ -54,11 +54,6 @@
   "RiebeckPickUpChert_Riebeck_See_Q_1": "ああ、早く探査艇に乗るべきだ。",
 
 
-  // Timber Hearth
-  "PickUpChert_TH_CampsiteCAMPSITE_0": "打ち上げ前のキャンプ、お前はどうだった？",
-  "PickUpChert_TH_CampsiteCAMPSITE_1": "Slateに言わせりゃ神経過敏になるって言うが、統計的に有意じゃない。<Pause/>Riebeckのあれはいつも通りのことだ。",
-  "PickUpChert_TH_CampsiteCAMPSITE_2": "それに、仮になるんだとしても構わないと私は思ってる。ついにあの星々を、大気に覆われない外側から見られるんだって、実感できるからな。",
-
   // Slate
   "PickUpChert_Slate_ChertSLATE_CHERT_0": "うん？<Pause/>お前の初飛行はなかなか面白いことをするな。Gabbroに見せてやりたいものだ。",
   "PickUpChert_Slate_ChertSLATE_CHERT_1": "<Chert/>私からしたらたまったものじゃない。まあ悪いのはGabbroだ。後輩に教えるのは焦げマシュマロの作り方だとかそんなことばかりだよ、あいつは。",
@@ -68,7 +63,39 @@
 
   // # dialogues
   // ## outerwilds
+  // ### Chert
+  // #### trigger
+  // ##### TH
+  // ###### campsite
+  "PUC_Chert_TH_campsite0": "打ち上げ前のキャンプ、お前はどうだった？",
+  "PUC_Chert_TH_campsite1": "Slateに言わせりゃ神経過敏になるって言うが、統計的に有意じゃない。<Pause/>Riebeckのあれはいつも通りのことだ。",
+  "PUC_Chert_TH_campsite2": "それに、仮になるんだとしても構わないと私は思ってる。ついにあの星々を、大気に覆われない外側から見られるんだって、実感できるからな。",
+  // ###### radio_campsite
+  "PUC_Chert_TH_radio_campsite0": "ここのキャンプファイヤー、いいよな。発射台の下のも好きだが、どうにも村の明かりが星空には眩しすぎる。",
+  "PUC_Chert_TH_radio_campsite1": "その点、ここは電波塔こそあれどマシュマロを焼きながらじっくり夜空を眺めるのに最高なんだ。",
   // ### Gabbro
+  // #### trigger
+  // ##### TH
+  // ###### radio_campsite
+  // ####### w_chert (default)
+  "PUC_Gabbro_TH_radio_campsite0": "Hornfelsを見直したよ。私の教えをしっかり覚えてるようだ。",
+  "PUC_Gabbro_TH_radio_campsite1": "<Chert/>それならお前もHornfelsの話をちゃんと聞いてやれ。あれも管制官として大事な仕事なんだ。",
+  "PUC_Gabbro_TH_radio_campsite2": "……<Pause/>…<Pause/>はっ。このGABBRO式超簡単3ステップに思わず取り組んでしまったよ。",
+  // ####### wo_chert
+  "PUC_Gabbro_TH_radio_campsite_wo_chert0": "なあ、あの電波塔、いつできたか知ってるかな？",
+  "GabbroPUC_Gabbro_TH_radio_campsite_wo_chertA": "私が訓練を始めた頃だろ？覚えてるよ。",
+  "PUC_Gabbro_TH_radio_campsite_wo_chertA0": "そのとおり。だけど、もう一つ記憶があるんだ<Pause/>…あの電波塔もここのキャンプファイヤーも存在しなかった、という記憶がね。",
+  "GabbroPUC_Gabbro_TH_radio_campsite_wo_chertAB": "は？焦げマシュマロの食べ過ぎか？",
+  "PUC_Gabbro_TH_radio_campsite_wo_chertB0": "よく思い出してほしい。このループの最初の頃を…ほら、おぼろげながらそんな気がしてこないか？",
+  "GabbroPUC_Gabbro_TH_radio_campsite_wo_chertBC": "いや、ループが始まる前からあったよ。",
+  "GabbroPUC_Gabbro_TH_radio_campsite_wo_chertBD": "電波塔は最初からあったよ…だけど、扉が閉まってたはずなんだ。",
+  "GabbroPUC_Gabbro_TH_radio_campsite_wo_chertBE": "待ってくれ、その、無かった頃を覚えてるのか？",
+  "PUC_Gabbro_TH_radio_campsite_wo_chertC0": "おやおや？…うーん、じゃあ忘れてくれた方がいいな。",
+  "PUC_Gabbro_TH_radio_campsite_wo_chertD0": "あー、そっちか。うん、それでもいいな。",
+  "PUC_Gabbro_TH_radio_campsite_wo_chertE0": "私の仮説によると、おそらくこのループは必ずしも同じ世界を繰り返しているとは限らない。竜巻は…軌道探査砲だとかお前の探査艇のジェットだとかで変わってるかもしれないが、例えばお前の言ってた脆い空洞の壊れ方は毎回違うんだろう？",
+  "PUC_Gabbro_TH_radio_campsite_wo_chertE1": "なんなら、草むらの中のChert転送装置だってそうだ。あれを作った記憶もあるし、作ってない記憶もあるんだよ、私には。",
+  "GabbroPUC_Gabbro_TH_radio_campsite_wo_chertEF": "いったい、どういうことなんだ！？",
+  "PUC_Gabbro_TH_radio_campsite_wo_chertF0": "答えは単純さ。ただの<i>気まぐれ</i>だよ。何もかも量子の仕業さ。だから、オールド・スペイシーなしにマップを作れていた世界も、ループ終わりに降り注ぐ構造物から頭を守らなくちゃならない世界も、どれも<i>本物</i>ということだ。",
   // #### event
   // ##### before_standup
   "PUC_Gabbro_before_standup0": "うん？<Pause/>…おぉ。どうだい、なかなかいい持ち手だろう？",

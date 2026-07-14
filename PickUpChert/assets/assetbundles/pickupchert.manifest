@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3280814875
+CRC: 2528909302
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ae9c7bf8e8c18953552232717a70c76b
+    Hash: f1f8ccc8944a9dc35b06fb7ffd7020d9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4cf70ad9e82f8b7c553e692dc33b190e
@@ -64,6 +64,7 @@ Assets:
 - Assets/orclecleprefabs/PUCPathProbesTH.prefab
 - Assets/orclecleprefabs/PUCTriggersTH.prefab
 - Assets/orclecleprefabs/PUCPathProbesGabbroIsland.prefab
+- Assets/orclecleprefabs/PUCTriggersTHRadioTower.prefab
 - Assets/MyAssets/Prefabs/shortcut_chert.prefab
 - Assets/orclecleprefabs/PUCPathGraphTHRadioTower.prefab
 - Assets/orclecleowrip/Traveller_HEA_Chert-wo-mesh-wo-scripts.prefab

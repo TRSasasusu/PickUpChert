@@ -1,0 +1,11 @@
+﻿<DialogueTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/xen-42/outer-wilds-new-horizons/main/NewHorizons/Schemas/dialogue_schema.xsd">
+  <NameField>Chert</NameField>
+  <DialogueNode>
+    <Name>PUC_Chert_TH_radio_campsite</Name>
+    <EntryCondition>DEFAULT</EntryCondition>
+    <Dialogue>
+      <Page>0</Page>
+      <Page>1</Page>
+    </Dialogue>
+  </DialogueNode>
+</DialogueTree>
