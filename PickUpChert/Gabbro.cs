@@ -15,16 +15,16 @@ namespace PickUpChert {
                 return ChertPickUpConversation._conversationDataDict["Gabbro"]._eventXMLDict["before_standup"];
             }
 
-            DialogueConditionManager.SharedInstance.SetConditionState("wo_chert", ChertItem.Brought);
+            DialogueConditionManager.SharedInstance.SetConditionState("wo_chert", !ChertItem.Brought);
 
             foreach (var trigger in triggers) {
-                if (ChertPickUpConversation._conversationDataDict["Chert"]._triggerXMLDict.ContainsKey(trigger._conversationFileName)) {
-                    return ChertPickUpConversation._conversationDataDict["Chert"]._triggerXMLDict[trigger._conversationFileName];
+                if (ChertPickUpConversation._conversationDataDict["Gabbro"]._triggerXMLDict.ContainsKey(trigger._conversationFileName)) {
+                    return ChertPickUpConversation._conversationDataDict["Gabbro"]._triggerXMLDict[trigger._conversationFileName];
                 }
             }
             foreach (var sector in sectors) {
-                if(ChertPickUpConversation._conversationDataDict["Chert"]._sectorXMLDict.ContainsKey(sector.name)) {
-                    return ChertPickUpConversation._conversationDataDict["Chert"]._sectorXMLDict[sector.name];
+                if(ChertPickUpConversation._conversationDataDict["Gabbro"]._sectorXMLDict.ContainsKey(sector.name)) {
+                    return ChertPickUpConversation._conversationDataDict["Gabbro"]._sectorXMLDict[sector.name];
                 }
             }
 

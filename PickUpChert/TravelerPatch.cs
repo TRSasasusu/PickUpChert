@@ -99,5 +99,21 @@ namespace PickUpChert {
         //        ModifyObjects.Gabbro.StopSitting();
         //    }
         //}
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(PlayerSpawner), nameof(PlayerSpawner.FixedUpdate))]
+        public static void PlayerSpawner_FixedUpdate_Prefix(PlayerSpawner __instance) {
+            if(__instance._debugWarpNextUpdate) {
+                if(ModifyObjects.Gabbro.IsActivated) {
+                    var owRigidbody = ModifyObjects.Gabbro.GetComponent<OWRigidbody>();
+                    var offset = owRigidbody.GetPosition() - __instance._playerBody.GetPosition();
+                    owRigidbody.WarpToPositionRotation(__instance._debugWarpPoint.transform.position, __instance._debugWarpPoint.transform.rotation);
+                    owRigidbody.SetVelocity(__instance._debugWarpPoint.GetPointVelocity());
+                    if(!PlayerState.IsInsideShip()) {
+                        __instance._debugWarpPoint.AddObjectToTriggerVolumes(owRigidbody.gameObject);
+                    }
+                }
+            }
+        }
     }
 }

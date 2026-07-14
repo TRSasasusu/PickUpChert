@@ -146,7 +146,7 @@ namespace PickUpChert {
         }
 
         public Node NearestNode(Vector3 pos) {
-            return _nodes.OrderBy(n => (transform.TransformPoint(n._pos) - pos).magnitude).FirstOrDefault(n => n._constraintForNearestNode == null || n._constraintForNearestNode.bounds.Contains(pos));
+            return _nodes.OrderBy(n => (transform.TransformPoint(n._pos) - pos).magnitude).FirstOrDefault(n => n._constraintForNearestNode == null || n._constraintForNearestNode.ClosestPoint(pos) == pos); // surprisingly, Vector3 == is approximately equal (1e-5)
         }
     }
 }
