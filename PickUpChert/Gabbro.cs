@@ -44,6 +44,22 @@ namespace PickUpChert {
             }
         }
 
+        protected override void MoveTo(Transform target, float radius, float speed, Vector3 offset) {
+            PickUpChert.Locomotion.GabbroMoveTo(target, radius, speed, offset);
+        }
+
+        protected override void MoveStop() {
+            PickUpChert.Locomotion.GabbroMoveStop();
+        }
+
+        protected override void Sitting() {
+            PickUpChert.Locomotion.GabbroSitting();
+        }
+
+        protected override void StandUp() {
+            PickUpChert.Locomotion.GabbroStandUp();
+        }
+
         protected override void Update() {
             base.Update();
         }

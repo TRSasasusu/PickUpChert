@@ -148,7 +148,7 @@ namespace PickUpChert {
         //}
 
         public void GoToCenterOfShipToExit() {
-            PickUpChert.Locomotion.GabbroMoveTo(Locator.GetShipTransform(), 0.5f, 2f, Vector3.zero);
+            MoveTo(Locator.GetShipTransform(), 0.5f, 2f, Vector3.zero);
         }
 
         public void CompleteEnteringShip() {
@@ -162,7 +162,7 @@ namespace PickUpChert {
             IsInsideShipBeamVolume = true;
             _currentProbe = null;
             _targetProbe = null;
-            PickUpChert.Locomotion.GabbroMoveStop();
+            MoveStop();
         }
 
         public void CompleteExitingShip() {
@@ -185,13 +185,13 @@ namespace PickUpChert {
 
         public void StartSitting() {
             _isSitting = true;
-            PickUpChert.Locomotion.GabbroMoveStop();
-            PickUpChert.Locomotion.GabbroSitting();
+            MoveStop();
+            Sitting();
         }
 
         public void StopSitting() {
             _isSitting = false;
-            PickUpChert.Locomotion.GabbroStandUp();
+            StandUp();
         }
 
         IEnumerator TrackPathToTarget(List<PathGraph.Node> nodes, PathGraph graph, Transform target, bool isTargetShip) {
@@ -210,9 +210,23 @@ namespace PickUpChert {
                         continue;
                     }
 
-                    PickUpChert.Locomotion.GabbroMoveTo(graph.transform, node._radius, node._baseSpeed * _baseSpeed, node._pos);
+                    MoveTo(graph.transform, node._radius, node._baseSpeed * _baseSpeed, node._pos);
+                    float time = 0;
+                    float distance = Vector3.Distance(transform.position, graph.transform.TransformPoint(node._pos));
                     while ((transform.position - graph.transform.TransformPoint(node._pos)).sqrMagnitude > node._radius * node._radius) {
                         yield return null;
+                        time += Time.deltaTime;
+                        if(time > 2) {
+                            if(Mathf.Abs(Vector3.Distance(transform.position, graph.transform.TransformPoint(node._pos)) - distance) < 0.1f) {
+                                PickUpChert.Log($"Traveler seems stuck even though it is on graph pathing!? (node: {node._pos})");
+                                var nearestNode = graph.NearestNode(target.position);
+                                PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
+                                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
+                                yield break;
+                            }
+                            time = 0;
+                            distance = Vector3.Distance(transform.position, graph.transform.TransformPoint(node._pos));
+                        }
                     }
                     yield return null;
 
@@ -220,22 +234,24 @@ namespace PickUpChert {
                         MovingConversation.Instance.DisplayDialogue(node._conversationFileName, ChertPickUpConversation.Instance.GetMovingConversationItem(node._conversationFileName));
                     }
 
-                    var nearestNode = graph.NearestNode(target.position);
-                    if(Vector3.Distance(target.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(target.position, transform.position)) {
-                    //if (Vector3.Distance(transform.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, target.position)) {
-                        break;
-                    }
-                    if (nearestNode != nodes.Last()) {
-                        PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
-                        _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
-                        yield break;
+                    {
+                        var nearestNode = graph.NearestNode(target.position);
+                        if (Vector3.Distance(target.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(target.position, transform.position)) {
+                            //if (Vector3.Distance(transform.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(transform.position, target.position)) {
+                            break;
+                        }
+                        if (nearestNode != nodes.Last()) {
+                            PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
+                            _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
+                            yield break;
+                        }
                     }
                 }
 
             }
 
             if(!isTargetShip) {
-                PickUpChert.Locomotion.GabbroMoveTo(target, 2f, _baseSpeed, Vector3.zero);
+                MoveTo(target, 2f, _baseSpeed, Vector3.zero);
                 float time = 0;
                 float distance = Vector3.Distance(transform.position, target.position);
                 while ((transform.position - target.position).sqrMagnitude > 2 * 2) {
@@ -272,7 +288,7 @@ namespace PickUpChert {
             else {
                 var probes = target.GetComponentsInChildren<PathProbe>();
                 var probe = probes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
-                PickUpChert.Locomotion.GabbroMoveTo(probe.transform, 0.5f, probe._baseSpeed * _baseSpeed, Vector3.zero);
+                MoveTo(probe.transform, 0.5f, probe._baseSpeed * _baseSpeed, Vector3.zero);
                 //_goingToShip = false;
                 float time = 0;
                 float distance = Vector3.Distance(transform.position, probe.transform.position);
@@ -304,7 +320,7 @@ namespace PickUpChert {
                         distance = Vector3.Distance(transform.position, probe.transform.position);
                     }
                 }
-                PickUpChert.Locomotion.GabbroMoveTo(target, 0.5f, _baseSpeed, new Vector3(0, -3.7f, 0));
+                MoveTo(target, 0.5f, _baseSpeed, new Vector3(0, -3.7f, 0));
                 time = 0;
                 distance = Vector3.Distance(transform.position, target.position);
                 while ((transform.position - target.position).sqrMagnitude > 0.5f * 0.5f) {
@@ -345,6 +361,22 @@ namespace PickUpChert {
         }
 
         virtual public void ConversationEnd(IEnumerable<ConversationTrigger> triggers, IEnumerable<Sector> sectors) {
+
+        }
+
+        virtual protected void MoveTo(Transform target, float radius, float speed, Vector3 offset) {
+
+        }
+
+        virtual protected void MoveStop() {
+
+        }
+
+        virtual protected void Sitting() {
+
+        }
+
+        virtual protected void StandUp() {
 
         }
 

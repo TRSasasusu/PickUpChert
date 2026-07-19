@@ -44,14 +44,6 @@
   "PickUpChert_BHBH_2": "…おい、ここにまさかRiebeckがいる<Pause/>…というのか？<Pause/>すぐさまこんな場所から連れ帰らなくては！",
   "PickUpChert_BHBH_3": "このペースでは1時間ももたないうちに脆い空洞という惑星は失われてしまう…。いったい何が起きているというんだ…？",
 
-  // See Riebeck
-  "PickUpChert_Riebeck_See_0_Chert": "Riebeck！この惑星は間もなく崩壊する！すぐに木の炉辺へ戻るんだ！",
-  "PickUpChert_Riebeck_See_1_Riebeck": "崩壊する？！この脆い空洞が？間もなく？！<Pause/>…そんなばかな…",
-  "PickUpChert_Riebeck_See_2_Chert": "残念ながら本当だ。隕石の数が大いに増えていて、実際にいくつもの大地が崩れ始めてる。もうあまり時間はない。早く探査艇に乗るんだ。",
-  "PickUpChert_Riebeck_See_3_Riebeck": "…Chertが言うから本当なんだろう。<Pause/>でも、そうだとすると<Pause/>…空中都市はどうなってしまう？私の夢なんだ。ひよっ子の頃からの夢なんだよ！",
-  "PickUpChert_Riebeck_See_4_Chert": "…<Pause/>すまない、頼む、諦めてくれ、Riebeck。<Pause/>その夢は知ってる。<Pause/>何度も、何度も語ってくれたし、あんなに怖がりなのに、ここまでたどり着いたんだって、私も知ってる。<Pause/>…あぁ、お前もRibeckに言ってやってくれないか。私にはもうこれ以上は…",
-  "RiebeckPickUpChert_Riebeck_See_Q_0": "今から空中都市へ行こう。それからでも遅くない。",
-  "RiebeckPickUpChert_Riebeck_See_Q_1": "ああ、早く探査艇に乗るべきだ。",
 
 
   // Slate
@@ -73,6 +65,7 @@
   // ###### radio_campsite
   "PUC_Chert_TH_radio_campsite0": "ここのキャンプファイヤー、いいよな。発射台の下のも好きだが、どうにも村の明かりが星空には眩しすぎる。",
   "PUC_Chert_TH_radio_campsite1": "その点、ここは電波塔こそあれどマシュマロを焼きながらじっくり夜空を眺めるのに最高なんだ。",
+
   // ### Gabbro
   // #### trigger
   // ##### TH
@@ -118,6 +111,20 @@
   "GabbroPUC_Gabbro_after_standup_wo_chertB": "いや、何でもないよ。",
   "PUC_Gabbro_after_standup_wo_chert_A0": "気まぐれっていうやつだよ。まあ今回はChertが振り回される様を見たいというのは本当だけどね。",
   "PUC_Gabbro_after_standup_wo_chert_A1": "…そう、人が何を考えてるかなんてお前にもなんなら自分にも本当はわからないものだ。どこぞの誰かだって、きっとそうだよ。",
+
+  // ### Riebeck
+  // #### event
+  // ##### before_standup
+  "PUC_Riebeck_before_standup0": "<Chert/>Riebeck！この惑星は間もなく崩壊する！すぐに木の炉辺へ戻るんだ！",
+  "PUC_Riebeck_before_standup1": "崩壊する？！この脆い空洞が？間もなく？！<Pause/>…そんなばかな…",
+  "PUC_Riebeck_before_standup2": "<Chert/>残念ながら本当だ。隕石の数が大いに増えていて、実際にいくつもの大地が崩れ始めてる。もうあまり時間はない。早く探査艇に乗るんだ。",
+  "PUC_Riebeck_before_standup3": "…Chertが言うから本当なんだろう。<Pause/>でも、そうだとすると<Pause/>…空中都市はどうなってしまう？私の夢なんだ。ひよっ子の頃からの夢なんだよ！",
+  "PUC_Riebeck_before_standup4": "…<Pause/>すまない、頼む、諦めてくれ、Riebeck。<Pause/>その夢は知ってる。<Pause/>何度も、何度も語ってくれたし、あんなに怖がりなのに、ここまでたどり着いたんだって、私も知ってる。<Pause/>…あぁ、お前もRibeckに言ってやってくれないか。私にはもうこれ以上は…",
+  "RiebeckPUC_Riebeck_before_standupA": "今から空中都市へ行こう。それからでも遅くない。着いてきてくれ！",
+  "RiebeckPUC_Riebeck_before_standupB": "ああ、早く探査艇に乗るべきだ。",
+  "PUC_Riebeck_before_standupA0": "<Chert/>おい正気か？<Pause/>…ああそうだな、私らはOuter Wilds Venturesだ。だが、崩壊が近づいたらすぐに出るからな。",
+  "PUC_Riebeck_before_standupA1": "2人ともありがとう…！わ、私はいつでも行けるよ！",
+  "PUC_Riebeck_before_standupB0": "あぁ…そうだよね、うん。<Pause/>ここから私の探査艇に自力ですぐには帰れないから、お前に着いていくよ…",
 
   // # moving_conversations
   // ## outerwilds

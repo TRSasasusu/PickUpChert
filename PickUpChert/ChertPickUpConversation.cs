@@ -260,6 +260,9 @@ namespace PickUpChert {
             else if (characterName == "Gabbro") {
                 return ModifyObjects.Gabbro.ConversationStart(_conversationTriggers, BringChert.Instance.SectorDetector._sectorList);
             }
+            else if(characterName == "Riebeck") {
+                return ModifyObjects.Riebeck.ConversationStart(_conversationTriggers, BringChert.Instance.SectorDetector._sectorList);
+            }
             return ModifyObjects.OtherConversation.ConversationStart(characterName, _conversationTriggers, BringChert.Instance.SectorDetector._sectorList);
         }
 
@@ -269,6 +272,9 @@ namespace PickUpChert {
             }
             else if(characterName == "Gabbro") {
                 ModifyObjects.Gabbro.ConversationEnd(_conversationTriggers, BringChert.Instance.SectorDetector._sectorList);
+            }
+            else if(characterName == "Riebeck") {
+                ModifyObjects.Riebeck.ConversationEnd(_conversationTriggers, BringChert.Instance.SectorDetector._sectorList);
             }
             else {
                 ModifyObjects.OtherConversation.ConversationEnd(characterName, _conversationTriggers, BringChert.Instance.SectorDetector._sectorList);

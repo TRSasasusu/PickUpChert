@@ -10,12 +10,13 @@ namespace PickUpChert {
     public class ModifyObjects {
         const string SHORTCUT_CHERT_PATH = "TimberHearth_Body/Sector_TH/shortcut_chert";
         const string GABBRO_PATH = "GabbroIsland_Body/Sector_GabbroIsland/Interactables_GabbroIsland/Traveller_HEA_Gabbro/Traveller_HEA_Gabbro_ANIM_IdleFlute";
-        const string GABBRO_INITIAL_PROBE_PATH = "GabbroIsland_Body/Sector_GabbroIsland/PUCPathProbesGabbroIsland/AfterHammock";
+        const string RIEBECK_PATH = "BrittleHollow_Body/Sector_BH/Sector_Crossroads/Characters_Crossroads/Traveller_HEA_Riebeck/Traveller_HEA_Riebeck_ANIM_Talking";
 
         Coroutine _initializeBody;
 
         public static Hatchling Hatchling { get; private set; }
         public static Traveler Gabbro { get; private set; }
+        public static Traveler Riebeck { get; private set; }
         public static OtherConversation OtherConversation { get; private set; }
 
 
@@ -62,6 +63,15 @@ namespace PickUpChert {
                 yield return null;
             }
 
+            while(true) {
+                var originalRiebeck = GameObject.Find(RIEBECK_PATH);
+                if(originalRiebeck) {
+                    PickUpChert.Locomotion.RiebeckInitialize(originalRiebeck);
+                    break;
+                }
+                yield return null;
+            }
+
             while (true) {
                 if(PickUpChert.Locomotion.GabbroIsInitialized()) {
                     var gabbro = PickUpChert.Locomotion.GetGabbro();
@@ -72,15 +82,15 @@ namespace PickUpChert {
                 yield return null;
             }
 
-            //GameObject gabborInitialProbe = null;
-            //while(true) {
-            //    gabborInitialProbe = GameObject.Find(GABBRO_INITIAL_PROBE_PATH);
-            //    if (gabborInitialProbe) {
-            //        Gabbro.AddStackedPathProbe(gabborInitialProbe.GetComponent<PathProbe>());
-            //        break;
-            //    }
-            //    yield return null;
-            //}
+            while(true) {
+                if(PickUpChert.Locomotion.RiebeckIsInitialized()) {
+                    var riebeck = PickUpChert.Locomotion.GetRiebeck();
+                    Riebeck = riebeck.AddComponent<Riebeck>();
+                    Riebeck.Initialize();
+                    break;
+                }
+                yield return null;
+            }
 
             while(true) {
                 var dialogue = GameObject.FindWithTag("DialogueGui").GetRequiredComponent<DialogueBoxVer2>();
