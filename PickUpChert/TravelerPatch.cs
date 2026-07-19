@@ -12,23 +12,41 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(HatchController), nameof(HatchController.OnEntry))]
         public static bool HatchController_OnEntry_Prefix(HatchController __instance, GameObject hitObj) {
-            if(hitObj.gameObject == ModifyObjects.Gabbro.gameObject) {
-                ModifyObjects.Gabbro.CompleteEnteringShip();
-                if(__instance._isPlayerInShip) {
+            bool travelerEnter = false;
+            foreach (var traveler in Traveler.GetAllTravelers) {
+                if (hitObj.gameObject == traveler.gameObject) {
+                    traveler.CompleteEnteringShip();
+                    travelerEnter = true;
+                    //if (__instance._isPlayerInShip) {
+                    //    __instance.CloseHatch();
+                    //    Locator.GetShipBody().GetComponentInChildren<ShipTractorBeamSwitch>().DeactivateTractorBeam();
+                    //}
+                    //return false;
+                }
+            }
+            if(travelerEnter) {
+                if(__instance._isPlayerInShip && Traveler.GetAllTravelers.All(x => !x.IsActivated || x.IsInShip)) {
                     __instance.CloseHatch();
                     Locator.GetShipBody().GetComponentInChildren<ShipTractorBeamSwitch>().DeactivateTractorBeam();
                 }
                 return false;
             }
+
             if(hitObj.CompareTag("PlayerDetector")) {
-                if(!ModifyObjects.Gabbro.IsActivated || ModifyObjects.Gabbro.IsInShip) {
+                if(Traveler.GetAllTravelers.All(x => !x.IsActivated || x.IsInShip)) {
+                //if(!ModifyObjects.Gabbro.IsActivated || ModifyObjects.Gabbro.IsInShip) {
                     __instance.CloseHatch();
                 }
                 __instance._isPlayerInShip = true;
                 GlobalMessenger.FireEvent("EnterShip");
                 ModifyObjects.Hatchling.CompleteEnteringShip();
-                if(ModifyObjects.Gabbro.IsActivated && !ModifyObjects.Gabbro.IsInShip) {
-                    ModifyObjects.Gabbro.GoToShip();
+                //if(ModifyObjects.Gabbro.IsActivated && !ModifyObjects.Gabbro.IsInShip) {
+                //    ModifyObjects.Gabbro.GoToShip();
+                //}
+                foreach(var traveler in Traveler.GetAllTravelers) {
+                    if(traveler.IsActivated && !traveler.IsInShip) {
+                        traveler.GoToShip();
+                    }
                 }
                 return false;
             }
@@ -39,7 +57,8 @@ namespace PickUpChert {
         [HarmonyPatch(typeof(ShipTractorBeamSwitch), nameof(ShipTractorBeamSwitch.OnEnterShip))]
         public static bool ShipTractorBeamSwitch_OnEnterShip_Prefix(ShipTractorBeamSwitch __instance) {
             __instance._isPlayerInShip = true;
-            if (!ModifyObjects.Gabbro.IsActivated || ModifyObjects.Gabbro.IsInShip) {
+            if(Traveler.GetAllTravelers.All(x => !x.IsActivated || x.IsInShip)) {
+            //if (!ModifyObjects.Gabbro.IsActivated || ModifyObjects.Gabbro.IsInShip) {
                 return true;
             }
             return false;
@@ -48,13 +67,17 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(HatchController), nameof(HatchController.OnExit))]
         public static bool HatchController_OnExit_Prefix(HatchController __instance, GameObject hitObj) {
-            if(hitObj.gameObject == ModifyObjects.Gabbro.gameObject) {
-                ModifyObjects.Gabbro.CompleteExitingShip();
-                return false;
+            foreach(var traveler in Traveler.GetAllTravelers) {
+                if(hitObj.gameObject == traveler.gameObject) {
+                    traveler.CompleteExitingShip();
+                    return false;
+                }
             }
             if(hitObj.CompareTag("PlayerDetector")) {
-                if(ModifyObjects.Gabbro.IsActivated) {
-                    ModifyObjects.Gabbro.GoToCenterOfShipToExit();
+                foreach (var traveler in Traveler.GetAllTravelers) {
+                    if (traveler.IsActivated) {
+                        traveler.GoToCenterOfShipToExit();
+                    }
                 }
             }
             return true;
@@ -63,16 +86,24 @@ namespace PickUpChert {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(ShipTractorBeamSwitch), nameof(ShipTractorBeamSwitch.OnTriggerExit))]
         public static bool ShipTractorBeamSwitch_OnTriggerExit_Prefix(ShipTractorBeamSwitch __instance, Collider hitCollider) {
-            if(hitCollider.gameObject == ModifyObjects.Gabbro.gameObject) {
-                PickUpChert.Log("gabbro exit the tractor beam volume");
-                ModifyObjects.Gabbro.CompleteExitingShipBeamVolume();
-                if(!ModifyObjects.Hatchling.IsInsideShipBeamVolume) {
+            bool travelerExit = false;
+            foreach (var traveler in Traveler.GetAllTravelers) {
+                if (hitCollider.gameObject == traveler.gameObject) {
+                    //PickUpChert.Log("gabbro exit the tractor beam volume");
+                    traveler.CompleteExitingShipBeamVolume();
+                    travelerExit = true;
+                }
+            }
+            if(travelerExit) {
+                if (!ModifyObjects.Hatchling.IsInsideShipBeamVolume && Traveler.GetAllTravelers.All(x => !x.IsActivated || (!x.IsInsideShipBeamVolume && !x.IsInShip))) {
                     __instance.ActivateTractorBeam();
                 }
                 return false;
             }
+
             if(!__instance._isPlayerInShip && __instance._functional && hitCollider.CompareTag("PlayerDetector")) {
-                if(!ModifyObjects.Gabbro.IsActivated || !ModifyObjects.Gabbro.IsInsideShipBeamVolume) {
+                if(Traveler.GetAllTravelers.All(x => !x.IsActivated || (!x.IsInsideShipBeamVolume && !x.IsInShip))) {
+                //if(!ModifyObjects.Gabbro.IsActivated || !ModifyObjects.Gabbro.IsInsideShipBeamVolume) {
                     PickUpChert.Log("tractor beam is activated");
                     __instance.ActivateTractorBeam();
                 }
@@ -86,9 +117,11 @@ namespace PickUpChert {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(Campfire), nameof(Campfire.StartRoasting))]
         public static void Campfire_StartRoasting_Postfix(Campfire __instance) {
-            if(ModifyObjects.Gabbro.IsActivated) {
-                ModifyObjects.Gabbro.StartSitting();
-                PickUpChert.Locomotion.GabbroLookAt(__instance.transform, Vector3.zero);
+            foreach (var traveler in Traveler.GetAllTravelers) {
+                if (traveler.IsActivated) {
+                    traveler.StartSitting();
+                    traveler.LookAt(__instance.transform, Vector3.zero);
+                }
             }
         }
 
@@ -104,13 +137,15 @@ namespace PickUpChert {
         [HarmonyPatch(typeof(PlayerSpawner), nameof(PlayerSpawner.FixedUpdate))]
         public static void PlayerSpawner_FixedUpdate_Prefix(PlayerSpawner __instance) {
             if(__instance._debugWarpNextUpdate) {
-                if(ModifyObjects.Gabbro.IsActivated) {
-                    var owRigidbody = ModifyObjects.Gabbro.GetComponent<OWRigidbody>();
-                    var offset = owRigidbody.GetPosition() - __instance._playerBody.GetPosition();
-                    owRigidbody.WarpToPositionRotation(__instance._debugWarpPoint.transform.position, __instance._debugWarpPoint.transform.rotation);
-                    owRigidbody.SetVelocity(__instance._debugWarpPoint.GetPointVelocity());
-                    if(!PlayerState.IsInsideShip()) {
-                        __instance._debugWarpPoint.AddObjectToTriggerVolumes(owRigidbody.gameObject);
+                foreach (var traveler in Traveler.GetAllTravelers) {
+                    if (traveler.IsActivated) {
+                        var owRigidbody = traveler.GetComponent<OWRigidbody>();
+                        var offset = owRigidbody.GetPosition() - __instance._playerBody.GetPosition();
+                        owRigidbody.WarpToPositionRotation(__instance._debugWarpPoint.transform.position, __instance._debugWarpPoint.transform.rotation);
+                        owRigidbody.SetVelocity(__instance._debugWarpPoint.GetPointVelocity());
+                        if (!PlayerState.IsInsideShip()) {
+                            __instance._debugWarpPoint.AddObjectToTriggerVolumes(owRigidbody.gameObject);
+                        }
                     }
                 }
             }

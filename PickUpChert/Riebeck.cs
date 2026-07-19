@@ -21,6 +21,7 @@ namespace PickUpChert {
             base.ConversationEnd(triggers, sectors);
             if(!_standUp) {
                 _standUp = true;
+                IsActivated = true;
                 PickUpChert.Locomotion.RiebeckStandUp();
             }
         }
@@ -39,6 +40,10 @@ namespace PickUpChert {
 
         protected override void StandUp() {
             PickUpChert.Locomotion.RiebeckStandUp();
+        }
+
+        public override void LookAt(Transform target, Vector3 offset) {
+            PickUpChert.Locomotion.RiebeckLookAt(target, offset);
         }
     }
 }

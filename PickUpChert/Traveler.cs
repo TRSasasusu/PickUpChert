@@ -9,7 +9,7 @@ using IEnumerator = System.Collections.IEnumerator;
 
 namespace PickUpChert {
     public class Traveler : MonoBehaviour {
-        public bool IsActivated { get; private set; }
+        public bool IsActivated { get; protected set; }
         public bool IsInShip { get; private set; }
         public bool IsInsideShipBeamVolume { get; private set; }
         public TravelerController _travelerController { get; private set; }
@@ -26,6 +26,11 @@ namespace PickUpChert {
         Coroutine _trackPathToTargetCoroutine;
         SectorDetector _sectorDetector;
         float _baseSpeed = 5f;
+
+        public static IEnumerable<Traveler> GetAllTravelers => new[] {
+            ModifyObjects.Gabbro,
+            ModifyObjects.Riebeck,
+        };
 
         public void Initialize() {
             _travelerController = transform.parent.GetComponentInChildren<TravelerController>(true);
@@ -377,6 +382,10 @@ namespace PickUpChert {
         }
 
         virtual protected void StandUp() {
+
+        }
+
+        virtual public void LookAt(Transform target, Vector3 offset) {
 
         }
 

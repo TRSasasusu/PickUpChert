@@ -60,6 +60,10 @@ namespace PickUpChert {
             PickUpChert.Locomotion.GabbroStandUp();
         }
 
+        public override void LookAt(Transform target, Vector3 offset) {
+            PickUpChert.Locomotion.GabbroLookAt(target, offset);
+        }
+
         protected override void Update() {
             base.Update();
         }
