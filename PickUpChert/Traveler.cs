@@ -224,9 +224,19 @@ namespace PickUpChert {
                         if(time > 2) {
                             if(Mathf.Abs(Vector3.Distance(transform.position, graph.transform.TransformPoint(node._pos)) - distance) < 0.1f) {
                                 PickUpChert.Log($"Traveler seems stuck even though it is on graph pathing!? (node: {node._pos})");
-                                var nearestNode = graph.NearestNode(target.position);
-                                PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
-                                _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
+
+                                var (pathGraph, nearestNode) = PathGraph.SearchPathGraphFromSectors(_sectorDetector);
+                                if (Vector3.Distance(target.position, graph.transform.TransformPoint(nearestNode._pos)) > Vector3.Distance(target.position, transform.position)) {
+                                    PickUpChert.Log($"Directly go to the target");
+                                    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(null, pathGraph, target, isTargetShip));
+                                }
+                                else {
+                                    PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
+                                    _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(transform.position, target.position), pathGraph, target, isTargetShip));
+                                }
+                                //var nearestNode = graph.NearestNode(target.position);
+                                //PickUpChert.Log($"Recompute path from {graph.transform.TransformPoint(nearestNode._pos)} to {target.position}");
+                                //_trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(graph.ComputePath(transform.position, target.position), graph, target, isTargetShip));
                                 yield break;
                             }
                             time = 0;
