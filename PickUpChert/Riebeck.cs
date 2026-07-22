@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,9 @@ namespace PickUpChert {
 
         protected override void Sitting() {
             PickUpChert.Locomotion.RiebeckSitting();
+
+            transform.DOLocalMove(new Vector3(-2.278f, 0.8706f, -0.8103f), 0.5f).OnComplete(() => {
+            }).SetLink(gameObject);
         }
 
         protected override void StandUp() {

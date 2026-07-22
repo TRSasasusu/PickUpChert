@@ -26,6 +26,7 @@ namespace PickUpChert {
         Coroutine _trackPathToTargetCoroutine;
         SectorDetector _sectorDetector;
         float _baseSpeed = 5f;
+        OWRigidbody _owRigidbody;
 
         public static IEnumerable<Traveler> GetAllTravelers => new[] {
             ModifyObjects.Gabbro,
@@ -35,6 +36,7 @@ namespace PickUpChert {
         public void Initialize() {
             _travelerController = transform.parent.GetComponentInChildren<TravelerController>(true);
             _sectorDetector = GetComponentInChildren<SectorDetector>(true);
+            _owRigidbody = GetComponent<OWRigidbody>();
         }
 
         //public void AddStackedPathProbe(PathProbe probe, bool head = true) {
@@ -397,6 +399,13 @@ namespace PickUpChert {
 
         virtual public void LookAt(Transform target, Vector3 offset) {
 
+        }
+
+        virtual public void SuspendInShipPosition() {
+            var shipBody = Locator.GetShipBody();
+            if(shipBody) {
+                _owRigidbody.Suspend(shipBody);
+            }
         }
 
         virtual protected void Update() {
