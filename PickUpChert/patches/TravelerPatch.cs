@@ -68,7 +68,11 @@ namespace PickUpChert {
         [HarmonyPatch(typeof(HatchController), nameof(HatchController.OnExit))]
         public static bool HatchController_OnExit_Prefix(HatchController __instance, GameObject hitObj) {
             foreach(var traveler in Traveler.GetAllTravelers) {
+                if(traveler.SuspendedInShip) {
+                    continue;
+                }
                 if(hitObj.gameObject == traveler.gameObject) {
+                    PickUpChert.Log($"traveler: {traveler.name} is exiting the ship!");
                     traveler.CompleteExitingShip();
                     return false;
                 }

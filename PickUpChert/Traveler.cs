@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using DG.Tweening;
 using IEnumerator = System.Collections.IEnumerator;
 
 namespace PickUpChert {
@@ -13,6 +14,10 @@ namespace PickUpChert {
         public bool IsInShip { get; private set; }
         public bool IsInsideShipBeamVolume { get; private set; }
         public TravelerController _travelerController { get; private set; }
+        public bool SuspendedInShip { get; private set; }
+
+        protected Vector3 _shipSuspendedPos;
+        protected Vector3 _shipSuspendedRot;
 
         //Stack<PathProbe> _stackedPathProbes = new Stack<PathProbe>();
         LinkedList<PathProbe> _stackedPathProbes = new LinkedList<PathProbe>();
@@ -27,13 +32,15 @@ namespace PickUpChert {
         SectorDetector _sectorDetector;
         float _baseSpeed = 5f;
         OWRigidbody _owRigidbody;
+        Tween _movedToShipTweenPos;
+        Tween _movedToShipTweenRot;
 
         public static IEnumerable<Traveler> GetAllTravelers => new[] {
             ModifyObjects.Gabbro,
             ModifyObjects.Riebeck,
         };
 
-        public void Initialize() {
+        public virtual void Initialize() {
             _travelerController = transform.parent.GetComponentInChildren<TravelerController>(true);
             _sectorDetector = GetComponentInChildren<SectorDetector>(true);
             _owRigidbody = GetComponent<OWRigidbody>();
@@ -155,6 +162,11 @@ namespace PickUpChert {
         //}
 
         public void GoToCenterOfShipToExit() {
+            if(SuspendedInShip) {
+                UnsuspendInShip();
+                StandUp();
+            }
+
             MoveTo(Locator.GetShipTransform(), 0.5f, 2f, Vector3.zero);
         }
 
@@ -170,6 +182,9 @@ namespace PickUpChert {
             _currentProbe = null;
             _targetProbe = null;
             MoveStop();
+
+            SuspendInShipPosition();
+            //MoveTo(Locator.GetShipTransform(), 0.5f, 2, new Vector3(0.772f, 1.3208f, -2.8818f));
         }
 
         public void CompleteExitingShip() {
@@ -199,6 +214,48 @@ namespace PickUpChert {
         public void StopSitting() {
             _isSitting = false;
             StandUp();
+        }
+
+        public void SuspendInShipPosition() {
+            if (_movedToShipTweenPos != null) {
+                _movedToShipTweenPos.Kill();
+                _movedToShipTweenPos = null;
+            }
+            if (_movedToShipTweenRot != null) {
+                _movedToShipTweenRot.Kill();
+                _movedToShipTweenRot = null;
+            }
+
+            var shipTransform = Locator.GetShipTransform();
+            if(shipTransform) {
+                PickUpChert.Log($"traveler: {gameObject.name} is suspended!");
+                SuspendedInShip = true;
+
+                DisableRigidbody(shipTransform);
+
+                _movedToShipTweenPos = transform.DOLocalMove(_shipSuspendedPos, 0.5f)
+                    //.SetUpdate(UpdateType.Fixed)
+                    .OnComplete(() => {
+                        Sitting();
+                    }).SetLink(gameObject);
+                _movedToShipTweenRot = transform.DOLocalRotate(_shipSuspendedRot, 0.5f)
+                    //.SetUpdate(UpdateType.Fixed)
+                    .SetLink(gameObject);
+            }
+        }
+
+        public void UnsuspendInShip() {
+            EnableRigidbody();
+            if(_movedToShipTweenPos != null) {
+                _movedToShipTweenPos.Kill();
+                _movedToShipTweenPos= null;
+            }
+            if (_movedToShipTweenRot != null) {
+                _movedToShipTweenRot.Kill();
+                _movedToShipTweenRot = null;
+            }
+            PickUpChert.Log($"traveler: {gameObject.name} is unsuspended!");
+            SuspendedInShip = false;
         }
 
         IEnumerator TrackPathToTarget(List<PathGraph.Node> nodes, PathGraph graph, Transform target, bool isTargetShip) {
@@ -401,12 +458,14 @@ namespace PickUpChert {
 
         }
 
-        virtual public void SuspendInShipPosition() {
-            var shipBody = Locator.GetShipBody();
-            if(shipBody) {
-                _owRigidbody.Suspend(shipBody);
-            }
+        virtual public void DisableRigidbody(Transform newParent) {
+
         }
+
+        virtual public void EnableRigidbody() {
+
+        }
+
 
         virtual protected void Update() {
             if (_goingToShip) {
@@ -448,6 +507,10 @@ namespace PickUpChert {
             else {
                 _trackPathToTargetCoroutine = StartCoroutine(TrackPathToTarget(pathGraph.ComputePath(transform.position, Locator.GetPlayerTransform().position), pathGraph, Locator.GetPlayerTransform(), false));
             }
+        }
+
+        virtual protected void FixedUpdate() {
+
         }
     }
 }

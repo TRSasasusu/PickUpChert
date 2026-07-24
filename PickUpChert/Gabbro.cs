@@ -64,6 +64,14 @@ namespace PickUpChert {
             PickUpChert.Locomotion.GabbroLookAt(target, offset);
         }
 
+        public override void DisableRigidbody(Transform newParent) {
+            PickUpChert.Locomotion.GabbroDisableRigidbody(newParent);
+        }
+
+        public override void EnableRigidbody() {
+            PickUpChert.Locomotion.GabbroEnableRigidbody();
+        }
+
         protected override void Update() {
             base.Update();
         }

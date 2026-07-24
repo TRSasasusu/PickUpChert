@@ -39,6 +39,10 @@ namespace TravelersLocomotionPack {
 
         public void GabbroSitting();
 
+        public void GabbroDisableRigidbody(Transform newParent);
+
+        public void GabbroEnableRigidbody();
+
         public void RiebeckInitialize(GameObject riebeck);
 
         public bool RiebeckIsInitialized();
@@ -57,6 +61,10 @@ namespace TravelersLocomotionPack {
 
         public void RiebeckStartPlaying();
 
-        public void RiebeckSitting();
+        public void RiebeckSitting(bool legcrossing = true);
+
+        public void RiebeckDisableRigidbody(Transform newParent);
+
+        public void RiebeckEnableRigidbody();
     }
 }
