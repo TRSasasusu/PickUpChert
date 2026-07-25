@@ -65,6 +65,9 @@
   // ###### radio_campsite
   "PUC_Chert_TH_radio_campsite0": "ここのキャンプファイヤー、いいよな。発射台の下のも好きだが、どうにも村の明かりが星空には眩しすぎる。",
   "PUC_Chert_TH_radio_campsite1": "その点、ここは電波塔こそあれどマシュマロを焼きながらじっくり夜空を眺めるのに最高なんだ。",
+  // ##### BH
+  // ###### near_riebeck_camp
+  "PUC_Chert_near_riebeck_camp0": "Riebeckは脆い空洞に向けた訓練を念入りにやっていたんだ。重力水晶、そう、Feldsparが持って帰ってきた博物館にあるやつだ、あれの範囲をよく身体に叩き込んでた。"
 
   // ### Gabbro
   // #### trigger
@@ -113,6 +116,11 @@
   "PUC_Gabbro_after_standup_wo_chert_A1": "…そう、人が何を考えてるかなんてお前にもなんなら自分にも本当はわからないものだ。どこぞの誰かだって、きっとそうだよ。",
 
   // ### Riebeck
+  // ## outerwilds
+  // ### BH
+  // #### near_riebeck_camp
+  
+  
   // #### event
   // ##### before_standup
   "PUC_Riebeck_before_standup0": "<Chert/>Riebeck！この惑星は間もなく崩壊する！すぐに木の炉辺へ戻るんだ！",
@@ -145,4 +153,10 @@
   "PickUpChert_GD/gabbro_campsite1": "Chert、わかってないな。今は絶賛調理中なんだよ。塩味が効いて最高だとこいつからもお墨付きさ。",
   "PickUpChert_GD/gabbro_campsite2": "……Gabbroに変なの食わされたらちゃんと言うんだぞ。私じゃなくてもHornfelsでもいい。",
   "PickUpChert_GD/gabbro_campsite3": "うーん、その点についてはすこーし心外かな。",
+
+  // ### BH
+  // #### near_riebeck_camp
+  "PickUpChert_BH/near_riebeck_camp0": "この上から落ちてきたのか？Riebeck。",
+  "PickUpChert_BH/near_riebeck_camp1": "うん、重力水晶の範囲がいまいちわからなくて、気を取られてたら足を引っ掛けちゃってそのまま…",
+  "PickUpChert_BH/near_riebeck_camp2": "本当に無事でよかった。やはり訓練と実地じゃあ違うんだな…"
 }
