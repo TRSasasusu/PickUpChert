@@ -126,8 +126,15 @@
   "PUC_Riebeck_BH_riebeck_camp0": "<Chert/>Riebeck、このNomaiの小物はこの辺で拾ったのか？",
   "PUC_Riebeck_BH_riebeck_camp1": "ああ、そうなんだよ！上の、おそらく重力水晶の工房近くで拾ったんだ。私はマシュマロ置くために使ってるけど、本当は逆で色んなものの入れ物として使うはずだけどね。それに、あと3つばかり小物を持ってたんだけど、残念ながらここまで落ちてくるときにブラックホールに吸い込まれちゃったよ…",
   "PUC_Riebeck_BH_riebeck_camp2": "<Chert/>……そんなに欲張ったから落ちたんじゃないか…？",
-  // #### near_riebeck_camp
-  "PUC_Riebeck_BH_near_riebeck_camp0": "ここのトラクタービームは何のためのものなのか"
+  // ###### near_riebeck_camp
+  // ####### w_chert (default)
+  "PUC_Riebeck_BH_near_riebeck_camp0": "<Chert/>こう見ると、落ちてきたときにちょうど足場があってよかったよ。いや、足場があっても打ちどころが悪いと危ないんだが…",
+  "PUC_Riebeck_BH_near_riebeck_camp1": "うん、寝袋がちょうどクッションになってくれて助かったんだ。2つ持ってきてよかった！",
+  "PUC_Riebeck_BH_near_riebeck_camp2": "<Chert/>無駄なものなんてないんだな…",
+  // ####### wo_chert
+  "PUC_Riebeck_BH_near_riebeck_camp_wo_chert0": "ここのトラクタービームは何のためのものなのか気になってるんだ。下に足場があるわけでもないし…",
+  "RiebeckPUC_Riebeck_BH_near_riebeck_camp_wo_chertA": "私は君のキャンプで燃料補給するためによく使ってるよ。足を踏み外したときに便利なんだ。",
+  "PUC_Riebeck_BH_near_riebeck_camp_wo_chertA0": "え？<Pause/>…聞かなかったことにするよ……。",
   
   // #### event
   // ##### before_standup
