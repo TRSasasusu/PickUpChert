@@ -173,5 +173,22 @@
   // #### near_riebeck_camp
   "PickUpChert_BH/near_riebeck_camp0": "この上から落ちてきたのか？Riebeck。",
   "PickUpChert_BH/near_riebeck_camp1": "うん、重力水晶の範囲がいまいちわからなくて、気を取られてたら足を引っ掛けちゃってそのまま…",
-  "PickUpChert_BH/near_riebeck_camp2": "本当に無事でよかった。やはり訓練と実地じゃあ違うんだな…"
+  "PickUpChert_BH/near_riebeck_camp2": "本当に無事でよかった。やはり訓練と実地じゃあ違うんだな…",
+  // #### big_bridge
+  "PickUpChert_BH/big_bridge0": "この先に…空中都市が…キャンプからも見えてたから行けることはわかってたんだけど、登るのが怖くてね…",
+  "PickUpChert_BH/big_bridge1": "こんな立派な橋ですら崩壊している…危なくなったら本当に出るからな。",
+  // #### hanging_directory
+  "PickUpChert_BH/hanging_directory0": "ああ、これが、空中都市……",
+  "PickUpChert_BH/hanging_directory1": "…なるほど、4つの階層に分かれてるんだ。行き来には…ああ、重力水晶より洗練されてる重力床！これもFeldsparから聞いてぜひ見たいと思ってたんだ！",
+  "PickUpChert_BH/hanging_directory2": "…これが、そう、Riebeckのライフワークだからな……",
+  // #### hanging_three_boards
+  "PickUpChert_BH/hanging_three_boards0": "灰の双子星プロジェクト…先進的なワープコア……うん、やっぱりNomaiは何か大きな計画をやろうとしてたんだ。",
+  "PickUpChert_BH/hanging_three_boards1": "さすがだな。お前に翻訳機を預ける話もあったはずだが、そこまで読めるなら何も問題ないな。",
+  "PickUpChert_BH/hanging_three_boards2": "いや、今はすっごく速読してるんだ！時間がないらしいから…",
+  // #### hanging_eye_start
+  "PickUpChert_BH/hanging_eye_start0": "遠くに見えるあのシンボル…Nomaiの遺跡の色々なところで見つかるけど、多分すごく重要な意味があるんだと思う。",
+  "PickUpChert_BH/hanging_eye_start1": "Feldsparも言ってたな。すごいとこだと、巨人の大海周回軌道上の筒の中で探査機みたいなのにも装飾されてるって……あっ",
+  "PickUpChert_BH/hanging_eye_start2": "まって、それ初耳なんだけど！Slateからアレに着陸するのはダメだってキツく言われてたよね！？",
+  "PickUpChert_BH/hanging_eye_start3": "…まあ時効だろう。それに着陸はさせてないと言ってたし。",
+  // #### hanging_eye
 }
