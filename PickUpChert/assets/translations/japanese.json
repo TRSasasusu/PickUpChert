@@ -66,8 +66,12 @@
   "PUC_Chert_TH_radio_campsite0": "ここのキャンプファイヤー、いいよな。発射台の下のも好きだが、どうにも村の明かりが星空には眩しすぎる。",
   "PUC_Chert_TH_radio_campsite1": "その点、ここは電波塔こそあれどマシュマロを焼きながらじっくり夜空を眺めるのに最高なんだ。",
   // ##### BH
+  // ###### riebeck_camp
+  "PUC_Chert_BH_riebeck_camp0": "ここは…すごいな。マシュマロを焼きながらブラックホールによる一般相対論的現象を間近で観察できる…素晴らしい。",
+  "PUC_Chert_BH_riebeck_camp1": "まあ、そこに背を向けてバンジョー弾く気持ちもわからないでもないけどな。",
   // ###### near_riebeck_camp
-  "PUC_Chert_near_riebeck_camp0": "Riebeckは脆い空洞に向けた訓練を念入りにやっていたんだ。重力水晶、そう、Feldsparが持って帰ってきた博物館にあるやつだ、あれの範囲をよく身体に叩き込んでた。"
+  "PUC_Chert_BH_near_riebeck_camp0": "Riebeckは脆い空洞に向けた訓練を念入りにやっていたんだ。重力水晶、そう、Feldsparが持って帰ってきた博物館にあるやつだ、あれの範囲をよく身体に叩き込んでた。",
+  "PUC_Chert_BH_near_riebeck_camp1": "だが、真下にブラックホールが鎮座してるなかでそいつが実践できるかっていうとまた別の話だよな…",
 
   // ### Gabbro
   // #### trigger
@@ -116,10 +120,14 @@
   "PUC_Gabbro_after_standup_wo_chert_A1": "…そう、人が何を考えてるかなんてお前にもなんなら自分にも本当はわからないものだ。どこぞの誰かだって、きっとそうだよ。",
 
   // ### Riebeck
-  // ## outerwilds
-  // ### BH
+  // #### trigger
+  // ##### BH
+  // ###### riebeck_camp
+  "PUC_Riebeck_BH_riebeck_camp0": "<Chert/>Riebeck、このNomaiの小物はこの辺で拾ったのか？",
+  "PUC_Riebeck_BH_riebeck_camp1": "ああ、そうなんだよ！上の、おそらく重力水晶の工房近くで拾ったんだ。私はマシュマロ置くために使ってるけど、本当は逆で色んなものの入れ物として使うはずだけどね。それに、あと3つばかり小物を持ってたんだけど、残念ながらここまで落ちてくるときにブラックホールに吸い込まれちゃったよ…",
+  "PUC_Riebeck_BH_riebeck_camp2": "<Chert/>……そんなに欲張ったから落ちたんじゃないか…？",
   // #### near_riebeck_camp
-  
+  "PUC_Riebeck_BH_near_riebeck_camp0": "ここのトラクタービームは何のためのものなのか"
   
   // #### event
   // ##### before_standup
