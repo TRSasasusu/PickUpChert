@@ -233,12 +233,12 @@ namespace PickUpChert {
 
                 DisableRigidbody(shipTransform);
 
-                _movedToShipTweenPos = transform.DOLocalMove(_shipSuspendedPos, 0.5f)
+                _movedToShipTweenPos = transform.parent.DOLocalMove(_shipSuspendedPos, 0.5f)
                     //.SetUpdate(UpdateType.Fixed)
                     .OnComplete(() => {
                         Sitting();
                     }).SetLink(gameObject);
-                _movedToShipTweenRot = transform.DOLocalRotate(_shipSuspendedRot, 0.5f)
+                _movedToShipTweenRot = transform.parent.DOLocalRotate(_shipSuspendedRot, 0.5f)
                     //.SetUpdate(UpdateType.Fixed)
                     .SetLink(gameObject);
             }

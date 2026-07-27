@@ -18,7 +18,7 @@ namespace PickUpChert {
             base.Initialize();
             _animator = GetComponentInChildren<Animator>(true);
 
-            _shipSuspendedPos = new Vector3(-2.278f, 0.8706f, -0.8103f);
+            _shipSuspendedPos = new Vector3(-2.278f, 0.4606f, -0.5896f);
             _shipSuspendedRot = new Vector3(0, 90, 0);
         }
 
