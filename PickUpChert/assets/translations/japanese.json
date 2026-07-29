@@ -152,6 +152,13 @@
 
   // # moving_conversations
   // ## outerwilds
+  // ### event
+  // #### dead
+  "PickUpChert_event/dead0": "おい！しっかりしろ！まだ大丈夫だ、すぐに…",
+  // #### ship_collide
+  "PickUpChert_event/ship_collide0": "おい！頼むから気をつけてくれ…",
+  // #### ship_reactor_broken
+  "PickUpChert_event/ship_reactor_broken0": "この警報、反応炉だ！探査艇の中だから落ち着いて修理するんだ…！",
   // ### TH
   // #### shortcut
   "PickUpChert_TH/shortcut0": "うわ、な、なんだ、木の炉辺か？",
