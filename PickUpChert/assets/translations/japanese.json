@@ -211,5 +211,8 @@
   "PickUpChert_BH/hanging_school4": "何か他の部族にもあったのかな…それとも、もしかして、ここに来てることが他の部族に知られていない…とか？",
   // #### hanging_shortcut
   "PickUpChert_BH/hanging_shortcut0": "待ってくれ、こんなところに、空中都市に繋がる穴があったのか？探査艇から見たときにまったく気づかなかったよ…",
-  "PickUpChert_BH/hanging_shortcut1": "ふむ、確かに雪解け水由来の流れと考えると、気づける……いや、これはわからないな。まったく、こいつは本当によくやってるよ。"
+  "PickUpChert_BH/hanging_shortcut1": "ふむ、確かに雪解け水由来の流れと考えると、気づける……いや、これはわからないな。まったく、こいつは本当によくやってるよ。",
+  // #### old
+  "PickUpChert_BH/old0": "こんなところにNomaiの居住地が！？…しかも、この見た目から推測するに、空中都市よりも古い、そうだろう？",
+  "PickUpChert_BH/old1": "Riebeck、悪いがここは他より崩壊が早そうだ。調査するなら急いでくれ。",
 }
